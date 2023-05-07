@@ -50,9 +50,7 @@ public class RunDB {
                             " SELECT cow.id, cow.momId, cow.dadId"+
                             " FROM cow"+
                             " JOIN cow_family_tree ON cow_family_tree.momId = cow.id"+
-                            " AND cow_family_tree.dadId = cow.dadId"+
-                            " WHERE cow_family_tree.momId IS NOT NULL"+
-                            " AND cow_family_tree.dadId IS NOT NULL)"+
+                            " WHERE cow_family_tree.momId IS NOT NULL)"+
                     " SELECT id, momId, dadId"+
                     " FROM cow_family_tree")){
                 ResultSet resultSet = statement.executeQuery();

@@ -42,15 +42,31 @@ public class CustomTree extends DefaultTreeCellRenderer {
         }
         else if (node.getUserObject().toString().startsWith("(MOM 4)")
                 || node.getUserObject().toString().startsWith("(DAD 4)")){
-            component.setForeground(Color.PINK);
+            component.setForeground(Color.ORANGE);
         }
         else if (node.getUserObject().toString().startsWith("(MOM 5)")
                 || node.getUserObject().toString().startsWith("(DAD 5)")){
+            component.setForeground(Color.PINK);
+        }
+        else  if (node.getUserObject().toString().startsWith("(MOM 6)")
+                || node.getUserObject().toString().startsWith("(DAD 6)")){
+            component.setForeground(Color.RED);
+        }
+        else if (node.getUserObject().toString().startsWith("(MOM 7)")
+                || node.getUserObject().toString().startsWith("(DAD 7)")){
+            component.setForeground(Color.BLUE);
+        }
+        else if (node.getUserObject().toString().startsWith("(MOM 8)")
+                || node.getUserObject().toString().startsWith("(DAD 8)")){
+            component.setForeground(Color.MAGENTA);
+        }
+        else if (node.getUserObject().toString().startsWith("(MOM 9)")
+                || node.getUserObject().toString().startsWith("(DAD 9)")){
             component.setForeground(Color.ORANGE);
         }
-        else if (node.getUserObject().toString().startsWith("(MOM 6)")
-                || node.getUserObject().toString().startsWith("(DAD 6)")){
-            component.setForeground(Color.DARK_GRAY);
+        else if (node.getUserObject().toString().startsWith("(MOM 10)")
+                || node.getUserObject().toString().startsWith("(DAD 10)")){
+            component.setForeground(Color.PINK);
         }
         else {
             component.setForeground(Color.BLACK);
