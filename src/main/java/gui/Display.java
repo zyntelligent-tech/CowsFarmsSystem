@@ -21,6 +21,7 @@ public class Display extends JPanel {
         ArrayList<String[]> allErrorBreeds = RunDB.getAllErrorBreed();
         ArrayList<String[]> allCorrectParent = RunDB.getAllCorrectParent();
         ArrayList<String[]> allErrorParent = RunDB.getAllErrorParent();
+        ArrayList<String[]> allPerIntBreed = RunDB.getAllPerIntBreed();
         cardLayout = new CardLayout();
         this.setPreferredSize(new Dimension(1366, 768));
         this.setBorder(new EmptyBorder(10,10,10,10));
@@ -38,6 +39,9 @@ public class Display extends JPanel {
                 new CowsTable(allCorrectBreeds, columnAlLBreed, this));
         tabbedPane.add("Cows Error ข้อมูลวัวไม่ 100 % ("+decimalFormat(allErrorBreeds.size())+" รายการ)",
                 new CowsTable(allErrorBreeds, columnAlLBreed, this));
+
+        tabbedPane.add("Cows Compare เปรียบเทียบ % ("+decimalFormat(allPerIntBreed.size())+" รายการ)",
+                new CowsTable(allPerIntBreed, columnAlLBreed, this));
 
         tabbedPane.add("Correct Parent พ่อแม่ถูกต้อง ("+decimalFormat(allCorrectParent.size())+" รายการ)",
                 new CowsTable(allCorrectParent, columnAlLCows, this));

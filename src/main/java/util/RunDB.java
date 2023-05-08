@@ -164,11 +164,11 @@ public class RunDB {
         try {
             openDatabaseConnection();
             try(PreparedStatement statement = connection.prepareStatement(
-                    "SELECT cowId, GROUP_CONCAT(CONCAT(breedId, ' : ', percen) SEPARATOR ' , ') AS Breed," +
-                            " SUM(percen) AS total_percent"+
+                    "SELECT cowId, GROUP_CONCAT(CONCAT(breedId, ' : ', perInt + num_up / num_low) SEPARATOR ' , ') AS Breed," +
+                            " SUM(perInt + num_up / num_low) AS total_perInt"+
                             " FROM cowbreed"+
                             " GROUP BY cowId"+
-                            " HAVING total_percent = 100")){
+                            " HAVING total_perInt = 100")){
                 ResultSet resultSet = statement.executeQuery();
                 int column = statement.getMetaData().getColumnCount();
                 while (resultSet.next()){
@@ -191,11 +191,38 @@ public class RunDB {
         try {
             openDatabaseConnection();
             try(PreparedStatement statement = connection.prepareStatement(
-                    "SELECT cowId, GROUP_CONCAT(CONCAT(breedId, ' : ', percen) SEPARATOR ' , ') AS Breed," +
-                            " SUM(percen) AS total_percent"+
+                    "SELECT cowId, GROUP_CONCAT(CONCAT(breedId, ' : ', perInt + num_up / num_low) SEPARATOR ' , ') AS Breed," +
+                            " SUM(perInt + num_up / num_low) AS total_perInt"+
                             " FROM cowbreed"+
                             " GROUP BY cowId"+
-                            " HAVING total_percent != 100")){
+                            " HAVING total_perInt != 100")){
+                ResultSet resultSet = statement.executeQuery();
+                int column = statement.getMetaData().getColumnCount();
+                while (resultSet.next()){
+                    String[] data = new String[column];
+                    for (int i=1;i <= column;i++){
+                        data[i-1] = resultSet.getString(i);
+                    }
+                    dataList.add(data);
+                }
+            };
+            closeDatabaseConnection();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return dataList;
+    }
+
+    public static ArrayList<String[]> getAllPerIntBreed(){
+        ArrayList<String[]> dataList = new ArrayList<>();
+        try {
+            openDatabaseConnection();
+            try(PreparedStatement statement = connection.prepareStatement(
+                    "SELECT cowId," +
+                            " GROUP_CONCAT(CONCAT(breedId, ' : ', perInt + num_up / num_low) SEPARATOR ' , ') AS Breed_PerInt," +
+                            " SUM(perInt + num_up / num_low) AS total_perInt" +
+                            " FROM cowbreed" +
+                            " GROUP BY cowId")){
                 ResultSet resultSet = statement.executeQuery();
                 int column = statement.getMetaData().getColumnCount();
                 while (resultSet.next()){
