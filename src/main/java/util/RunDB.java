@@ -159,6 +159,33 @@ public class RunDB {
         return data;
     }
 
+    public static String[] getBreeds(String cowCode){
+        String[] data = new String[0];
+        try {
+            openDatabaseConnection();
+            try(PreparedStatement statement = connection.prepareStatement(
+                    "SELECT cowId," +
+                            " GROUP_CONCAT(CONCAT(breedId, ' : ', perInt+num_up/num_low) SEPARATOR ' , ') AS Breed_Perint,\n" +
+                            " SUM(perInt+num_up/num_low) AS total_perint\n" +
+                            " FROM cowbreed" +
+                            " WHERE cowId = '" + cowCode + "'" +
+                            " GROUP BY cowId")){
+                ResultSet resultSet = statement.executeQuery();
+                int column = statement.getMetaData().getColumnCount();
+                while (resultSet.next()) {
+                    data = new String[column];
+                    for (int i = 1; i <= column; i++) {
+                        data[i - 1] = resultSet.getString(i);
+                    }
+                }
+            };
+            closeDatabaseConnection();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return data;
+    }
+
     public static ArrayList<String[]> getAllCorrectBreed(){
         ArrayList<String[]> dataList = new ArrayList<>();
         try {
@@ -191,7 +218,7 @@ public class RunDB {
         try {
             openDatabaseConnection();
             try(PreparedStatement statement = connection.prepareStatement(
-                    "SELECT cowId, GROUP_CONCAT(CONCAT(breedId, ' : ', perInt + num_up / num_low) SEPARATOR ' , ') AS Breed," +
+                    "SELECT cowId, GROUP_CONCAT(CONCAT(breedId, ' : ', perInt + num_up / num_low) SEPARATOR ' / ') AS Breed," +
                             " SUM(perInt + num_up / num_low) AS total_perInt"+
                             " FROM cowbreed"+
                             " GROUP BY cowId"+

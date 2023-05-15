@@ -38,8 +38,8 @@ public class CowsTable extends JPanel{
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
                     int row = table.rowAtPoint(e.getPoint());
-                    String name = (String) table.getValueAt(row, table.getColumn("หมายเลขโค").getModelIndex());
-                    new CowDetail(display).setUpCowTreePanel(name);
+                    String cowCode = (String) table.getValueAt(row, table.getColumn("หมายเลขโค").getModelIndex());
+                    new CowDetail(display, cowCode);
                     Display.getCardLayout().show(display, "COW_DETAIL");
                 }
             }

@@ -40,8 +40,8 @@ public class Display extends JPanel {
         tabbedPane.add("Cows Error ข้อมูลวัวไม่ 100 % ("+decimalFormat(allErrorBreeds.size())+" รายการ)",
                 new CowsTable(allErrorBreeds, columnAlLBreed, this));
 
-        tabbedPane.add("Cows Compare เปรียบเทียบ % ("+decimalFormat(allPerIntBreed.size())+" รายการ)",
-                new CowsTable(allPerIntBreed, columnAlLBreed, this));
+//        tabbedPane.add("Cows Compare เปรียบเทียบ % ("+decimalFormat(allPerIntBreed.size())+" รายการ)",
+//                new CowsTable(allPerIntBreed, columnAlLBreed, this));
 
         tabbedPane.add("Correct Parent พ่อแม่ถูกต้อง ("+decimalFormat(allCorrectParent.size())+" รายการ)",
                 new CowsTable(allCorrectParent, columnAlLCows, this));

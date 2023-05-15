@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args){
 
         JFrame frame = new JFrame();
-        frame.setTitle("Cows Simulator");
+        frame.setTitle("DPO Cleanser");
 
         frame.add(new Display());
 
