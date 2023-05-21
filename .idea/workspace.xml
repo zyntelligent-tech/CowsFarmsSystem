@@ -5,21 +5,71 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="62bd48ef-414f-4f9f-8bde-acfffa3c54fc" name="Changes" comment="Add Cows Compare">
-      <change afterPath="$PROJECT_DIR$/src/main/java/util/Dialog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ErrorCows.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/algo/FindParent.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gui/CowDetail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/CowDetail.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gui/CowsTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/CowsTable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gui/Display.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/Display.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/util/Element.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/Element.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/models/Breed.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/models/Breeder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/models/BreederBreed.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/models/Center.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/models/Cow.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/models/CowBreed.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/models/Farmer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/models/Sector.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/util/Dialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/Dialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/util/ReadCSVFile.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/util/RunDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/RunDB.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/img/DadCow60px.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/img/DadCow60px.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/gui/CowDetail$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/CowDetail$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/gui/CowDetail$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/CowDetail$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/gui/CowDetail.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/CowDetail.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/gui/Display.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/Display.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/img/DadCow60px.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/img/DadCow60px.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/util/RunDB.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/util/RunDB.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/util/WriteCSVFile.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/util/WriteXlsxFile.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/data/1tx.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/data/2ty.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/data/3farmer.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/data/4cow.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/data/5breed.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/data/6tz.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/data/7tpfdata.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/data/8tobcode.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/algo/FindParent.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/data/1tx.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/data/2ty.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/data/3farmer.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/data/4cow.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/data/5breed.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/data/6tz.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/data/7tpfdata.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/data/8tobcode.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/font/Kanit-Regular.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gui/CowDetail$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gui/CowDetail$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gui/CowDetail$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gui/CowDetail.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gui/CowsTable$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gui/CowsTable$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gui/CowsTable.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gui/Display$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gui/Display.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/img/Cow60px.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/img/DadCow60px.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/img/MomCow60px.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/models/Breed.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/models/Breeder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/models/BreederBreed.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/models/Center.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/models/Cow.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/models/CowBreed.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/models/Farmer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/models/Sector.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/util/CustomTree.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/util/Dialog.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/util/Element.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/util/ReadCSVFile.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/util/RunDB.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/util/WriteCSVFile.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/util/WriteXlsxFile.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +85,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/main/java/util/RunDB.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />

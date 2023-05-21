@@ -16,9 +16,7 @@ import java.util.ArrayList;
 
 public class CowsTable extends JPanel{
 
-    ArrayList<String[]> allData;
     public CowsTable(ArrayList<String[]> allData, String[] columnNames, Display display){
-        this.allData = allData;
         this.setLayout(new BorderLayout());
 
         DefaultTableModel tableModel = new DefaultTableModel(allData.toArray(new Object[0][0]), columnNames){

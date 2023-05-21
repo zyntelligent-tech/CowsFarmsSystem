@@ -9,7 +9,6 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.JTree;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
@@ -18,14 +17,11 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class CowDetail extends JPanel{
 
     private final Display display;
-    private final JPanel detailPanel;
     private final JPanel treePanel;
     private final String cowCode;
     private JCheckBox cowDetailCB;
@@ -49,21 +45,15 @@ public class CowDetail extends JPanel{
         treePanel.setLayout(new BorderLayout());
         this.add(treePanel);
 
-        detailPanel = new JPanel();
-        detailPanel.setLayout(new BorderLayout());
-
         setUpCheckBox();
 
         Dialog dialog = new Dialog();
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                InitCowData();
-                SwingUtilities.invokeLater(() -> {
-                    setUpCowTreePanel(cowCode);
-                    dialog.getDialog().setVisible(false);
-                });
-            }
+        new Thread(() -> {
+            InitCowData();
+            SwingUtilities.invokeLater(() -> {
+                setUpCowTreePanel(cowCode);
+                dialog.getDialog().setVisible(false);
+            });
         }).start();
         dialog.getDialog().setVisible(true);
 
@@ -85,7 +75,7 @@ public class CowDetail extends JPanel{
         }
     }
 
-    public void setUpCowTreePanel(String cowCode){
+    private void setUpCowTreePanel(String cowCode){
         treePanel.removeAll();
         JTree tree = new JTree(getCowsTree(cowParent, cowCode));
         tree.setCellRenderer(new CustomTree());
@@ -109,12 +99,7 @@ public class CowDetail extends JPanel{
         JButton backButton = new JButton("ย้อนกลับ");
         backButton.setFont(Element.getFont(20));
 
-        backButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Display.getCardLayout().show(display, "COWS_TABLE");
-            }
-        });
+        backButton.addActionListener(event -> Display.getCardLayout().show(display, "COWS_TABLE"));
 
         menuBarPanel.add(backButton);
 
@@ -138,12 +123,7 @@ public class CowDetail extends JPanel{
 
         JButton filterBut = new JButton("แสดงข้อมูลที่เลือก");
         filterBut.setFont(Element.getFont(20));
-        filterBut.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setUpCowTreePanel(cowCode);
-            }
-        });
+        filterBut.addActionListener(event -> setUpCowTreePanel(cowCode));
 
         menuBarPanel.add(cowDetailCB);
         menuBarPanel.add(farmerDetailCB);
@@ -154,7 +134,6 @@ public class CowDetail extends JPanel{
     }
 
     private String getFilterCowsDetail(){
-
         String filterStr = "";
         if (cowDetail.length > 0){
             if(cowDetailCB.isSelected()){
@@ -188,62 +167,7 @@ public class CowDetail extends JPanel{
         return filterStr;
     }
 
-    private void setUpCowsDetail(String cowCode){
-        detailPanel.removeAll();
-        JTextArea textArea = new JTextArea();
-        textArea.setBorder(new EmptyBorder(20,50,20,20));
-        textArea.setFont(Element.getFont(30));
-        textArea.setEditable(false);
-
-        String[] cowDetail;
-        if (RunDB.getCow("cow",cowCode).length > 0){
-            cowDetail = RunDB.getCow("cow",cowCode);
-            textArea.append("ข้อมูลวัว\n");
-            textArea.append("\tหมายเลขโค : "+cowDetail[1]+"\n\tชื่อโค : "+cowDetail[4]+"\n\tวันเกิด : "+cowDetail[6]+"\n" +
-                    "\tสถานะโค : "+cowDetail[2]+"\n\tรหัสสายพันธุ์ยุโรป : "+cowDetail[12]+"\n\t%สายพันธุ์ยุโรป : "+cowDetail[13]+"\n\n");
-
-            if (RunDB.getCow("cow",cowDetail[7]).length > 0){
-                String[] cowMomDetail = RunDB.getCow("cow",cowDetail[7]);
-                textArea.append("ข้อมูลแม่\n");
-                textArea.append("\tหมายเลขโค : "+cowMomDetail[1]+"\n\tชื่อโค : "+cowMomDetail[4]+"\n\tวันเกิด : "+cowMomDetail[6]+"\n" +
-                        "\tสถานะโค : "+cowMomDetail[2]+"\n\tรหัสสายพันธุ์ยุโรป : "+cowMomDetail[12]+"\n\t%สายพันธุ์ยุโรป : "+cowMomDetail[13]+"\n\n");
-            }
-
-            if (RunDB.getCow("breeder", cowDetail[8]).length > 0){
-                String[] cowDadDetail = RunDB.getCow("breeder", cowDetail[8]);
-                textArea.append("ข้อมูลพ่อ\n");
-                textArea.append("\tหมายเลขโค : "+cowDadDetail[0]+"\n\tชื่อโค : "+cowDadDetail[1]+"\n"+
-                        "\tหมายเลขพ่อพันธุ์ : "+cowDadDetail[2]+"\n\tหมายเลขแม่พันธุ์ : "+cowDadDetail[3]+"\n\n");
-            }
-
-            if (RunDB.getFarmer(cowDetail[0]).length > 0){
-                String[] farmerDetail = RunDB.getFarmer(cowDetail[0]);
-                String[] centerDetail = RunDB.getCenter(farmerDetail[0]);
-                String[] sectorDetail = RunDB.getSector(centerDetail[0]);
-
-                textArea.append("ข้อมูลเกษตรกร\n");
-                textArea.append("\tหมายเลขสมาชิก : "+farmerDetail[1]+"\n\tชื่อ : "+farmerDetail[3]+"\n\tนามสกุล : "+farmerDetail[4]+"\n" +
-                        "\tวันเกิด : "+farmerDetail[5]+"\n\tจำนวนโคที่มี : "+farmerDetail[12]+"\n\n");
-                textArea.append("ศูนย์/สหกรณ์\n");
-                textArea.append("\tรหัสศูนย์/สหกรณ์ : "+centerDetail[1]+"\n\tชื่อศูนย์/สหกรณ์ : "+centerDetail[2]+"\n" +
-                        "\tชื่อย่อของศูนย์ : "+centerDetail[3]+"\n\tภาค : "+sectorDetail[1]+"\n\n");
-            }
-        }
-        else if (RunDB.getCow("breeder",cowCode).length > 0){
-            cowDetail = RunDB.getCow("breeder",cowCode);
-            textArea.append("ข้อมูลพ่อพันธุ์\n");
-            textArea.append("\tหมายเลขโค : "+cowDetail[0]+"\n\tชื่อโค : "+cowDetail[1]+"\n"+
-                    "\tหมายเลขพ่อพันธุ์ : "+cowDetail[2]+"\n\tหมายเลขแม่พันธุ์ : "+cowDetail[3]+"\n\n");
-        }
-
-        textArea.setCaretPosition(0);
-
-        JScrollPane scrollPane = new JScrollPane(textArea);
-        detailPanel.add(scrollPane);
-        detailPanel.validate();
-    }
-
-    public DefaultMutableTreeNode getCowsTree(ArrayList<String[]> cowParent, String cowCode){
+    private DefaultMutableTreeNode getCowsTree(ArrayList<String[]> cowParent, String cowCode){
         DefaultMutableTreeNode root = new DefaultMutableTreeNode("(CHILD) "+cowCode + getFilterCowsDetail());
         DefaultMutableTreeNode prevNode = root;
         int index = 1;

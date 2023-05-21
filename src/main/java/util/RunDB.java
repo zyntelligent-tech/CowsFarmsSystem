@@ -29,7 +29,7 @@ public class RunDB {
                     }
                     dataList.add(data);
                 }
-            };
+            }
             closeDatabaseConnection();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -63,7 +63,7 @@ public class RunDB {
                     System.out.println(Arrays.toString(data));
                     dataList.add(data);
                 }
-            };
+            }
             closeDatabaseConnection();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -85,7 +85,7 @@ public class RunDB {
                         data[i - 1] = resultSet.getString(i);
                     }
                 }
-            };
+            }
             closeDatabaseConnection();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -107,7 +107,7 @@ public class RunDB {
                         data[i - 1] = resultSet.getString(i);
                     }
                 }
-            };
+            }
             closeDatabaseConnection();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -129,7 +129,7 @@ public class RunDB {
                         data[i - 1] = resultSet.getString(i);
                     }
                 }
-            };
+            }
             closeDatabaseConnection();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -151,7 +151,7 @@ public class RunDB {
                         data[i - 1] = resultSet.getString(i);
                     }
                 }
-            };
+            }
             closeDatabaseConnection();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -178,7 +178,7 @@ public class RunDB {
                         data[i - 1] = resultSet.getString(i);
                     }
                 }
-            };
+            }
             closeDatabaseConnection();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -205,7 +205,7 @@ public class RunDB {
                     }
                     dataList.add(data);
                 }
-            };
+            }
             closeDatabaseConnection();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -232,7 +232,7 @@ public class RunDB {
                     }
                     dataList.add(data);
                 }
-            };
+            }
             closeDatabaseConnection();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -259,7 +259,7 @@ public class RunDB {
                     }
                     dataList.add(data);
                 }
-            };
+            }
             closeDatabaseConnection();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -284,7 +284,7 @@ public class RunDB {
                     }
                     dataList.add(data);
                 }
-            };
+            }
             closeDatabaseConnection();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -309,14 +309,13 @@ public class RunDB {
                     }
                     dataList.add(data);
                 }
-            };
+            }
             closeDatabaseConnection();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         return dataList;
     }
-
 
     private static void openDatabaseConnection() throws SQLException {
         System.out.println("Connecting to the database....");
