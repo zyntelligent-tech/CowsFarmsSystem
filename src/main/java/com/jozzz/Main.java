@@ -6,6 +6,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import java.awt.Dimension;
 import java.awt.Frame;
+import java.util.Objects;
 
 public class Main {
 
@@ -13,7 +14,7 @@ public class Main {
 
         JFrame frame = new JFrame();
         frame.setTitle("DPO Cleanser");
-        frame.setIconImage(new ImageIcon("src//main//resources//img//MomCow60px.png").getImage());
+        frame.setIconImage(new ImageIcon(Objects.requireNonNull(Main.class.getClassLoader().getResource("img/MomCow60px.png"))).getImage());
 
         frame.add(new Display());
 

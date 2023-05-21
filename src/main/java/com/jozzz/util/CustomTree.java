@@ -1,5 +1,7 @@
 package com.jozzz.util;
 
+import com.jozzz.Main;
+
 import javax.swing.ImageIcon;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -7,6 +9,7 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Image;
+import java.util.Objects;
 
 public class CustomTree extends DefaultTreeCellRenderer {
 
@@ -16,15 +19,15 @@ public class CustomTree extends DefaultTreeCellRenderer {
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) value;
 
         if (node.getUserObject().toString().startsWith("(CHILD)")){
-            setIcon(new ImageIcon(new ImageIcon("src//main//resources//img//Cow60px.png")
+            setIcon(new ImageIcon(new ImageIcon(Objects.requireNonNull(Main.class.getClassLoader().getResource("img/Cow60px.png")))
                     .getImage().getScaledInstance(60,60, Image.SCALE_SMOOTH)));
         }
         else if (node.getUserObject().toString().startsWith("(MOM")){
-            setIcon(new ImageIcon(new ImageIcon("src//main//resources//img//MomCow60px.png")
+            setIcon(new ImageIcon(new ImageIcon(Objects.requireNonNull(Main.class.getClassLoader().getResource("img/MomCow60px.png")))
                     .getImage().getScaledInstance(60,60, Image.SCALE_SMOOTH)));
         }
         else if (node.getUserObject().toString().startsWith("(DAD")){
-            setIcon(new ImageIcon(new ImageIcon("src//main//resources//img//DadCow60px.png")
+            setIcon(new ImageIcon(new ImageIcon(Objects.requireNonNull(Main.class.getClassLoader().getResource("img/DadCow60px.png")))
                     .getImage().getScaledInstance(60,60, Image.SCALE_SMOOTH)));
         }
 

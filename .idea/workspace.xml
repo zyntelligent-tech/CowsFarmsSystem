@@ -9,20 +9,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="62bd48ef-414f-4f9f-8bde-acfffa3c54fc" name="Changes" comment="Optimize Code And Module">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpclient_4_5_13.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpcore_4_4_13.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+    <list default="true" id="62bd48ef-414f-4f9f-8bde-acfffa3c54fc" name="Changes" comment="Optimize Code">
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/CowSimulator_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/CowSimulator_jar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__jakarta_activation_jakarta_activation_api_1_2_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__jakarta_xml_bind_jakarta_xml_bind_api_2_3_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gui/CowDetail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/gui/CowDetail.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gui/CowsTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/gui/CowsTable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gui/Display.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/gui/Display.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/util/CustomTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/util/CustomTree.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/util/Dialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/util/Dialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/util/Element.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/util/Element.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/util/RunDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/util/RunDB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jozzz/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jozzz/util/CustomTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/util/CustomTree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jozzz/util/Dialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/util/Dialog.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -163,7 +159,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684692229259</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Optimize Code">
+      <created>1684697849456</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1684697849456</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -181,6 +184,7 @@
     <MESSAGE value="Cows Tree Hotfix" />
     <MESSAGE value="Add Cows Compare" />
     <MESSAGE value="Optimize Code And Module" />
-    <option name="LAST_COMMIT_MESSAGE" value="Optimize Code And Module" />
+    <MESSAGE value="Optimize Code" />
+    <option name="LAST_COMMIT_MESSAGE" value="Optimize Code" />
   </component>
 </project>
