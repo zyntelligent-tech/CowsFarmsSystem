@@ -1,9 +1,9 @@
-package gui;
+package com.jozzz.gui;
 
-import util.CustomTree;
-import util.Dialog;
-import util.Element;
-import util.RunDB;
+import com.jozzz.util.CustomTree;
+import com.jozzz.util.Dialog;
+import com.jozzz.util.Element;
+import com.jozzz.util.RunDB;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;

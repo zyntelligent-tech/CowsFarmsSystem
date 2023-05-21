@@ -1,4 +1,4 @@
-package util;
+package com.jozzz.util;
 
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;

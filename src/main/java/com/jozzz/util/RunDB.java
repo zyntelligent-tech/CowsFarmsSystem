@@ -1,4 +1,4 @@
-package util;
+package com.jozzz.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class RunDB {
 
@@ -60,7 +59,6 @@ public class RunDB {
                     for (int i=1;i <= column;i++){
                         data[i-1] = resultSet.getString(i);
                     }
-                    System.out.println(Arrays.toString(data));
                     dataList.add(data);
                 }
             }
@@ -318,18 +316,14 @@ public class RunDB {
     }
 
     private static void openDatabaseConnection() throws SQLException {
-        System.out.println("Connecting to the database....");
         connection = DriverManager.getConnection(
                 "jdbc:mariadb://ec2-54-251-168-197.ap-southeast-1.compute.amazonaws.com:6667/farmdb",
                 "summer2023",
                 "Summ3r!@MISL$$23"
         );
-        System.out.println("Connection valid : " + connection.isValid(5)) ;
     }
 
     private static void closeDatabaseConnection() throws SQLException{
-        System.out.println("Closing database connection...");
         connection.close();
-        System.out.println("Connection valid : "+connection.isValid(5));
     }
 }

@@ -1,4 +1,4 @@
-package util;
+package com.jozzz.util;
 
 import java.awt.Font;
 import java.io.InputStream;

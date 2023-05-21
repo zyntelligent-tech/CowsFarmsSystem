@@ -1,75 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="CowSimulator:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="62bd48ef-414f-4f9f-8bde-acfffa3c54fc" name="Changes" comment="Add Cows Compare">
+    <list default="true" id="62bd48ef-414f-4f9f-8bde-acfffa3c54fc" name="Changes" comment="Optimize Code And Module">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpclient_4_5_13.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpcore_4_4_13.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ErrorCows.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/algo/FindParent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gui/CowDetail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/CowDetail.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gui/CowsTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/CowsTable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gui/Display.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/Display.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/models/Breed.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/models/Breeder.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/models/BreederBreed.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/models/Center.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/models/Cow.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/models/CowBreed.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/models/Farmer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/models/Sector.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/util/Dialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/Dialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/util/ReadCSVFile.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/util/RunDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/RunDB.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/util/WriteCSVFile.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/util/WriteXlsxFile.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/data/1tx.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/data/2ty.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/data/3farmer.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/data/4cow.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/data/5breed.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/data/6tz.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/data/7tpfdata.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/data/8tobcode.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/algo/FindParent.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/data/1tx.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/data/2ty.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/data/3farmer.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/data/4cow.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/data/5breed.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/data/6tz.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/data/7tpfdata.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/data/8tobcode.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/font/Kanit-Regular.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/gui/CowDetail$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/gui/CowDetail$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/gui/CowDetail$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/gui/CowDetail.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/gui/CowsTable$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/gui/CowsTable$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/gui/CowsTable.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/gui/Display$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/gui/Display.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/img/Cow60px.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/img/DadCow60px.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/img/MomCow60px.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/models/Breed.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/models/Breeder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/models/BreederBreed.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/models/Center.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/models/Cow.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/models/CowBreed.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/models/Farmer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/models/Sector.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/util/CustomTree.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/util/Dialog.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/util/Element.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/util/ReadCSVFile.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/util/RunDB.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/util/WriteCSVFile.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/util/WriteXlsxFile.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gui/CowDetail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/gui/CowDetail.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gui/CowsTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/gui/CowsTable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gui/Display.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/gui/Display.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/util/CustomTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/util/CustomTree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/util/Dialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/util/Dialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/util/Element.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/util/Element.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/util/RunDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/util/RunDB.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,7 +40,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/src/main/java/util/RunDB.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/jozzz/util/RunDB.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -104,30 +57,40 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;Groovy compiler&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "last_opened_file_path": "F:/GitHub/Projects/CowsFarmsSystem/src/main/resources",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.sourceCode.Groovy"
   }
-}</component>
-  <component name="RunManager" selected="Application.Main">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Main" />
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\GitHub\Projects\CowsFarmsSystem\src\main\java\com\jozzz" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.com.jozzz.Main">
+    <configuration name="com.jozzz.Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.jozzz.Main" />
       <module name="CowSimulator" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="WriteCSVFile" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="util.WriteCSVFile" />
+    <configuration name="com.jozzz.Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.jozzz.Main" />
       <module name="CowSimulator" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="util.*" />
+          <option name="PATTERN" value=".*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -135,12 +98,25 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="WriteXlsxFile" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="util.WriteCSVFile" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="util.WriteCSVFile" />
+      <module name="CowSimulator" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.jozzz.util.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="util.WriteXlsxFile" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="util.WriteXlsxFile" />
       <module name="CowSimulator" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="util.*" />
+          <option name="PATTERN" value="com.jozzz.util.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -150,9 +126,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
-        <item itemvalue="Application.WriteXlsxFile" />
-        <item itemvalue="Application.WriteCSVFile" />
+        <item itemvalue="Application.com.jozzz.Main" />
+        <item itemvalue="Application.com.jozzz.Main" />
+        <item itemvalue="Application.util.WriteXlsxFile" />
+        <item itemvalue="Application.util.WriteCSVFile" />
       </list>
     </recent_temporary>
   </component>
@@ -179,7 +156,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683535747549</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Optimize Code And Module">
+      <created>1684692229259</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1684692229259</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -196,6 +180,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Cows Tree Hotfix" />
     <MESSAGE value="Add Cows Compare" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add Cows Compare" />
+    <MESSAGE value="Optimize Code And Module" />
+    <option name="LAST_COMMIT_MESSAGE" value="Optimize Code And Module" />
   </component>
 </project>

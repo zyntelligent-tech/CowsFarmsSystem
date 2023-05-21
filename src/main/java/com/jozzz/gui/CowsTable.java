@@ -1,6 +1,6 @@
-package gui;
+package com.jozzz.gui;
 
-import util.Element;
+import com.jozzz.util.Element;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
