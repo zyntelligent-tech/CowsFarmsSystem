@@ -321,9 +321,9 @@ public class RunDB {
     private static void openDatabaseConnection() throws SQLException {
         System.out.println("Connecting to the database....");
         connection = DriverManager.getConnection(
-                "jdbc:mariadb://localhost:3306/farmdb",
-                "root",
-                ""
+                "jdbc:mariadb://ec2-54-251-168-197.ap-southeast-1.compute.amazonaws.com:6667/farmdb",
+                "summer2023",
+                "Summ3r!@MISL$$23"
         );
         System.out.println("Connection valid : " + connection.isValid(5)) ;
     }

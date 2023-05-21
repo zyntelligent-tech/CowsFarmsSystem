@@ -58,4 +58,5 @@ public class CowsTable extends JPanel{
 
         this.add(scrollPane);
     }
+
 }

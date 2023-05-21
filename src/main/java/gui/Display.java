@@ -1,10 +1,15 @@
 package gui;
 
+import util.Dialog;
 import util.Element;
 import util.RunDB;
 
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import java.awt.CardLayout;
 import java.awt.Dimension;
@@ -14,19 +19,39 @@ import java.util.ArrayList;
 public class Display extends JPanel {
 
     private static CardLayout cardLayout;
-
+    ArrayList<String[]> allCow;
+    ArrayList<String[]> allCorrectBreeds;
+    ArrayList<String[]> allErrorBreeds;
+    ArrayList<String[]> allCorrectParent;
+    ArrayList<String[]> allErrorParent;
+    ArrayList<String[]> allPerIntBreed;
     public Display(){
-        ArrayList<String[]> allCow = RunDB.getAllCows();
-        ArrayList<String[]> allCorrectBreeds = RunDB.getAllCorrectBreed();
-        ArrayList<String[]> allErrorBreeds = RunDB.getAllErrorBreed();
-        ArrayList<String[]> allCorrectParent = RunDB.getAllCorrectParent();
-        ArrayList<String[]> allErrorParent = RunDB.getAllErrorParent();
-        ArrayList<String[]> allPerIntBreed = RunDB.getAllPerIntBreed();
+
         cardLayout = new CardLayout();
         this.setPreferredSize(new Dimension(1366, 768));
         this.setBorder(new EmptyBorder(10,10,10,10));
         this.setLayout(cardLayout);
 
+        Dialog dialog = new Dialog();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                allCow = RunDB.getAllCows();
+                allCorrectBreeds = RunDB.getAllCorrectBreed();
+                allErrorBreeds = RunDB.getAllErrorBreed();
+                allCorrectParent = RunDB.getAllCorrectParent();
+                allErrorParent = RunDB.getAllErrorParent();
+                allPerIntBreed = RunDB.getAllPerIntBreed();
+                createTable();
+                SwingUtilities.invokeLater(() -> {
+                    dialog.getDialog().setVisible(false);
+                });
+            }
+        }).start();
+        dialog.getDialog().setVisible(true);
+    }
+
+    private void createTable(){
         JTabbedPane tabbedPane = new JTabbedPane();
         tabbedPane.setFont(Element.getFont(15));
         String[] columnAlLCows = {"เลขเกษตรกร", "หมายเลขโค", "สถานะโค","วันที่", "ชื่อโค", "c_oth", "วันเกิด"
@@ -47,8 +72,8 @@ public class Display extends JPanel {
                 new CowsTable(allCorrectParent, columnAlLCows, this));
         tabbedPane.add("Error Parent พ่อแม่ไม่ถูกต้อง ("+decimalFormat(allErrorParent.size())+" รายการ)",
                 new CowsTable(allErrorParent, columnAlLCows, this));
-
         this.add(tabbedPane, "COWS_TABLE");
+        this.validate();
     }
 
     public static CardLayout getCardLayout() {

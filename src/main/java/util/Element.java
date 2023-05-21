@@ -17,5 +17,4 @@ public class Element {
         }
         return font;
     }
-
 }
