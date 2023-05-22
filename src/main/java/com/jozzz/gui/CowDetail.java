@@ -18,6 +18,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CowDetail extends JPanel{
 
@@ -28,12 +30,9 @@ public class CowDetail extends JPanel{
     private JCheckBox farmerDetailCB;
     private JCheckBox centerDetailCB;
     private JCheckBox breedDetailCB;
+    private Map<String,ArrayList<String[]>> allCowsDetail;
     private ArrayList<String[]> cowParent;
-    private String[] cowDetail;
-    private String[] farmerDetail;
-    private String[] centerDetail;
-    private String[] sectorDetail;
-    private String[] breedDetail;
+
     public CowDetail(Display display, String cowCode){
         this.display = display;
         this.cowCode = cowCode;
@@ -50,10 +49,8 @@ public class CowDetail extends JPanel{
         Dialog dialog = new Dialog();
         new Thread(() -> {
             InitCowData();
-            SwingUtilities.invokeLater(() -> {
-                setUpCowTreePanel(cowCode);
-                dialog.getDialog().setVisible(false);
-            });
+            setUpCowTreePanel(cowCode);
+            SwingUtilities.invokeLater(() -> dialog.getDialog().setVisible(false));
         }).start();
         dialog.getDialog().setVisible(true);
 
@@ -61,18 +58,39 @@ public class CowDetail extends JPanel{
     }
 
     private void InitCowData(){
+        allCowsDetail = new HashMap<>();
         cowParent = RunDB.getCowParent(cowCode);
-        cowDetail = RunDB.getCow("cow",cowCode);
-        if (cowDetail.length > 0) {
-            breedDetail = RunDB.getBreeds(cowCode);
-            farmerDetail = RunDB.getFarmer(cowDetail[0]);
-            if (farmerDetail.length > 0){
-                centerDetail = RunDB.getCenter(farmerDetail[0]);
-                sectorDetail = RunDB.getSector(centerDetail[0]);
+        for (String[] rowParent : cowParent) {
+            if (rowParent[0] != null){
+                allCowsDetail.put(rowParent[0],getCowDetail(rowParent[0], "cow"));
             }
-        } else {
-            cowDetail = RunDB.getCow("breeder",cowCode);
+            if (rowParent[2] != null){
+                allCowsDetail.put(rowParent[2],getCowDetail(rowParent[2], "dad"));
+            }
         }
+    }
+
+    private ArrayList<String[]> getCowDetail(String cowCode, String cowType){
+        ArrayList<String[]> cowDetailList = new ArrayList<>();
+        String[] cowDetail;
+        if (cowType.equals("cow")) {
+            cowDetail = RunDB.getCow("cow",cowCode);
+            cowDetailList.add(cowDetail);
+            String[] breedDetail = RunDB.getBreeds(cowCode);
+            cowDetailList.add(breedDetail);
+            String[] farmerDetail = RunDB.getFarmer(cowDetail[0]);
+            cowDetailList.add(farmerDetail);
+            if (farmerDetail.length > 0){
+                String[] centerDetail = RunDB.getCenter(farmerDetail[0]);
+                cowDetailList.add(centerDetail);
+                String[] sectorDetail = RunDB.getSector(centerDetail[0]);
+                cowDetailList.add(sectorDetail);
+            }
+        } else if (cowType.equals("dad")){
+            cowDetail = RunDB.getCow("breeder",cowCode);
+            cowDetailList.add(cowDetail);
+        }
+        return cowDetailList;
     }
 
     private void setUpCowTreePanel(String cowCode){
@@ -133,9 +151,10 @@ public class CowDetail extends JPanel{
         this.add(menuBarPanel, BorderLayout.NORTH);
     }
 
-    private String getFilterCowsDetail(){
+    private String getFilterCowsDetail(String cowCode, String cowType){
         String filterStr = "";
-        if (cowDetail.length > 0){
+        String[] cowDetail = allCowsDetail.get(cowCode).get(0);
+        if (cowType.equals("cow")){
             if(cowDetailCB.isSelected()){
                 filterStr += " [ (ข้อมูลโค) หมายเลขโค : "+cowDetail[1]+" , ชื่อโค : "+cowDetail[4]
                         +" , วันเกิด : "+cowDetail[6]+" , สถานะโค : "+cowDetail[2]+" , รหัสสายพันธุ์ยุโรป : "+cowDetail[12]
@@ -143,38 +162,42 @@ public class CowDetail extends JPanel{
             }
 
             if (breedDetailCB.isSelected()){
-                filterStr += " [ (สายพันธุ์) "+breedDetail[1]+ " ] ";
+                filterStr += " [ (สายพันธุ์) "+allCowsDetail.get(cowCode).get(1)[1]+ " ] ";
             }
 
-            if (farmerDetail.length > 0){
-                if (farmerDetailCB.isSelected()){
-                    filterStr += " [ (ข้อมูลเกษตรกร) หมายเลขสมาชิก : "+farmerDetail[1]+" , ชื่อ : "+farmerDetail[3]
-                            +" , นามสกุล : "+farmerDetail[4]+" , วันเกิด : "+farmerDetail[5]+" , จำนวนโคที่มี : "
-                            +farmerDetail[12]+" ] ";
-                }
-                if (centerDetailCB.isSelected()){
-                    filterStr += " [ (ศูนย์/สหกรณ์) รหัสศูนย์/สหกรณ์ : "+centerDetail[1]+" , ชื่อศูนย์/สหกรณ์ : "+centerDetail[2]
-                            +" , ชื่อย่อของศูนย์ : "+centerDetail[3]+" , ภาค : "+sectorDetail[1]+" ] ";
-                }
+            String[] farmerDetail = allCowsDetail.get(cowCode).get(2);
+            String[] centerDetail = allCowsDetail.get(cowCode).get(3);
+            String[] sectorDetail = allCowsDetail.get(cowCode).get(4);
+
+            if (farmerDetailCB.isSelected()){
+                filterStr += " [ (ข้อมูลเกษตรกร) หมายเลขสมาชิก : "+farmerDetail[1]+" , ชื่อ : "+farmerDetail[3]
+                        +" , นามสกุล : "+farmerDetail[4]+" , วันเกิด : "+farmerDetail[5]+" , จำนวนโคที่มี : "
+                        +farmerDetail[12]+" ] ";
+            }
+
+            if (centerDetailCB.isSelected()){
+                filterStr += " [ (ศูนย์/สหกรณ์) รหัสศูนย์/สหกรณ์ : "+centerDetail[1]+" , ชื่อศูนย์/สหกรณ์ : "+centerDetail[2]
+                        +" , ชื่อย่อของศูนย์ : "+centerDetail[3]+" , ภาค : "+sectorDetail[1]+" ] ";
             }
         }
-        else {
-            if (cowDetailCB.isSelected()){
-                filterStr += " [ (ข้อมูลโค) หมายเลขโค : "+cowDetail[0]+" , ชื่อโค : "+cowDetail[1]
-                        + " , หมายเลขพ่อพันธุ์ : "+cowDetail[2]+" , หมายเลขแม่พันธุ์ : "+cowDetail[3]+" ] ";
-            }
+        else if (cowType.equals("dad")){
+            cowDetail = allCowsDetail.get(cowCode).get(0);
+                if (cowDetailCB.isSelected()) {
+                    filterStr += " [ (ข้อมูลโค) หมายเลขโค : " + cowDetail[0] + " , ชื่อโค : " + cowDetail[1]
+                            + " , หมายเลขพ่อพันธุ์ : " + cowDetail[2] + " , หมายเลขแม่พันธุ์ : " + cowDetail[3] + " ] ";
+                }
         }
         return filterStr;
     }
 
     private DefaultMutableTreeNode getCowsTree(ArrayList<String[]> cowParent, String cowCode){
-        DefaultMutableTreeNode root = new DefaultMutableTreeNode("(CHILD) "+cowCode + getFilterCowsDetail());
+        DefaultMutableTreeNode root = new DefaultMutableTreeNode("(CHILD) "+cowCode + getFilterCowsDetail(cowCode, "cow"));
         DefaultMutableTreeNode prevNode = root;
         int index = 1;
         for (String[] rowParent : cowParent) {
             if (!rowParent[1].isEmpty() && !rowParent[2].isEmpty()) {
-                DefaultMutableTreeNode mom = new DefaultMutableTreeNode("(MOM "+index+") "+rowParent[1] + getFilterCowsDetail());
-                DefaultMutableTreeNode dad = new DefaultMutableTreeNode("(DAD "+index+") "+rowParent[2] + getFilterCowsDetail());
+                DefaultMutableTreeNode mom = new DefaultMutableTreeNode("(MOM "+index+") "+rowParent[1] + getFilterCowsDetail(rowParent[1], "cow"));
+                DefaultMutableTreeNode dad = new DefaultMutableTreeNode("(DAD "+index+") "+rowParent[2] + getFilterCowsDetail(rowParent[2], "dad"));
                 prevNode.add(mom);
                 prevNode.add(dad);
                 prevNode = mom;
@@ -182,13 +205,13 @@ public class CowDetail extends JPanel{
             else{
                 if(rowParent[1].isEmpty() && !rowParent[2].isEmpty()){
                     DefaultMutableTreeNode mom = new DefaultMutableTreeNode("(MOM "+index+") ไม่พบแม่พันธุ์");
-                    DefaultMutableTreeNode dad = new DefaultMutableTreeNode("(DAD "+index+") "+rowParent[2] + getFilterCowsDetail());
+                    DefaultMutableTreeNode dad = new DefaultMutableTreeNode("(DAD "+index+") "+rowParent[2] + getFilterCowsDetail(rowParent[2], "dad"));
                     prevNode.add(mom);
                     prevNode.add(dad);
                     prevNode = mom;
                 }
                 if (!rowParent[1].isEmpty() && rowParent[2].isEmpty()){
-                    DefaultMutableTreeNode mom = new DefaultMutableTreeNode("(MOM "+index+") "+rowParent[1] + getFilterCowsDetail());
+                    DefaultMutableTreeNode mom = new DefaultMutableTreeNode("(MOM "+index+") "+rowParent[1] + getFilterCowsDetail(rowParent[1], "cow"));
                     DefaultMutableTreeNode dad = new DefaultMutableTreeNode("(DAD "+index+") ไม่พบพ่อพันธุ์");
                     prevNode.add(mom);
                     prevNode.add(dad);

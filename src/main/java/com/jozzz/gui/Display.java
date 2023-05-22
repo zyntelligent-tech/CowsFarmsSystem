@@ -21,7 +21,6 @@ public class Display extends JPanel {
     private ArrayList<String[]> allErrorBreeds;
     private ArrayList<String[]> allCorrectParent;
     private ArrayList<String[]> allErrorParent;
-    private ArrayList<String[]> allPerIntBreed;
     public Display(){
 
         cardLayout = new CardLayout();
@@ -36,7 +35,6 @@ public class Display extends JPanel {
             allErrorBreeds = RunDB.getAllErrorBreed();
             allCorrectParent = RunDB.getAllCorrectParent();
             allErrorParent = RunDB.getAllErrorParent();
-            allPerIntBreed = RunDB.getAllPerIntBreed();
             createTable();
             SwingUtilities.invokeLater(() -> dialog.getDialog().setVisible(false));
         }).start();

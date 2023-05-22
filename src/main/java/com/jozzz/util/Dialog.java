@@ -20,7 +20,7 @@ public class Dialog {
         dialog.setIconImage(new ImageIcon(Objects.requireNonNull(Main.class.getClassLoader().getResource("img/MomCow60px.png"))).getImage());
         dialog.setTitle("Loading...");
         dialog.setContentPane(label);
-        dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         dialog.setModal(true);
         dialog.pack();
         dialog.setLocationRelativeTo(null);
