@@ -13,14 +13,15 @@ public class Dialog {
     private final JDialog dialog;
     public Dialog(){
         JLabel label = new JLabel("รอข้อมูลจากเซิร์ฟเวอร์...");
-        label.setPreferredSize(new Dimension(300, 100));
-        label.setFont(Element.getFont(25));
+        label.setPreferredSize(new Dimension(400, 150));
+        label.setFont(Element.getFont(35));
         label.setHorizontalAlignment(JLabel.CENTER);
         dialog = new JDialog();
         dialog.setIconImage(new ImageIcon(Objects.requireNonNull(Main.class.getClassLoader().getResource("img/MomCow60px.png"))).getImage());
         dialog.setTitle("Loading...");
         dialog.setContentPane(label);
-        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+        dialog.setUndecorated(true);
         dialog.setModal(true);
         dialog.pack();
         dialog.setLocationRelativeTo(null);

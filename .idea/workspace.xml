@@ -9,11 +9,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="62bd48ef-414f-4f9f-8bde-acfffa3c54fc" name="Changes" comment="Optimize Code">
+    <list default="true" id="62bd48ef-414f-4f9f-8bde-acfffa3c54fc" name="Changes" comment="Tree Hotfix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/jozzz/gui/CowDetail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/gui/CowDetail.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jozzz/gui/Display.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/gui/Display.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/jozzz/util/Dialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/util/Dialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jozzz/util/RunDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/util/RunDB.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -168,7 +168,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684704157225</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Tree Hotfix">
+      <created>1684746243393</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1684746243393</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -187,6 +194,7 @@
     <MESSAGE value="Add Cows Compare" />
     <MESSAGE value="Optimize Code And Module" />
     <MESSAGE value="Optimize Code" />
-    <option name="LAST_COMMIT_MESSAGE" value="Optimize Code" />
+    <MESSAGE value="Tree Hotfix" />
+    <option name="LAST_COMMIT_MESSAGE" value="Tree Hotfix" />
   </component>
 </project>

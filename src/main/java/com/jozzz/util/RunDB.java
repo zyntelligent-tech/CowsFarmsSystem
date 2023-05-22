@@ -323,7 +323,6 @@ public class RunDB {
         );
     }
 
-
     private static void closeDatabaseConnection() throws SQLException{
         connection.close();
     }

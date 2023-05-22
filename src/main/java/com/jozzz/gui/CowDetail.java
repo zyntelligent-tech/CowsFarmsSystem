@@ -48,8 +48,10 @@ public class CowDetail extends JPanel{
 
         Dialog dialog = new Dialog();
         new Thread(() -> {
-            InitCowData();
-            setUpCowTreePanel(cowCode);
+            try {
+                InitCowData();
+                setUpCowTreePanel(cowCode);
+            }catch (Exception ignored){}
             SwingUtilities.invokeLater(() -> dialog.getDialog().setVisible(false));
         }).start();
         dialog.getDialog().setVisible(true);

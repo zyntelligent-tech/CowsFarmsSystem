@@ -30,12 +30,14 @@ public class Display extends JPanel {
 
         Dialog dialog = new Dialog();
         new Thread(() -> {
-            allCow = RunDB.getAllCows();
-            allCorrectBreeds = RunDB.getAllCorrectBreed();
-            allErrorBreeds = RunDB.getAllErrorBreed();
-            allCorrectParent = RunDB.getAllCorrectParent();
-            allErrorParent = RunDB.getAllErrorParent();
-            createTable();
+            try {
+                allCow = RunDB.getAllCows();
+                allCorrectBreeds = RunDB.getAllCorrectBreed();
+                allErrorBreeds = RunDB.getAllErrorBreed();
+                allCorrectParent = RunDB.getAllCorrectParent();
+                allErrorParent = RunDB.getAllErrorParent();
+                createTable();
+            }catch (Exception ignored){}
             SwingUtilities.invokeLater(() -> dialog.getDialog().setVisible(false));
         }).start();
         dialog.getDialog().setVisible(true);
