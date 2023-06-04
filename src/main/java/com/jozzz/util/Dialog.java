@@ -13,8 +13,8 @@ public class Dialog {
     private final JDialog dialog;
     public Dialog(){
         JLabel label = new JLabel("รอข้อมูลจากเซิร์ฟเวอร์...");
-        label.setPreferredSize(new Dimension(400, 150));
-        label.setFont(Element.getFont(35));
+        label.setPreferredSize(new Dimension(500, 250));
+        label.setFont(Element.getFont(40));
         label.setHorizontalAlignment(JLabel.CENTER);
         dialog = new JDialog();
         dialog.setIconImage(new ImageIcon(Objects.requireNonNull(Main.class.getClassLoader().getResource("img/MomCow60px.png"))).getImage());

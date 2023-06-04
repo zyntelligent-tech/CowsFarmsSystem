@@ -1,5 +1,6 @@
 package com.jozzz.gui;
 
+import com.jozzz.Main;
 import com.jozzz.util.CustomTree;
 import com.jozzz.util.Dialog;
 import com.jozzz.util.Element;
@@ -23,7 +24,6 @@ import java.util.Map;
 
 public class CowDetail extends JPanel{
 
-    private final Display display;
     private final JPanel treePanel;
     private final String cowCode;
     private JCheckBox cowDetailCB;
@@ -33,8 +33,7 @@ public class CowDetail extends JPanel{
     private Map<String,ArrayList<String[]>> allCowsDetail;
     private ArrayList<String[]> cowParent;
 
-    public CowDetail(Display display, String cowCode){
-        this.display = display;
+    public CowDetail(String cowCode){
         this.cowCode = cowCode;
         this.setLayout(new BorderLayout());
 
@@ -55,8 +54,6 @@ public class CowDetail extends JPanel{
             SwingUtilities.invokeLater(() -> dialog.getDialog().setVisible(false));
         }).start();
         dialog.getDialog().setVisible(true);
-
-        display.add(this, "COW_DETAIL");
     }
 
     private void InitCowData(){
@@ -119,7 +116,7 @@ public class CowDetail extends JPanel{
         JButton backButton = new JButton("ย้อนกลับ");
         backButton.setFont(Element.getFont(20));
 
-        backButton.addActionListener(event -> Display.getCardLayout().show(display, "COWS_TABLE"));
+        backButton.addActionListener(event -> Element.getCardLayout().show(Main.display, "DPO_DISPLAY"));
 
         menuBarPanel.add(backButton);
 

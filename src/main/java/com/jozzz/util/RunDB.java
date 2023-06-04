@@ -189,8 +189,8 @@ public class RunDB {
         try {
             openDatabaseConnection();
             try(PreparedStatement statement = connection.prepareStatement(
-                    "SELECT cowId, GROUP_CONCAT(CONCAT(breedId, ' : ', perInt + num_up / num_low) SEPARATOR ' , ') AS Breed," +
-                            " SUM(perInt + num_up / num_low) AS total_perInt"+
+                    "SELECT cowId, GROUP_CONCAT(CONCAT(breedId, ' : ', num_up ,'/', num_low, '=', perInt + num_up / num_low) SEPARATOR ' , ') AS Breed," +
+                            " CAST(SUM(perInt + num_up / num_low) AS DECIMAL) AS total_perInt"+
                             " FROM cowbreed"+
                             " GROUP BY cowId"+
                             " HAVING total_perInt = 100")){
@@ -216,8 +216,8 @@ public class RunDB {
         try {
             openDatabaseConnection();
             try(PreparedStatement statement = connection.prepareStatement(
-                    "SELECT cowId, GROUP_CONCAT(CONCAT(breedId, ' : ', perInt + num_up / num_low) SEPARATOR ' / ') AS Breed," +
-                            " SUM(perInt + num_up / num_low) AS total_perInt"+
+                    "SELECT cowId, GROUP_CONCAT(CONCAT(breedId, ' : ', num_up ,'/', num_low, '=', perInt + num_up / num_low) SEPARATOR ' , ') AS Breed," +
+                            " CAST(SUM(perInt + num_up / num_low) AS DECIMAL) AS total_perInt"+
                             " FROM cowbreed"+
                             " GROUP BY cowId"+
                             " HAVING total_perInt != 100")){
@@ -244,7 +244,7 @@ public class RunDB {
             openDatabaseConnection();
             try(PreparedStatement statement = connection.prepareStatement(
                     "SELECT cowId," +
-                            " GROUP_CONCAT(CONCAT(breedId, ' : ', perInt + num_up / num_low) SEPARATOR ' , ') AS Breed_PerInt," +
+                            " GROUP_CONCAT(CONCAT(breedId, ' : ', num_up ,'/', num_low, '=', perInt + num_up / num_low) SEPARATOR ' , ') AS Breed_PerInt," +
                             " SUM(perInt + num_up / num_low) AS total_perInt" +
                             " FROM cowbreed" +
                             " GROUP BY cowId")){
@@ -315,11 +315,19 @@ public class RunDB {
         return dataList;
     }
 
+//    private static void openDatabaseConnection() throws SQLException {
+//        connection = DriverManager.getConnection(
+//                "jdbc:mariadb://ec2-54-251-168-197.ap-southeast-1.compute.amazonaws.com:6667/farmdb",
+//                "summer2023",
+//                "Summ3r!@MISL$$23"
+//        );
+//    }
+
     private static void openDatabaseConnection() throws SQLException {
         connection = DriverManager.getConnection(
-                "jdbc:mariadb://ec2-54-251-168-197.ap-southeast-1.compute.amazonaws.com:6667/farmdb",
-                "summer2023",
-                "Summ3r!@MISL$$23"
+                "jdbc:mariadb://localhost:3306/farmdb",
+                "root",
+                ""
         );
     }
 

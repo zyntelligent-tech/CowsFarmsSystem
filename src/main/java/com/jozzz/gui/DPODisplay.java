@@ -1,32 +1,32 @@
 package com.jozzz.gui;
 
+import com.jozzz.Main;
 import com.jozzz.util.Dialog;
 import com.jozzz.util.Element;
 import com.jozzz.util.RunDB;
 
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
-import java.awt.CardLayout;
+import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class Display extends JPanel {
+public class DPODisplay extends JPanel {
 
-    private static CardLayout cardLayout;
     private ArrayList<String[]> allCow;
     private ArrayList<String[]> allCorrectBreeds;
     private ArrayList<String[]> allErrorBreeds;
     private ArrayList<String[]> allCorrectParent;
     private ArrayList<String[]> allErrorParent;
-    public Display(){
-
-        cardLayout = new CardLayout();
+    public DPODisplay(){
         this.setPreferredSize(new Dimension(1366, 768));
         this.setBorder(new EmptyBorder(10,10,10,10));
-        this.setLayout(cardLayout);
+        this.setLayout(new BorderLayout());
 
         Dialog dialog = new Dialog();
         new Thread(() -> {
@@ -41,6 +41,18 @@ public class Display extends JPanel {
             SwingUtilities.invokeLater(() -> dialog.getDialog().setVisible(false));
         }).start();
         dialog.getDialog().setVisible(true);
+
+        JPanel menuBarPanel = new JPanel();
+        menuBarPanel.setPreferredSize(new Dimension(0,50));
+        menuBarPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+
+        JButton backButton = new JButton("ย้อนกลับ");
+        backButton.setFont(Element.getFont(15));
+
+        backButton.addActionListener(event -> Element.getCardLayout().show(Main.display, "MAIN_MENU"));
+
+        menuBarPanel.add(backButton);
+        this.add(menuBarPanel, BorderLayout.NORTH);
     }
 
     private void createTable(){
@@ -50,26 +62,24 @@ public class Display extends JPanel {
         String[] columnAlLCows = {"เลขเกษตรกร", "หมายเลขโค", "สถานะโค","วันที่", "ชื่อโค", "c_oth", "วันเกิด"
                 , "หมายเลขแม่", "หมายเลขพ่อ", "เพศ", "outfg", "milk", "eurbrd", "eurper"};
         tabbedPane.add("All Cows วัวทั้งหมด ("+decimalFormat(allCow.size())+" รายการ)",
-                new CowsTable(allCow, columnAlLCows, this));
+                new CowsTable(allCow, columnAlLCows, true));
 
         String[] columnAlLBreed = {"หมายเลขโค", "สายพันธุ์", "เปอร์เซ็นต์รวม"};
         tabbedPane.add("Cows Correct ข้อมูลวัว 100 % ("+decimalFormat(allCorrectBreeds.size())+" รายการ)",
-                new CowsTable(allCorrectBreeds, columnAlLBreed, this));
+                new CowsTable(allCorrectBreeds, columnAlLBreed, true));
         tabbedPane.add("Cows Error ข้อมูลวัวไม่ 100 % ("+decimalFormat(allErrorBreeds.size())+" รายการ)",
-                new CowsTable(allErrorBreeds, columnAlLBreed, this));
+                new CowsTable(allErrorBreeds, columnAlLBreed, true));
 
         tabbedPane.add("Correct Parent พ่อแม่ถูกต้อง ("+decimalFormat(allCorrectParent.size())+" รายการ)",
-                new CowsTable(allCorrectParent, columnAlLCows, this));
+                new CowsTable(allCorrectParent, columnAlLCows, true));
         tabbedPane.add("Error Parent พ่อแม่ไม่ถูกต้อง ("+decimalFormat(allErrorParent.size())+" รายการ)",
-                new CowsTable(allErrorParent, columnAlLCows, this));
+                new CowsTable(allErrorParent, columnAlLCows, true));
 
-        this.add(tabbedPane, "COWS_TABLE");
-        this.validate();
+        this.add(tabbedPane);
+//        this.validate();
     }
 
-    public static CardLayout getCardLayout() {
-        return cardLayout;
-    }
+
 
     public String decimalFormat (int number) {
         DecimalFormat formatter = new DecimalFormat("###,###,###");

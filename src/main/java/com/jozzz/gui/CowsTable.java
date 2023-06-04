@@ -1,5 +1,6 @@
 package com.jozzz.gui;
 
+import com.jozzz.Main;
 import com.jozzz.util.Element;
 
 import javax.swing.JPanel;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 
 public class CowsTable extends JPanel{
 
-    public CowsTable(ArrayList<String[]> allData, String[] columnNames, Display display){
+    public CowsTable(ArrayList<String[]> allData, String[] columnNames, boolean isViewDetail){
         this.setLayout(new BorderLayout());
 
         DefaultTableModel tableModel = new DefaultTableModel(allData.toArray(new Object[0][0]), columnNames){
@@ -32,16 +33,18 @@ public class CowsTable extends JPanel{
         table.setRowSelectionAllowed(true);
         table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 
-        table.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent e) {
-                if (e.getClickCount() == 2) {
-                    int row = table.rowAtPoint(e.getPoint());
-                    String cowCode = (String) table.getValueAt(row, table.getColumn("หมายเลขโค").getModelIndex());
-                    new CowDetail(display, cowCode);
-                    Display.getCardLayout().show(display, "COW_DETAIL");
+        if(isViewDetail){
+            table.addMouseListener(new MouseAdapter() {
+                public void mouseClicked(MouseEvent e) {
+                    if (e.getClickCount() == 2) {
+                        int row = table.rowAtPoint(e.getPoint());
+                        String cowCode = (String) table.getValueAt(row, table.getColumn("หมายเลขโค").getModelIndex());
+                        Main.display.add(new CowDetail(cowCode), "COW_DETAIL");
+                        Element.getCardLayout().show(Main.display, "COW_DETAIL");
+                    }
                 }
-            }
-        });
+            });
+        }
 
         JTableHeader header = table.getTableHeader();
         header.setFont(Element.getFont(15));
