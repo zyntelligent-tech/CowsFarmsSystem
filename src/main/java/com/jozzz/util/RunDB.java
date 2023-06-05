@@ -315,6 +315,65 @@ public class RunDB {
         return dataList;
     }
 
+    public static ArrayList<String[]> getDairyFormat(String formatType){
+        ArrayList<String[]> dataList = new ArrayList<>();
+        try {
+            openDatabaseConnection();
+            String sqlStr = switch (formatType) {
+                case "PERCENT" ->
+                        "SELECT breed_uuid, breed_code, breed_name FROM tbd_breed WHERE breed_name REGEXP '^[0-9]+(\\.[0-9]+)? ?%$'";
+                case "100%HF" ->
+                        "SELECT breed_uuid, breed_code, breed_name FROM tbd_breed WHERE BREED_NAME REGEXP '^[0-9]+(\\.[0-9]+)?+%[A-Za-z, ]+$'";
+                case "HF100%" ->
+                        "SELECT breed_uuid, breed_code, breed_name FROM tbd_breed WHERE BREED_NAME REGEXP '^[A-Za-z]+[0-9]+(\\.[0-9]+)?+[%]?%$'";
+                case "THAI100%" ->
+                        "SELECT breed_uuid, breed_code, breed_name FROM tbd_breed WHERE BREED_NAME REGEXP '^[ก-๙]+ ?+([ก-๙]+)?+[[:space:]]*[0-9]+(\\.[0-9]+)?+%?$'";
+                case "HAS+" ->
+                        "SELECT breed_uuid, breed_code, breed_name FROM tbd_breed WHERE breed_name LIKE '%+%'";
+                case "HAS," ->
+                        "SELECT breed_uuid, breed_code, breed_name FROM tbd_breed WHERE breed_name LIKE '%,%'";
+                case "THAI" ->
+                        "SELECT breed_uuid, breed_code, breed_name FROM tbd_breed WHERE breed_name REGEXP '^[ก-๙]+\\([^0-9%\\-]+\\)$'";
+                case "ENG" ->
+                        "SELECT breed_uuid, breed_code, breed_name FROM tbd_breed WHERE breed_name REGEXP '^[a-z]+ ?+([a-z]+)?$'";
+                case "OnlyNum" ->
+                        "SELECT breed_uuid, breed_code, breed_name FROM tbd_breed WHERE BREED_NAME REGEXP '^[0-9]+(\\.[0-9]+)?$'";
+                case "Other" -> """
+                        SELECT breed_uuid, breed_code, breed_name
+                        FROM tbd_breed
+                        WHERE NOT (
+                          BREED_NAME REGEXP '^[0-9]+(\\.[0-9]+)? ?%$'
+                          OR BREED_NAME REGEXP '^[0-9]+(\\.[0-9]+)?+%[A-Za-z, ]+$'
+                          OR BREED_NAME REGEXP '^[A-Za-z]+ ?+[0-9]+(\\.[0-9]+)?+[%]?%$'
+                          OR BREED_NAME REGEXP '^[ก-๙]+ ?+([ก-๙]+)?+[[:space:]]*[0-9]+(\\.[0-9]+)?+%?$'
+                          OR BREED_NAME LIKE '%+%'
+                          OR BREED_NAME LIKE '%,%'
+                          OR BREED_NAME REGEXP '^[ก-๙]+\\([^0-9%\\-]+\\)$'
+                          OR BREED_NAME REGEXP '^[0-9]+(\\.[0-9]+)?$'
+                          OR BREED_NAME REGEXP '^[a-z]+ ?+([a-z]+)?$'
+                          AND BREED_NAME REGEXP '^[a-z]+ ?+([a-z]+)?$'
+                        )""";
+                default -> "";
+            };
+
+            try(PreparedStatement statement = connection.prepareStatement(sqlStr)){
+                ResultSet resultSet = statement.executeQuery();
+                int column = statement.getMetaData().getColumnCount();
+                while (resultSet.next()){
+                    String[] data = new String[column];
+                    for (int i=1;i <= column;i++){
+                        data[i-1] = resultSet.getString(i);
+                    }
+                    dataList.add(data);
+                }
+            }
+            closeDatabaseConnection();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return dataList;
+    }
+
 //    private static void openDatabaseConnection() throws SQLException {
 //        connection = DriverManager.getConnection(
 //                "jdbc:mariadb://ec2-54-251-168-197.ap-southeast-1.compute.amazonaws.com:6667/farmdb",

@@ -14,6 +14,7 @@ import java.awt.GridLayout;
 public class MainMenu extends JPanel {
 
     private DPODisplay dpoDisplay = null;
+    private DairyDisplay dairyDisplay = null;
     public MainMenu(){
         this.setPreferredSize(new Dimension(1366, 768));
         this.setBorder(new EmptyBorder(10,10,10,10));
@@ -44,6 +45,13 @@ public class MainMenu extends JPanel {
 
         JButton dairyButton = new JButton("Data Zyan Dairy");
         dairyButton.setFont(Element.getFont(20));
+        dairyButton.addActionListener(event -> {
+            if(dairyDisplay == null){
+                dairyDisplay = new DairyDisplay();
+            }
+            Main.display.add(dairyDisplay, "DAIRY_DISPLAY");
+            Element.getCardLayout().show(Main.display, "DAIRY_DISPLAY");
+        });
 
         buttonPanel.add(dpoButton);
         buttonPanel.add(dairyButton);

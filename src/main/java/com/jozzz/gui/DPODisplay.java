@@ -4,6 +4,7 @@ import com.jozzz.Main;
 import com.jozzz.util.Dialog;
 import com.jozzz.util.Element;
 import com.jozzz.util.RunDB;
+import com.jozzz.util.WriteXlsxFile;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -23,6 +24,10 @@ public class DPODisplay extends JPanel {
     private ArrayList<String[]> allErrorBreeds;
     private ArrayList<String[]> allCorrectParent;
     private ArrayList<String[]> allErrorParent;
+    private JTabbedPane tabbedPane;
+    private final String[] columnAlLCows = {"เลขเกษตรกร", "หมายเลขโค", "สถานะโค","วันที่", "ชื่อโค", "c_oth", "วันเกิด"
+            , "หมายเลขแม่", "หมายเลขพ่อ", "เพศ", "outfg", "milk", "eurbrd", "eurper"};
+    private final String[] columnAlLBreed = {"หมายเลขโค", "สายพันธุ์", "เปอร์เซ็นต์รวม"};
     public DPODisplay(){
         this.setPreferredSize(new Dimension(1366, 768));
         this.setBorder(new EmptyBorder(10,10,10,10));
@@ -44,27 +49,28 @@ public class DPODisplay extends JPanel {
 
         JPanel menuBarPanel = new JPanel();
         menuBarPanel.setPreferredSize(new Dimension(0,50));
-        menuBarPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+        menuBarPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 0));
 
         JButton backButton = new JButton("ย้อนกลับ");
         backButton.setFont(Element.getFont(15));
-
         backButton.addActionListener(event -> Element.getCardLayout().show(Main.display, "MAIN_MENU"));
 
+        JButton exportButton = new JButton("ส่งออกเป็นไฟล์ Excel (.xlsx)");
+        exportButton.setFont(Element.getFont(15));
+        exportButton.addActionListener(event -> WriteXlsxFile.selectFileDialog(tabbedPane));
+
         menuBarPanel.add(backButton);
+        menuBarPanel.add(exportButton);
         this.add(menuBarPanel, BorderLayout.NORTH);
     }
 
     private void createTable(){
-        JTabbedPane tabbedPane = new JTabbedPane();
+        tabbedPane = new JTabbedPane();
         tabbedPane.setFont(Element.getFont(15));
 
-        String[] columnAlLCows = {"เลขเกษตรกร", "หมายเลขโค", "สถานะโค","วันที่", "ชื่อโค", "c_oth", "วันเกิด"
-                , "หมายเลขแม่", "หมายเลขพ่อ", "เพศ", "outfg", "milk", "eurbrd", "eurper"};
         tabbedPane.add("All Cows วัวทั้งหมด ("+decimalFormat(allCow.size())+" รายการ)",
                 new CowsTable(allCow, columnAlLCows, true));
 
-        String[] columnAlLBreed = {"หมายเลขโค", "สายพันธุ์", "เปอร์เซ็นต์รวม"};
         tabbedPane.add("Cows Correct ข้อมูลวัว 100 % ("+decimalFormat(allCorrectBreeds.size())+" รายการ)",
                 new CowsTable(allCorrectBreeds, columnAlLBreed, true));
         tabbedPane.add("Cows Error ข้อมูลวัวไม่ 100 % ("+decimalFormat(allErrorBreeds.size())+" รายการ)",

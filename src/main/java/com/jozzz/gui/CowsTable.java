@@ -16,8 +16,12 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 public class CowsTable extends JPanel{
+    private final ArrayList<String[]> allData;
+    private final String[] columnNames;
 
     public CowsTable(ArrayList<String[]> allData, String[] columnNames, boolean isViewDetail){
+        this.allData = allData;
+        this.columnNames = columnNames;
         this.setLayout(new BorderLayout());
 
         DefaultTableModel tableModel = new DefaultTableModel(allData.toArray(new Object[0][0]), columnNames){
@@ -58,6 +62,14 @@ public class CowsTable extends JPanel{
         scrollPane.getVerticalScrollBar().setUnitIncrement(100);
 
         this.add(scrollPane);
+    }
+
+    public ArrayList<String[]> getAllData() {
+        return allData;
+    }
+
+    public String[] getColumnNames(){
+        return columnNames;
     }
 
 }

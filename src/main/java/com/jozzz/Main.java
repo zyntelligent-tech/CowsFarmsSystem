@@ -1,6 +1,5 @@
 package com.jozzz;
 
-import com.jozzz.gui.DPODisplay;
 import com.jozzz.gui.MainMenu;
 import com.jozzz.util.Element;
 
