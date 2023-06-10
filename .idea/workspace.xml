@@ -9,17 +9,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="62bd48ef-414f-4f9f-8bde-acfffa3c54fc" name="Changes" comment="Add Main Menu">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/gui/DairyDisplay.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/util/ProgressBar.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/util/WriteXlsxFile.java" afterDir="false" />
+    <list default="true" id="62bd48ef-414f-4f9f-8bde-acfffa3c54fc" name="Changes" comment="Add Export File Feature">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__jakarta_activation_jakarta_activation_api_1_2_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__jakarta_xml_bind_jakarta_xml_bind_api_2_3_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/img/MomCow.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/CowSimulator_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/CowSimulator_jar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jozzz/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jozzz/gui/CowsTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/gui/CowsTable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jozzz/gui/DPODisplay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/gui/DPODisplay.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jozzz/gui/DairyDisplay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/gui/DairyDisplay.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/jozzz/gui/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/gui/MainMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jozzz/util/Element.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/util/Element.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jozzz/util/RunDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/util/RunDB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jozzz/util/WriteXlsxFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/util/WriteXlsxFile.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,19 +52,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;F:/GitHub/Projects/CowsFarmsSystem/src/main/resources&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode.Groovy&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "last_opened_file_path": "F:/GitHub/Projects/CowsFarmsSystem/src/main/resources",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.sourceCode.Groovy"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\GitHub\Projects\CowsFarmsSystem\src\main\resources\img" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="F:\GitHub\Projects\CowsFarmsSystem\src\main\java\com\jozzz\util" />
       <recent name="F:\GitHub\Projects\CowsFarmsSystem\src\main\java\com\jozzz" />
@@ -199,7 +200,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685902661729</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Add Export File Feature">
+      <created>1685991708642</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1685991708642</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -220,6 +228,7 @@
     <MESSAGE value="Optimize Code" />
     <MESSAGE value="Tree Hotfix" />
     <MESSAGE value="Add Main Menu" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add Main Menu" />
+    <MESSAGE value="Add Export File Feature" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add Export File Feature" />
   </component>
 </project>

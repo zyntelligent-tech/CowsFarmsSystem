@@ -1,22 +1,21 @@
 package com.jozzz.util;
 
 import com.jozzz.gui.CowsTable;
-import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JProgressBar;
 import javax.swing.JTabbedPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -57,13 +56,13 @@ public class WriteXlsxFile {
                 showExportFileChooser(checkBoxesList, cowsTables, tabbedPane);
             }
             else{
-                JLabel label = new JLabel("กรุณาเลือกไฟล์");
+                JLabel label = new JLabel("กรุณาเลือกตารางที่จะส่งออก");
                 label.setFont(Element.getFont(20));
-                JOptionPane.showMessageDialog(null,label,"กรุณาเลือกไฟล์",JOptionPane.WARNING_MESSAGE,null);
+                JOptionPane.showMessageDialog(null,label,"กรุณาเลือกตารางที่จะส่งออก",JOptionPane.WARNING_MESSAGE,null);
             }
         });
 
-        JOptionPane.showOptionDialog(null, panel, "เลือกไฟล์ที่จะส่งออก",
+        JOptionPane.showOptionDialog(null, panel, "กรุณาเลือกตารางที่จะส่งออก",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, new Object[] {exportButton}, null);
     }
 

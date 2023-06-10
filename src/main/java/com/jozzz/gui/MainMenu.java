@@ -3,6 +3,7 @@ package com.jozzz.gui;
 import com.jozzz.Main;
 import com.jozzz.util.Element;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -10,6 +11,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.util.Objects;
 
 public class MainMenu extends JPanel {
 
@@ -23,11 +25,12 @@ public class MainMenu extends JPanel {
 
 
         JPanel panel = new JPanel();
-        panel.setPreferredSize(new Dimension(300, 200));
+        panel.setPreferredSize(new Dimension(400, 220));
         panel.setLayout(new GridLayout(2, 1));
 
         JLabel textTitle = new JLabel("DPO Cleanser");
         textTitle.setFont(Element.getFont(35));
+        textTitle.setIcon(new ImageIcon(Objects.requireNonNull(Main.class.getClassLoader().getResource("img/MomCow.png"))));
         textTitle.setHorizontalAlignment(JLabel.CENTER);
 
         JPanel buttonPanel = new JPanel();
