@@ -17,7 +17,7 @@ import java.awt.FlowLayout;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class DPODisplay extends JPanel {
+public class DIPDisplay extends JPanel {
 
     private ArrayList<String[]> allCow;
     private ArrayList<String[]> allCorrectBreeds;
@@ -28,7 +28,7 @@ public class DPODisplay extends JPanel {
     private final String[] columnAlLCows = {"เลขเกษตรกร", "หมายเลขโค", "สถานะโค","วันที่", "ชื่อโค", "c_oth", "วันเกิด"
             , "หมายเลขแม่", "หมายเลขพ่อ", "เพศ", "outfg", "milk", "eurbrd", "eurper"};
     private final String[] columnAlLBreed = {"หมายเลขโค", "สายพันธุ์", "เปอร์เซ็นต์รวม"};
-    public DPODisplay(){
+    public DIPDisplay(){
         this.setPreferredSize(new Dimension(1366, 768));
         this.setBorder(new EmptyBorder(10,10,10,10));
         this.setLayout(new BorderLayout());

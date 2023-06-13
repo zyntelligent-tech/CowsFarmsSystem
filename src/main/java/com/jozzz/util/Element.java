@@ -3,6 +3,7 @@ package com.jozzz.util;
 import java.awt.CardLayout;
 import java.awt.Font;
 import java.io.InputStream;
+import java.text.DecimalFormat;
 
 public class Element {
     private static final CardLayout cardLayout = new CardLayout();
@@ -18,6 +19,11 @@ public class Element {
             e.printStackTrace();
         }
         return font;
+    }
+
+    public static String decimalFormat (int number) {
+        DecimalFormat formatter = new DecimalFormat("###,###,###");
+        return formatter.format(number);
     }
 
     public static CardLayout getCardLayout() {

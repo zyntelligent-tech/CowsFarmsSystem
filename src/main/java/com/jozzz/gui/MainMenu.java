@@ -15,8 +15,8 @@ import java.util.Objects;
 
 public class MainMenu extends JPanel {
 
-    private DPODisplay dpoDisplay = null;
-    private DairyDisplay dairyDisplay = null;
+    private DIPDisplay dipDisplay;
+    private DairyDisplay dairyDisplay;
     public MainMenu(){
         this.setPreferredSize(new Dimension(1366, 768));
         this.setBorder(new EmptyBorder(10,10,10,10));
@@ -36,14 +36,14 @@ public class MainMenu extends JPanel {
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridLayout(2, 1, 0, 10));
 
-        JButton dpoButton = new JButton("Data DPI");
+        JButton dpoButton = new JButton("Data DIP");
         dpoButton.setFont(Element.getFont(20));
         dpoButton.addActionListener(event -> {
-            if(dpoDisplay == null){
-                dpoDisplay = new DPODisplay();
+            if(dipDisplay == null){
+                dipDisplay = new DIPDisplay();
             }
-            Main.display.add(dpoDisplay, "DPI_DISPLAY");
-            Element.getCardLayout().show(Main.display, "DPI_DISPLAY");
+            Main.display.add(dipDisplay, "DIP_DISPLAY");
+            Element.getCardLayout().show(Main.display, "DIP_DISPLAY");
         });
 
         JButton dairyButton = new JButton("Data Zyan Dairy");

@@ -363,9 +363,7 @@ public class RunDB {
         try {
             openDairyDatabaseConnection();
             try(PreparedStatement statement = connection.prepareStatement(
-                    "SELECT breed_name, COUNT(*) AS pattern_count" +
-                            " FROM tbd_breed" +
-                            " GROUP BY breed_name")){
+                    "SELECT breed_code, breed_name FROM tbd_breed")){
                 ResultSet resultSet = statement.executeQuery();
                 int column = statement.getMetaData().getColumnCount();
                 while (resultSet.next()){

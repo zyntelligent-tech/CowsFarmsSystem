@@ -3,19 +3,15 @@ package com.jozzz.gui;
 import com.jozzz.Main;
 import com.jozzz.util.Element;
 
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
-public class CowsTable extends JPanel{
+public class CowsTable extends JPanel {
     private final ArrayList<String[]> allData;
     private final String[] columnNames;
 
@@ -57,9 +53,12 @@ public class CowsTable extends JPanel{
         header.setBackground(Color.lightGray);
         header.setForeground(Color.black);
 
+
         JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setPreferredSize(new Dimension(1366, 768));
         scrollPane.getVerticalScrollBar().setUnitIncrement(100);
+        scrollPane.setCorner(JScrollPane.UPPER_LEFT_CORNER,
+                header);
 
         this.add(scrollPane);
     }

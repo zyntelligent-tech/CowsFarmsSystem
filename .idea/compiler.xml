@@ -9,8 +9,5 @@
         <module name="CowSimulator" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="CowSimulator" target="17" />
-    </bytecodeTargetLevel>
   </component>
 </project>

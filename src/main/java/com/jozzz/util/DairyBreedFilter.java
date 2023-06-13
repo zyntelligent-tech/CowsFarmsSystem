@@ -37,7 +37,7 @@ public class DairyBreedFilter {
         createSheet(filter2, sheet2);
         allBreed.removeAll(filter2);
 
-        String pattern3 = "[a-zA-Zก-๙]+\\s*\\d+\\.*\\d*\\s*%*";
+        String pattern3 = "([ก-๙]+\\s*)+\\d+\\.*\\d*\\s*%*";
         List<String> filter3 = filterData(allBreed, pattern3);
         Sheet sheet3 = workbook.createSheet("LetterAndNum");
         createSheet(filter3, sheet3);
@@ -51,7 +51,7 @@ public class DairyBreedFilter {
 
         String pattern5 = "(\\d+\\.*\\d*\\s*%\\s*[a-zA-Zก-๙]*\\s*)+";
         List<String> filter5 = filterData(allBreed, pattern5);
-        Sheet sheet5 = workbook.createSheet("ManyBreed");
+        Sheet sheet5 = workbook.createSheet("MultiBreed");
         createSheet(filter5, sheet5);
         allBreed.removeAll(filter5);
 

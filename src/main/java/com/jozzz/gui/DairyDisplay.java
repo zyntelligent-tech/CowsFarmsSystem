@@ -1,6 +1,7 @@
 package com.jozzz.gui;
 
 import com.jozzz.Main;
+import com.jozzz.records.DataTab;
 import com.jozzz.util.Dialog;
 import com.jozzz.util.Element;
 import com.jozzz.util.RunDB;
@@ -14,44 +15,82 @@ import javax.swing.border.EmptyBorder;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class DairyDisplay extends JPanel {
-
-    private ArrayList<String[]> listPercentFormat;
-    private ArrayList<String[]> list100perFormat;
-    private ArrayList<String[]> listPer100Format;
-    private ArrayList<String[]> listThai100PerFormat;
-    private ArrayList<String[]> listHasPlusFormat;
-    private ArrayList<String[]> listHasCommaFormat;
-    private ArrayList<String[]> listThaiFormat;
-    private ArrayList<String[]> listEngFormat;
-    private ArrayList<String[]> listOnlyNumFormat;
-    private ArrayList<String[]> listOtherFormat;
     private ArrayList<String[]> listAllPattern;
     private JTabbedPane tabbedPane;
+    private final ArrayList<DataTab> allDataTabs;
     private final String[] columnAlLBreed = {"breed_uuid", "breed_code", "breed_name"};
-    private final String[] columnAlLPattern = {"pattern","pattern count"};
+    private final String[] columnAlLPattern = {"breed_code","breed_name"};
     public DairyDisplay(){
         this.setPreferredSize(new Dimension(1366, 768));
         this.setBorder(new EmptyBorder(10,10,10,10));
         this.setLayout(new BorderLayout());
 
         Dialog dialog = new Dialog();
+
+        String percentRegx = "\\d+\\.*\\d*\\s*%$";
+        String numberRegx = "\\d+\\.*\\d*\\s*";
+        String percentAndEngRegx = "\\d+\\.*\\d*\\s*%\\s*([a-zA-Z]+\\s*)+";
+        String percentAndThaiRegx = "\\d+\\.*\\d*\\s*%\\s*([ก-๙]+\\s*)+";
+        String engAndPercentRegx = "([a-zA-Z]+\\s*)+\\d+\\.*\\d*\\s*%";
+        String thaiAndPercentRegx = "([ก-๙]+\\s*)+\\d+\\.*\\d*\\s*%";
+        String numAndEngRegx = "\\d+\\.*\\d*\\s*([a-zA-Z]+\\s*)+";
+        String numAndThaiRegx = "\\d+\\.*\\d*\\s*([ก-๙]+\\s*)+";
+        String engAndNumRegx = "([a-zA-Z]+\\s*)+\\d+\\.*\\d*";
+        String thaiAndNumRegx = "([ก-๙]+\\s*)+\\d+\\.*\\d*";
+        String engMultiRegx = "(\\d+\\.*\\d*\\s*%\\s*[a-zA-Z]*\\s*)+";
+        String thaiMultiRegx = "(\\d+\\.*\\d*\\s*%\\s*[ก-๙]*\\s*)+";
+        String commaRegx = ".+\\,.+";
+        String plusRegx = ".+\\+.+";
+        String letterAndNumMultiRegx = "([a-zA-Zก-๙]*\\s*\\d+\\.*\\d*\\s*%\\s*\\s*)+";
+        String letterRegx = "([^0-9]+\\s*)+";
+        String thaiPercentEng = "([ก-๙]+\\s*)+\\d+\\.*\\d*\\s*%\\s*([a-zA-Z]+\\s*)+";
+
+        allDataTabs = new ArrayList<>();
+
         new Thread(() -> {
             try {
-                listPercentFormat = RunDB.getDairyFormat("PERCENT");
-                list100perFormat = RunDB.getDairyFormat("100%HF");
-                listPer100Format = RunDB.getDairyFormat("HF100%");
-                listThai100PerFormat = RunDB.getDairyFormat("THAI100%");
-                listHasPlusFormat = RunDB.getDairyFormat("HAS+");
-                listHasCommaFormat = RunDB.getDairyFormat("HAS,");
-                listThaiFormat = RunDB.getDairyFormat("THAI");
-                listEngFormat = RunDB.getDairyFormat("ENG");
-                listOnlyNumFormat = RunDB.getDairyFormat("OnlyNum");
-                listOtherFormat = RunDB.getDairyFormat("Other");
                 listAllPattern = RunDB.getAllDairyBreedPattern();
+                allDataTabs.add(new DataTab("Percent",
+                        filterData(listAllPattern, percentRegx)));
+                allDataTabs.add(new DataTab("Number",
+                        filterData(listAllPattern, numberRegx)));
+                allDataTabs.add(new DataTab("Percent & Eng",
+                        filterData(listAllPattern, percentAndEngRegx)));
+                allDataTabs.add(new DataTab("Percent & Thai",
+                        filterData(listAllPattern, percentAndThaiRegx)));
+                allDataTabs.add(new DataTab("Eng & Percent",
+                        filterData(listAllPattern, engAndPercentRegx)));
+                allDataTabs.add(new DataTab("Thai & Percent",
+                        filterData(listAllPattern, thaiAndPercentRegx)));
+                allDataTabs.add(new DataTab("Num & Eng",
+                        filterData(listAllPattern, numAndEngRegx)));
+                allDataTabs.add(new DataTab("Num & Thai",
+                        filterData(listAllPattern, numAndThaiRegx)));
+                allDataTabs.add(new DataTab("Eng & Num",
+                        filterData(listAllPattern, engAndNumRegx)));
+                allDataTabs.add(new DataTab("Thai & Num",
+                        filterData(listAllPattern, thaiAndNumRegx)));
+                allDataTabs.add(new DataTab("Eng Multi",
+                        filterData(listAllPattern, engMultiRegx)));
+                allDataTabs.add(new DataTab("Thai Multi",
+                        filterData(listAllPattern, thaiMultiRegx)));
+                allDataTabs.add(new DataTab("Comma",
+                        filterData(listAllPattern, commaRegx)));
+                allDataTabs.add(new DataTab("Plus",
+                        filterData(listAllPattern, plusRegx)));
+                allDataTabs.add(new DataTab("Letter & Num Multi",
+                        filterData(listAllPattern, letterAndNumMultiRegx)));
+                allDataTabs.add(new DataTab("Letter",
+                        filterData(listAllPattern, letterRegx)));
+                allDataTabs.add(new DataTab("Thai Per Eng",
+                        filterData(listAllPattern, thaiPercentEng)));
+                allDataTabs.add(new DataTab("Other",
+                        listAllPattern));
                 createTable();
             }catch (Exception ignored){}
             SwingUtilities.invokeLater(() -> dialog.getDialog().setVisible(false));
@@ -79,38 +118,30 @@ public class DairyDisplay extends JPanel {
         tabbedPane = new JTabbedPane();
         tabbedPane.setFont(Element.getFont(15));
 
-        tabbedPane.add("All Pattern ("+decimalFormat(listAllPattern.size())+" รายการ)",
-                new CowsTable(listAllPattern, columnAlLPattern, false));
-
-        tabbedPane.add("Percent Pattern ("+decimalFormat(listPercentFormat.size())+" รายการ)",
-                new CowsTable(listPercentFormat, columnAlLBreed, false));
-        tabbedPane.add("100%HF Pattern ("+decimalFormat(list100perFormat.size())+" รายการ)",
-                new CowsTable(list100perFormat, columnAlLBreed, false));
-        tabbedPane.add("HF100% Pattern ("+decimalFormat(listPer100Format.size())+" รายการ)",
-                new CowsTable(listPer100Format, columnAlLBreed, false));
-        tabbedPane.add("Thai100% Pattern ("+decimalFormat(listThai100PerFormat.size())+" รายการ)",
-                new CowsTable(listThai100PerFormat, columnAlLBreed, false));
-        tabbedPane.add("HAS + Pattern ("+decimalFormat(listHasPlusFormat.size())+" รายการ)",
-                new CowsTable(listHasPlusFormat, columnAlLBreed, false));
-        tabbedPane.add("HAS , Pattern ("+decimalFormat(listHasCommaFormat.size())+" รายการ)",
-                new CowsTable(listHasCommaFormat, columnAlLBreed, false));
-        tabbedPane.add("Thai Pattern ("+decimalFormat(listThaiFormat.size())+" รายการ)",
-                new CowsTable(listThaiFormat, columnAlLBreed, false));
-        tabbedPane.add("Eng Pattern ("+decimalFormat(listEngFormat.size())+" รายการ)",
-                new CowsTable(listEngFormat, columnAlLBreed, false));
-        tabbedPane.add("Only Number Pattern ("+decimalFormat(listOnlyNumFormat.size())+" รายการ)",
-                new CowsTable(listOnlyNumFormat, columnAlLBreed, false));
-        tabbedPane.add("Other Pattern ("+decimalFormat(listOtherFormat.size())+" รายการ)",
-                new CowsTable(listOtherFormat, columnAlLBreed, false));
+        for (DataTab tab : allDataTabs){
+            tabbedPane.add(tab.title(),
+                    new CowsTable(tab.data(), columnAlLPattern, false));
+        }
 
         this.add(tabbedPane);
     }
 
+    private ArrayList<String[]> filterData(ArrayList<String[]> inputData, String pattern) {
+        ArrayList<String[]> filteredData = new ArrayList<>();
 
+        Pattern regexPattern = Pattern.compile(pattern);
 
-    public String decimalFormat (int number) {
-        DecimalFormat formatter = new DecimalFormat("###,###,###");
-        return formatter.format(number);
+        for (String[] value : inputData) {
+            Matcher matcher = regexPattern.matcher(value[1].trim());
+            if (matcher.matches()) {
+                filteredData.add(value);
+            }
+        }
+        inputData.removeAll(filteredData);
+        return filteredData;
     }
+
+
+
 
 }
