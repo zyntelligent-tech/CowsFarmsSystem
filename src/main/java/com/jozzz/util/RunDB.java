@@ -16,7 +16,7 @@ public class RunDB {
     public static ArrayList<String[]> getAllCows(){
         ArrayList<String[]> dataList = new ArrayList<>();
         try {
-            openDatabaseConnection();
+            openDPIDatabaseConnection();
             try(PreparedStatement statement = connection.prepareStatement(
                     "SELECT * FROM cow")){
                 ResultSet resultSet = statement.executeQuery();
@@ -39,7 +39,7 @@ public class RunDB {
     public static ArrayList<String[]> getCowParent(String cowCode){
         ArrayList<String[]> dataList = new ArrayList<>();
         try {
-            openDatabaseConnection();
+            openDPIDatabaseConnection();
             try(PreparedStatement statement = connection.prepareStatement(
                     "WITH RECURSIVE cow_family_tree(id, momId, dadId) AS ("+
                             " SELECT id, momId, dadId"+
@@ -72,7 +72,7 @@ public class RunDB {
     public static String[] getCow(String table, String cowCode){
         String[] data = new String[0];
         try {
-            openDatabaseConnection();
+            openDPIDatabaseConnection();
             try(PreparedStatement statement = connection.prepareStatement(
                     "SELECT * FROM "+table+" WHERE id = '"+cowCode+"'")){
                 ResultSet resultSet = statement.executeQuery();
@@ -94,7 +94,7 @@ public class RunDB {
     public static String[] getFarmer(String farmerCode){
         String[] data = new String[0];
         try {
-            openDatabaseConnection();
+            openDPIDatabaseConnection();
             try(PreparedStatement statement = connection.prepareStatement(
                     "SELECT * FROM farmer WHERE id = '"+farmerCode+"'")){
                 ResultSet resultSet = statement.executeQuery();
@@ -116,7 +116,7 @@ public class RunDB {
     public static String[] getCenter(String centerCode){
         String[] data = new String[0];
         try {
-            openDatabaseConnection();
+            openDPIDatabaseConnection();
             try(PreparedStatement statement = connection.prepareStatement(
                     "SELECT * FROM center WHERE id = '"+centerCode+"'")){
                 ResultSet resultSet = statement.executeQuery();
@@ -138,7 +138,7 @@ public class RunDB {
     public static String[] getSector(String sectorCode){
         String[] data = new String[0];
         try {
-            openDatabaseConnection();
+            openDPIDatabaseConnection();
             try(PreparedStatement statement = connection.prepareStatement(
                     "SELECT * FROM sector WHERE id = '"+sectorCode+"'")){
                 ResultSet resultSet = statement.executeQuery();
@@ -160,7 +160,7 @@ public class RunDB {
     public static String[] getBreeds(String cowCode){
         String[] data = new String[0];
         try {
-            openDatabaseConnection();
+            openDPIDatabaseConnection();
             try(PreparedStatement statement = connection.prepareStatement(
                     "SELECT cowId," +
                             " GROUP_CONCAT(CONCAT(breedId, ' : ', perInt+num_up/num_low) SEPARATOR ' , ') AS Breed_Perint,\n" +
@@ -187,7 +187,7 @@ public class RunDB {
     public static ArrayList<String[]> getAllCorrectBreed(){
         ArrayList<String[]> dataList = new ArrayList<>();
         try {
-            openDatabaseConnection();
+            openDPIDatabaseConnection();
             try(PreparedStatement statement = connection.prepareStatement(
                     "SELECT cowId, GROUP_CONCAT(CONCAT(breedId, ' : ', num_up ,'/', num_low, '=', perInt + num_up / num_low) SEPARATOR ' , ') AS Breed," +
                             " CAST(SUM(perInt + num_up / num_low) AS DECIMAL) AS total_perInt"+
@@ -214,7 +214,7 @@ public class RunDB {
     public static ArrayList<String[]> getAllErrorBreed(){
         ArrayList<String[]> dataList = new ArrayList<>();
         try {
-            openDatabaseConnection();
+            openDPIDatabaseConnection();
             try(PreparedStatement statement = connection.prepareStatement(
                     "SELECT cowId, GROUP_CONCAT(CONCAT(breedId, ' : ', num_up ,'/', num_low, '=', perInt + num_up / num_low) SEPARATOR ' , ') AS Breed," +
                             " CAST(SUM(perInt + num_up / num_low) AS DECIMAL) AS total_perInt"+
@@ -241,7 +241,7 @@ public class RunDB {
     public static ArrayList<String[]> getAllPerIntBreed(){
         ArrayList<String[]> dataList = new ArrayList<>();
         try {
-            openDatabaseConnection();
+            openDPIDatabaseConnection();
             try(PreparedStatement statement = connection.prepareStatement(
                     "SELECT cowId," +
                             " GROUP_CONCAT(CONCAT(breedId, ' : ', num_up ,'/', num_low, '=', perInt + num_up / num_low) SEPARATOR ' , ') AS Breed_PerInt," +
@@ -268,7 +268,7 @@ public class RunDB {
     public static ArrayList<String[]> getAllCorrectParent(){
         ArrayList<String[]> dataList = new ArrayList<>();
         try {
-            openDatabaseConnection();
+            openDPIDatabaseConnection();
             try(PreparedStatement statement = connection.prepareStatement(
                     "SELECT * FROM cow" +
                     " WHERE (momId = '' AND dadId = '')" +
@@ -293,7 +293,7 @@ public class RunDB {
     public static ArrayList<String[]> getAllErrorParent(){
         ArrayList<String[]> dataList = new ArrayList<>();
         try {
-            openDatabaseConnection();
+            openDPIDatabaseConnection();
             try(PreparedStatement statement = connection.prepareStatement(
                     "SELECT * FROM cow" +
                     " WHERE (momId = '' AND dadId != '')" +
@@ -315,10 +315,78 @@ public class RunDB {
         return dataList;
     }
 
+    public static ArrayList<String[]> getAllDairyBreed(){
+        ArrayList<String[]> dataList = new ArrayList<>();
+        try {
+            openDairyDatabaseConnection();
+            try(PreparedStatement statement = connection.prepareStatement(
+                    "SELECT * FROM tbd_breed")){
+                ResultSet resultSet = statement.executeQuery();
+                int column = statement.getMetaData().getColumnCount();
+                while (resultSet.next()){
+                    String[] data = new String[column];
+                    for (int i=1;i <= column;i++){
+                        data[i-1] = resultSet.getString(i);
+                    }
+                    dataList.add(data);
+                }
+            }
+            closeDatabaseConnection();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return dataList;
+    }
+    public static ArrayList<String> getAllDairyBreedPatternOnly(){
+        ArrayList<String> dataList = new ArrayList<>();
+        try {
+            openDairyDatabaseConnection();
+            try(PreparedStatement statement = connection.prepareStatement(
+                    "SELECT breed_name" +
+                            " FROM tbd_breed" +
+                            " GROUP BY breed_name")){
+                ResultSet resultSet = statement.executeQuery();
+                int column = statement.getMetaData().getColumnCount();
+                while (resultSet.next()){
+                    dataList.add(resultSet.getString(1));
+                }
+            }
+            closeDatabaseConnection();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return dataList;
+    }
+
+    public static ArrayList<String[]> getAllDairyBreedPattern(){
+        ArrayList<String[]> dataList = new ArrayList<>();
+        try {
+            openDairyDatabaseConnection();
+            try(PreparedStatement statement = connection.prepareStatement(
+                    "SELECT breed_name, COUNT(*) AS pattern_count" +
+                            " FROM tbd_breed" +
+                            " GROUP BY breed_name")){
+                ResultSet resultSet = statement.executeQuery();
+                int column = statement.getMetaData().getColumnCount();
+                while (resultSet.next()){
+                    String[] data = new String[column];
+                    for (int i=1;i <= column;i++){
+                        data[i-1] = resultSet.getString(i);
+                    }
+                    dataList.add(data);
+                }
+            }
+            closeDatabaseConnection();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return dataList;
+    }
+
     public static ArrayList<String[]> getDairyFormat(String formatType){
         ArrayList<String[]> dataList = new ArrayList<>();
         try {
-            openDatabaseConnection();
+            openDairyDatabaseConnection();
             String sqlStr = switch (formatType) {
                 case "PERCENT" ->
                         "SELECT breed_uuid, breed_code, breed_name FROM tbd_breed WHERE breed_name REGEXP '^[0-9]+(\\.[0-9]+)? ?%$'";
@@ -374,21 +442,31 @@ public class RunDB {
         return dataList;
     }
 
-//    private static void openDatabaseConnection() throws SQLException {
-//        connection = DriverManager.getConnection(
-//                "jdbc:mariadb://ec2-54-251-168-197.ap-southeast-1.compute.amazonaws.com:6667/farmdb",
-//                "summer2023",
-//                "Summ3r!@MISL$$23"
-//        );
-//    }
-
-    private static void openDatabaseConnection() throws SQLException {
+    //Connect to DPI Database
+    private static void openDPIDatabaseConnection() throws SQLException {
         connection = DriverManager.getConnection(
-                "jdbc:mariadb://localhost:3306/farmdb",
-                "root",
-                ""
+                "jdbc:mariadb://ec2-54-251-168-197.ap-southeast-1.compute.amazonaws.com:6667/farmdb",
+                "summer2023",
+                "Summ3r!@MISL$$23"
         );
     }
+
+    //Connect to Dairy Database
+    private static void openDairyDatabaseConnection() throws SQLException {
+        connection = DriverManager.getConnection(
+                "jdbc:mariadb://54.251.168.197:6667/zyanwoadev_test",
+                "summer2023",
+                "Summ3r!@MISL$$23"
+        );
+    }
+
+//        private static void openDPIDatabaseConnection() throws SQLException {
+//        connection = DriverManager.getConnection(
+//                "jdbc:mariadb://localhost:3306/farmdb",
+//                "root",
+//                ""
+//        );
+//    }
 
     private static void closeDatabaseConnection() throws SQLException{
         connection.close();

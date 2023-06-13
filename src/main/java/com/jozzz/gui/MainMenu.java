@@ -36,14 +36,14 @@ public class MainMenu extends JPanel {
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridLayout(2, 1, 0, 10));
 
-        JButton dpoButton = new JButton("Data DPO");
+        JButton dpoButton = new JButton("Data DPI");
         dpoButton.setFont(Element.getFont(20));
         dpoButton.addActionListener(event -> {
             if(dpoDisplay == null){
                 dpoDisplay = new DPODisplay();
             }
-            Main.display.add(dpoDisplay, "DPO_DISPLAY");
-            Element.getCardLayout().show(Main.display, "DPO_DISPLAY");
+            Main.display.add(dpoDisplay, "DPI_DISPLAY");
+            Element.getCardLayout().show(Main.display, "DPI_DISPLAY");
         });
 
         JButton dairyButton = new JButton("Data Zyan Dairy");

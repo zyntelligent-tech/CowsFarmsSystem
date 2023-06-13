@@ -29,8 +29,10 @@ public class DairyDisplay extends JPanel {
     private ArrayList<String[]> listEngFormat;
     private ArrayList<String[]> listOnlyNumFormat;
     private ArrayList<String[]> listOtherFormat;
+    private ArrayList<String[]> listAllPattern;
     private JTabbedPane tabbedPane;
     private final String[] columnAlLBreed = {"breed_uuid", "breed_code", "breed_name"};
+    private final String[] columnAlLPattern = {"pattern","pattern count"};
     public DairyDisplay(){
         this.setPreferredSize(new Dimension(1366, 768));
         this.setBorder(new EmptyBorder(10,10,10,10));
@@ -49,6 +51,7 @@ public class DairyDisplay extends JPanel {
                 listEngFormat = RunDB.getDairyFormat("ENG");
                 listOnlyNumFormat = RunDB.getDairyFormat("OnlyNum");
                 listOtherFormat = RunDB.getDairyFormat("Other");
+                listAllPattern = RunDB.getAllDairyBreedPattern();
                 createTable();
             }catch (Exception ignored){}
             SwingUtilities.invokeLater(() -> dialog.getDialog().setVisible(false));
@@ -76,29 +79,31 @@ public class DairyDisplay extends JPanel {
         tabbedPane = new JTabbedPane();
         tabbedPane.setFont(Element.getFont(15));
 
-        tabbedPane.add("Percent Format ("+decimalFormat(listPercentFormat.size())+" รายการ)",
+        tabbedPane.add("All Pattern ("+decimalFormat(listAllPattern.size())+" รายการ)",
+                new CowsTable(listAllPattern, columnAlLPattern, false));
+
+        tabbedPane.add("Percent Pattern ("+decimalFormat(listPercentFormat.size())+" รายการ)",
                 new CowsTable(listPercentFormat, columnAlLBreed, false));
-        tabbedPane.add("100%HF Format ("+decimalFormat(list100perFormat.size())+" รายการ)",
+        tabbedPane.add("100%HF Pattern ("+decimalFormat(list100perFormat.size())+" รายการ)",
                 new CowsTable(list100perFormat, columnAlLBreed, false));
-        tabbedPane.add("HF100% Format ("+decimalFormat(listPer100Format.size())+" รายการ)",
+        tabbedPane.add("HF100% Pattern ("+decimalFormat(listPer100Format.size())+" รายการ)",
                 new CowsTable(listPer100Format, columnAlLBreed, false));
-        tabbedPane.add("Thai100% Format ("+decimalFormat(listThai100PerFormat.size())+" รายการ)",
+        tabbedPane.add("Thai100% Pattern ("+decimalFormat(listThai100PerFormat.size())+" รายการ)",
                 new CowsTable(listThai100PerFormat, columnAlLBreed, false));
-        tabbedPane.add("HAS + Format ("+decimalFormat(listHasPlusFormat.size())+" รายการ)",
+        tabbedPane.add("HAS + Pattern ("+decimalFormat(listHasPlusFormat.size())+" รายการ)",
                 new CowsTable(listHasPlusFormat, columnAlLBreed, false));
-        tabbedPane.add("HAS , Format ("+decimalFormat(listHasCommaFormat.size())+" รายการ)",
+        tabbedPane.add("HAS , Pattern ("+decimalFormat(listHasCommaFormat.size())+" รายการ)",
                 new CowsTable(listHasCommaFormat, columnAlLBreed, false));
-        tabbedPane.add("Thai Format ("+decimalFormat(listThaiFormat.size())+" รายการ)",
+        tabbedPane.add("Thai Pattern ("+decimalFormat(listThaiFormat.size())+" รายการ)",
                 new CowsTable(listThaiFormat, columnAlLBreed, false));
-        tabbedPane.add("Eng Format ("+decimalFormat(listEngFormat.size())+" รายการ)",
+        tabbedPane.add("Eng Pattern ("+decimalFormat(listEngFormat.size())+" รายการ)",
                 new CowsTable(listEngFormat, columnAlLBreed, false));
-        tabbedPane.add("Only Number Format ("+decimalFormat(listOnlyNumFormat.size())+" รายการ)",
+        tabbedPane.add("Only Number Pattern ("+decimalFormat(listOnlyNumFormat.size())+" รายการ)",
                 new CowsTable(listOnlyNumFormat, columnAlLBreed, false));
-        tabbedPane.add("Other Format ("+decimalFormat(listOtherFormat.size())+" รายการ)",
+        tabbedPane.add("Other Pattern ("+decimalFormat(listOtherFormat.size())+" รายการ)",
                 new CowsTable(listOtherFormat, columnAlLBreed, false));
 
         this.add(tabbedPane);
-//        this.validate();
     }
 
 
