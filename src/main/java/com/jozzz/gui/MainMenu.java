@@ -17,15 +17,14 @@ public class MainMenu extends JPanel {
 
     private DIPDisplay dipDisplay;
     private DairyDisplay dairyDisplay;
+    private TableListSelect tableListSelect;
     public MainMenu(){
         this.setPreferredSize(new Dimension(1366, 768));
         this.setBorder(new EmptyBorder(10,10,10,10));
         this.setLayout(new GridBagLayout());
 
-
-
         JPanel panel = new JPanel();
-        panel.setPreferredSize(new Dimension(400, 220));
+        panel.setPreferredSize(new Dimension(400, 300));
         panel.setLayout(new GridLayout(2, 1));
 
         JLabel textTitle = new JLabel("DPO Cleanser");
@@ -34,7 +33,7 @@ public class MainMenu extends JPanel {
         textTitle.setHorizontalAlignment(JLabel.CENTER);
 
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new GridLayout(2, 1, 0, 10));
+        buttonPanel.setLayout(new GridLayout(3, 1, 0, 10));
 
         JButton dpoButton = new JButton("Data DIP");
         dpoButton.setFont(Element.getFont(20));
@@ -56,8 +55,19 @@ public class MainMenu extends JPanel {
             Element.getCardLayout().show(Main.display, "DAIRY_DISPLAY");
         });
 
+        JButton tableListButton = new JButton("Table List Select");
+        tableListButton.setFont(Element.getFont(20));
+        tableListButton.addActionListener(event -> {
+            if(tableListSelect == null){
+                tableListSelect = new TableListSelect();
+            }
+            Main.display.add(tableListSelect, "TABLE_LIST_DISPLAY");
+            Element.getCardLayout().show(Main.display, "TABLE_LIST_DISPLAY");
+        });
+
         buttonPanel.add(dpoButton);
         buttonPanel.add(dairyButton);
+        buttonPanel.add(tableListButton);
 
         panel.add(textTitle);
         panel.add(buttonPanel);

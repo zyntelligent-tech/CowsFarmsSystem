@@ -337,8 +337,8 @@ public class RunDB {
         }
         return dataList;
     }
-    public static ArrayList<String> getAllDairyBreedPatternOnly(){
-        ArrayList<String> dataList = new ArrayList<>();
+    public static ArrayList<String[]> getAllDairyBreedPatternOnly(){
+        ArrayList<String[]> dataList = new ArrayList<>();
         try {
             openDairyDatabaseConnection();
             try(PreparedStatement statement = connection.prepareStatement(
@@ -348,7 +348,11 @@ public class RunDB {
                 ResultSet resultSet = statement.executeQuery();
                 int column = statement.getMetaData().getColumnCount();
                 while (resultSet.next()){
-                    dataList.add(resultSet.getString(1));
+                    String[] data = new String[column];
+                    for (int i=1;i <= column;i++){
+                        data[i-1] = resultSet.getString(i);
+                    }
+                    dataList.add(data);
                 }
             }
             closeDatabaseConnection();

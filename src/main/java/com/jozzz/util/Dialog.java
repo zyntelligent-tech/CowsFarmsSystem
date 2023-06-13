@@ -13,7 +13,7 @@ public class Dialog {
     private final JDialog dialog;
     public Dialog(){
         JLabel label = new JLabel("รอข้อมูลจากเซิร์ฟเวอร์...");
-        label.setPreferredSize(new Dimension(500, 250));
+        label.setPreferredSize(new Dimension(500, 320));
         label.setFont(Element.getFont(40));
         label.setHorizontalAlignment(JLabel.CENTER);
         dialog = new JDialog();

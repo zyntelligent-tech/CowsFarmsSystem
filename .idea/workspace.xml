@@ -9,88 +9,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="62bd48ef-414f-4f9f-8bde-acfffa3c54fc" name="Changes" comment="Add Dairy Breed Filter">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/records/DataTab.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_woodstox_woodstox_core_5_2_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_virtuald_curvesapi_1_06.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_opencsv_opencsv_5_7_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_zaxxer_SparseBitSet_1_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_beanutils_commons_beanutils_1_9_4.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_codec_commons_codec_1_15.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_collections_commons_collections_3_2_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_io_commons_io_1_3_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_logging_commons_logging_1_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__de_rototor_pdfbox_graphics2d_0_30.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__jakarta_activation_jakarta_activation_api_1_2_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__jakarta_xml_bind_jakarta_xml_bind_api_2_3_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_collections4_4_4.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_compress_1_20.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_lang3_3_12_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_math3_3_6_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_text_1_10_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpclient_4_5_13.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpcore_4_4_13.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_pdfbox_fontbox_2_0_22.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_pdfbox_pdfbox_2_0_22.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_poi_poi_5_0_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_poi_poi_ooxml_5_0_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_poi_poi_ooxml_lite_5_0_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_santuario_xmlsec_2_2_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_xmlbeans_xmlbeans_4_0_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_xmlgraphics_batik_all_1_13.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_xmlgraphics_batik_anim_1_13.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_xmlgraphics_batik_awt_util_1_13.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_xmlgraphics_batik_bridge_1_13.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_xmlgraphics_batik_codec_1_13.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_xmlgraphics_batik_constants_1_13.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_xmlgraphics_batik_css_1_13.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_xmlgraphics_batik_dom_1_13.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_xmlgraphics_batik_ext_1_13.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_xmlgraphics_batik_extension_1_13.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_xmlgraphics_batik_gui_util_1_13.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_xmlgraphics_batik_gvt_1_13.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_xmlgraphics_batik_i18n_1_13.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_xmlgraphics_batik_parser_1_13.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_xmlgraphics_batik_rasterizer_1_13.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_xmlgraphics_batik_rasterizer_ext_1_13.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_xmlgraphics_batik_script_1_13.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_xmlgraphics_batik_shared_resources_1_13.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_xmlgraphics_batik_slideshow_1_13.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_xmlgraphics_batik_squiggle_1_13.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_xmlgraphics_batik_squiggle_ext_1_13.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_xmlgraphics_batik_svg_dom_1_13.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_xmlgraphics_batik_svgbrowser_1_13.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_xmlgraphics_batik_svggen_1_13.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_xmlgraphics_batik_svgpp_1_13.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_xmlgraphics_batik_svgrasterizer_1_13.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_xmlgraphics_batik_swing_1_13.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_xmlgraphics_batik_transcoder_1_13.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_xmlgraphics_batik_ttf2svg_1_13.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_xmlgraphics_batik_util_1_13.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_xmlgraphics_batik_xml_1_13.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_xmlgraphics_xmlgraphics_commons_2_4.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_bouncycastle_bcpkix_jdk15on_1_68.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_bouncycastle_bcprov_jdk15on_1_68.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_codehaus_woodstox_stax2_api_4_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_mariadb_jdbc_mariadb_java_client_2_1_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_jcl_over_slf4j_1_7_30.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_30.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__xalan_serializer_2_7_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__xalan_xalan_2_7_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__xml_apis_xml_apis_1_4_01.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__xml_apis_xml_apis_ext_1_3_04.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+    <list default="true" id="62bd48ef-414f-4f9f-8bde-acfffa3c54fc" name="Changes" comment="Add New Dairy Breed Filter Tabs">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/gui/TableListSelect.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jozzz/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/jozzz/gui/CowsTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/gui/CowsTable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jozzz/gui/DPODisplay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/gui/DIPDisplay.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jozzz/gui/DairyDisplay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/gui/DairyDisplay.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/jozzz/gui/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/gui/MainMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jozzz/util/DairyBreedFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/util/DairyBreedFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jozzz/util/Element.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/util/Element.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jozzz/util/Dialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/util/Dialog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/jozzz/util/RunDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/util/RunDB.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -164,13 +89,39 @@
       <recent name="com.jozzz.gui" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.com.jozzz.Main">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="DairyBreedFilter" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.jozzz.util.DairyBreedFilter" />
       <module name="CowSimulator" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.jozzz.util.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.jozzz.Main" />
+      <module name="CowSimulator" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.jozzz.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TableListSelect" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.jozzz.gui.TableListSelect" />
+      <module name="CowSimulator" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.jozzz.gui.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -211,39 +162,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="util.WriteCSVFile" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="util.WriteCSVFile" />
-      <module name="CowSimulator" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.jozzz.util.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="util.WriteXlsxFile" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="util.WriteXlsxFile" />
-      <module name="CowSimulator" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.jozzz.util.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.TableListSelect" />
         <item itemvalue="Application.com.jozzz.Main" />
         <item itemvalue="Application.DairyBreedFilter" />
         <item itemvalue="Application.Test" />
-        <item itemvalue="Application.com.jozzz.Main" />
-        <item itemvalue="Application.util.WriteXlsxFile" />
       </list>
     </recent_temporary>
   </component>
@@ -255,7 +180,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1683476816548</updated>
-      <workItem from="1686661512154" duration="16333000" />
+      <workItem from="1686661512154" duration="21350000" />
     </task>
     <task id="LOCAL-00001" summary="Cows Tree Hotfix">
       <created>1683499602005</created>
@@ -334,7 +259,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686645894902</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Add New Dairy Breed Filter Tabs">
+      <created>1686682195876</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1686682195876</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -361,7 +293,8 @@
     <MESSAGE value="Add Export File Feature" />
     <MESSAGE value="Add Cows Dairy Query" />
     <MESSAGE value="Add Dairy Breed Filter" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add Dairy Breed Filter" />
+    <MESSAGE value="Add New Dairy Breed Filter Tabs" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add New Dairy Breed Filter Tabs" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

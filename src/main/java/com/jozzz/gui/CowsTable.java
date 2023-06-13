@@ -14,20 +14,22 @@ import java.util.ArrayList;
 public class CowsTable extends JPanel {
     private final ArrayList<String[]> allData;
     private final String[] columnNames;
+    private final JTable table;
+    private  final DefaultTableModel tableModel;
 
     public CowsTable(ArrayList<String[]> allData, String[] columnNames, boolean isViewDetail){
         this.allData = allData;
         this.columnNames = columnNames;
         this.setLayout(new BorderLayout());
 
-        DefaultTableModel tableModel = new DefaultTableModel(allData.toArray(new Object[0][0]), columnNames){
+        tableModel = new DefaultTableModel(allData.toArray(new Object[0][0]), columnNames){
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
 
-        JTable table = new JTable(tableModel);
+        table = new JTable(tableModel);
         table.setFont(Element.getFont(15));
         table.setRowHeight(20);
         table.setRowSelectionAllowed(true);
@@ -61,6 +63,14 @@ public class CowsTable extends JPanel {
                 header);
 
         this.add(scrollPane);
+    }
+
+    public JTable getTable() {
+        return table;
+    }
+
+    public DefaultTableModel getTableModel() {
+        return tableModel;
     }
 
     public ArrayList<String[]> getAllData() {
