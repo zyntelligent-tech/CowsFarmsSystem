@@ -24,6 +24,10 @@ public class FindParent {
 
     private ArrayList<Object[]> data;
 
+    public static void main(String[] args) {
+        
+    }
+    
     public FindParent(String cowCode){
         allCow = RunDB.getAllCows();
         allCorrectBreeds = RunDB.getAllCorrectBreed();
@@ -41,6 +45,7 @@ public class FindParent {
         for(String[] cow : allCow){
             if(cow[1].equals(cowCode)){
                 sourceCow = new Cow(cowCode, cow[7], cow[8]);
+                
             }
         }
 
@@ -62,8 +67,8 @@ public class FindParent {
                         }
                         else{
                             prevNode.setUserObject(cow.getDadCode()+" (DAD)");
-                            node.add(momNode);
                             node.add(prevNode);
+                            node.add(momNode);
                         }
                     }
                     else{

@@ -3,11 +3,13 @@ package com.jozzz.models;
 import java.util.ArrayList;
 
 public class Cow {
-
-    private String cowCode;
+    //Old variable
     private String momCode;
     private String dadCode;
-
+    private String cowCode;
+    
+    //New variable
+    private String zyanCode;
     private Cow mom;
     private Cow dad;
     private Cow child;
@@ -16,42 +18,24 @@ public class Cow {
 
     public Cow(){}
 
-    public Cow(String cowCode, String momCode, String dadCode) {
-        this.cowCode = cowCode;
-        this.momCode = momCode;
-        this.dadCode = dadCode;
+    public Cow(String zyanCode){
+        this.zyanCode = zyanCode;
     }
 
-    public Cow(String cowCode, String momCode, String dadCode, Cow mom, Cow dad) {
-        this.cowCode = cowCode;
-        this.momCode = momCode;
-        this.dadCode = dadCode;
+    public Cow(String zyanCode,Cow mom, Cow dad) {
+        this.zyanCode = zyanCode;
         this.mom = mom;
         this.dad = dad;
     }
 
-    public String getCowCode() {
-        return cowCode;
+
+    public String getZyanCode() {
+        return zyanCode;
     }
 
-    public void setCowCode(String cowCode) {
-        this.cowCode = cowCode;
-    }
 
-    public String getMomCode() {
-        return momCode;
-    }
-
-    public void setMomCode(String momCode) {
-        this.momCode = momCode;
-    }
-
-    public String getDadCode() {
-        return dadCode;
-    }
-
-    public void setDadCode(String dadCode) {
-        this.dadCode = dadCode;
+    public void setZyanCode(String zyanCode) {
+        this.zyanCode = zyanCode;
     }
 
     public Cow getMom() {
@@ -86,8 +70,41 @@ public class Cow {
         this.breeds = breeds;
     }
 
+
+
+    public String getCowCode() {
+        return cowCode;
+    }
+
+    public void setCowCode(String cowCode) {
+        this.cowCode = cowCode;
+    }
+
+    public String getMomCode() {
+        return momCode;
+    }
+
+    public void setMomCode(String momCode) {
+        this.momCode = momCode;
+    }
+
+    public String getDadCode() {
+        return dadCode;
+    }
+
+    public void setDadCode(String dadCode) {
+        this.dadCode = dadCode;
+    }
+
+    public Cow(String zyanCode , String momCode , String dadCode){
+        this.zyanCode = zyanCode;
+        this.momCode = momCode;
+        this.dadCode = dadCode;
+    }
     @Override
     public String toString() {
-        return getCowCode() + " " + getMomCode() + " " + getDadCode() + "\t";
+        return "Cow [zyanCode = "+zyanCode+"]";
     }
+
+    
 }
