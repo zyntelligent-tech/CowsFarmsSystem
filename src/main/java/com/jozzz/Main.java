@@ -1,5 +1,6 @@
 package com.jozzz;
 
+import com.jozzz.constant.DisplayState;
 import com.jozzz.gui.MainMenu;
 import com.jozzz.gui.TableListSelect;
 import com.jozzz.util.Element;
@@ -22,7 +23,7 @@ public class Main {
 
                 display = new JPanel();
                 display.setLayout(Element.getCardLayout());
-                display.add(new MainMenu(), "MAIN_MENU");
+                display.add(new MainMenu(), DisplayState.MAIN_MENU);
 
                 frame.add(display);
 

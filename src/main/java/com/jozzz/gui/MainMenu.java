@@ -1,6 +1,8 @@
 package com.jozzz.gui;
 
 import com.jozzz.Main;
+import com.jozzz.constant.CompName;
+import com.jozzz.constant.DisplayState;
 import com.jozzz.util.Element;
 
 import javax.swing.ImageIcon;
@@ -27,49 +29,49 @@ public class MainMenu extends JPanel {
         panel.setPreferredSize(new Dimension(400, 300));
         panel.setLayout(new GridLayout(2, 1));
 
-        JLabel textTitle = new JLabel("DPO Cleanser");
-        textTitle.setFont(Element.getFont(35));
-        textTitle.setIcon(new ImageIcon(Objects.requireNonNull(Main.class.getClassLoader().getResource("img/MomCow.png"))));
-        textTitle.setHorizontalAlignment(JLabel.CENTER);
+        JLabel dipTitle = new JLabel(CompName.DIP_TITLE);
+        dipTitle.setFont(Element.getFont(35));
+        dipTitle.setIcon(new ImageIcon(Objects.requireNonNull(Main.class.getClassLoader().getResource("img/MomCow.png"))));
+        dipTitle.setHorizontalAlignment(JLabel.CENTER);
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridLayout(3, 1, 0, 10));
 
-        JButton dpoButton = new JButton("Data DIP");
-        dpoButton.setFont(Element.getFont(20));
-        dpoButton.addActionListener(event -> {
+        JButton dipDataButton = new JButton(CompName.DIP_DATA_BUTTON);
+        dipDataButton.setFont(Element.getFont(20));
+        dipDataButton.addActionListener(event -> {
             if(dipDisplay == null){
                 dipDisplay = new DIPDisplay();
             }
-            Main.display.add(dipDisplay, "DIP_DISPLAY");
-            Element.getCardLayout().show(Main.display, "DIP_DISPLAY");
+            Main.display.add(dipDisplay, DisplayState.DIP);
+            Element.getCardLayout().show(Main.display, DisplayState.DIP);
         });
 
-        JButton dairyButton = new JButton("Data Zyan Dairy");
-        dairyButton.setFont(Element.getFont(20));
-        dairyButton.addActionListener(event -> {
+        JButton dairyPatternButton = new JButton(CompName.DAIRY_PATTERN_BUTTON);
+        dairyPatternButton.setFont(Element.getFont(20));
+        dairyPatternButton.addActionListener(event -> {
             if(dairyDisplay == null){
                 dairyDisplay = new DairyDisplay();
             }
-            Main.display.add(dairyDisplay, "DAIRY_DISPLAY");
-            Element.getCardLayout().show(Main.display, "DAIRY_DISPLAY");
+            Main.display.add(dairyDisplay, DisplayState.DAIRY);
+            Element.getCardLayout().show(Main.display, DisplayState.DAIRY);
         });
 
-        JButton tableListButton = new JButton("Table List Select");
+        JButton tableListButton = new JButton(CompName.TABLE_LIST_BUTTON);
         tableListButton.setFont(Element.getFont(20));
         tableListButton.addActionListener(event -> {
             if(tableListSelect == null){
                 tableListSelect = new TableListSelect();
             }
-            Main.display.add(tableListSelect, "TABLE_LIST_DISPLAY");
-            Element.getCardLayout().show(Main.display, "TABLE_LIST_DISPLAY");
+            Main.display.add(tableListSelect, DisplayState.TABLE_LIST);
+            Element.getCardLayout().show(Main.display, DisplayState.TABLE_LIST);
         });
 
-        buttonPanel.add(dpoButton);
-        buttonPanel.add(dairyButton);
+        buttonPanel.add(dipDataButton);
+        buttonPanel.add(dairyPatternButton);
         buttonPanel.add(tableListButton);
 
-        panel.add(textTitle);
+        panel.add(dipTitle);
         panel.add(buttonPanel);
 
         this.add(panel);

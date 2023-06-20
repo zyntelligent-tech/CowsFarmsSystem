@@ -519,9 +519,9 @@ public class RunDB {
     //Connect to DPI Database
     private static void openDPIDatabaseConnection() throws SQLException {
         connection = DriverManager.getConnection(
-                "jdbc:mariadb://localhost:3306/farmdb",
-                "root",
-                ""
+                "jdbc:mariadb://ec2-54-251-168-197.ap-southeast-1.compute.amazonaws.com:6667/farmdb",
+                "summer2023",
+                "Summ3r!@MISL$$23"
         );
     }
 

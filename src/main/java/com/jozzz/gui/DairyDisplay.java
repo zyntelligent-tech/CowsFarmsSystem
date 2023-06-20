@@ -1,6 +1,7 @@
 package com.jozzz.gui;
 
 import com.jozzz.Main;
+import com.jozzz.constant.DisplayState;
 import com.jozzz.cow_format.RegexPattern;
 import com.jozzz.records.DataTab;
 import com.jozzz.util.Dialog;
@@ -63,7 +64,7 @@ public class DairyDisplay extends JPanel {
 
         JButton backButton = new JButton("ย้อนกลับ");
         backButton.setFont(Element.getFont(15));
-        backButton.addActionListener(event -> Element.getCardLayout().show(Main.display, "MAIN_MENU"));
+        backButton.addActionListener(event -> Element.getCardLayout().show(Main.display, DisplayState.MAIN_MENU));
 
         JButton exportButton = new JButton("ส่งออกเป็นไฟล์ Excel (.xlsx)");
         exportButton.setFont(Element.getFont(15));

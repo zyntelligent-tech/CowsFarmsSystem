@@ -1,6 +1,7 @@
 package com.jozzz.gui;
 
 import com.jozzz.Main;
+import com.jozzz.constant.DisplayState;
 import com.jozzz.util.CustomTree;
 import com.jozzz.util.Dialog;
 import com.jozzz.util.Element;
@@ -115,8 +116,7 @@ public class CowDetail extends JPanel{
 
         JButton backButton = new JButton("ย้อนกลับ");
         backButton.setFont(Element.getFont(20));
-
-        backButton.addActionListener(event -> Element.getCardLayout().show(Main.display, "DPO_DISPLAY"));
+        backButton.addActionListener(event -> Element.getCardLayout().show(Main.display, DisplayState.DIP));
 
         menuBarPanel.add(backButton);
 

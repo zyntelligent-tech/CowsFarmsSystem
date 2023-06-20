@@ -1,6 +1,7 @@
 package com.jozzz.gui;
 
 import com.jozzz.Main;
+import com.jozzz.constant.DisplayState;
 import com.jozzz.util.Element;
 
 import javax.swing.*;
@@ -41,8 +42,8 @@ public class CowsTable extends JPanel {
                     if (e.getClickCount() == 2) {
                         int row = table.rowAtPoint(e.getPoint());
                         String cowCode = (String) table.getValueAt(row, table.getColumn("หมายเลขโค").getModelIndex());
-                        Main.display.add(new CowDetail(cowCode), "COW_DETAIL");
-                        Element.getCardLayout().show(Main.display, "COW_DETAIL");
+                        Main.display.add(new CowDetail(cowCode), DisplayState.COW_DETAIL);
+                        Element.getCardLayout().show(Main.display, DisplayState.COW_DETAIL);
                     }
                 }
             });
