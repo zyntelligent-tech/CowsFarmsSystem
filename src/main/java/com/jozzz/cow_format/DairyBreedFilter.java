@@ -1,4 +1,4 @@
-package com.jozzz.util;
+package com.jozzz.cow_format;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -14,73 +14,75 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class DairyBreedFilter {
     private static Connection connection;
+    public static Workbook workbook;
+    private static List<String> allBreed2;
     public static void main(String[] args) {
-        ArrayList<String> allBreed = getAllDairyBreedPatternOnly();
+        workbook = new XSSFWorkbook();
+        List<String> allBreed = getAllDairyBreedPatternOnly();
+        allBreed2 = new ArrayList<>(allBreed);
         String excelFile = "filterData.xlsx";
-        Workbook workbook = new XSSFWorkbook();
+
+        makeSheet(allBreed2, "allPattern");
+        makeSheetMultiCol(spiltPatternAll(allBreed2), "CorrectSpilt");
+        makeSheet(allBreed2, "ErrorSpilt");
 
         String pattern1 = "\\d+\\.*\\d*\\s*%$";
         List<String> filter1 = filterData(allBreed, pattern1);
-        Sheet sheet1 = workbook.createSheet("PercentData");
-        createSheet(filter1, sheet1);
+        makeSheet(filter1, "PercentData");
+        makeSheetMultiCol(spiltPattern(filter1), "PercentSpilt");
         allBreed.removeAll(filter1);
 
         String pattern2 = "\\d+\\.*\\d*\\s*%*\\s*([a-zA-Zก-๙]+\\s*)+";
         List<String> filter2 = filterData(allBreed, pattern2);
-        Sheet sheet2 = workbook.createSheet("NumAndLetter");
-        createSheet(filter2, sheet2);
+        makeSheet(filter2, "NumAndLetter");
+        makeSheetMultiCol(spiltPattern(filter2), "NumAndLetterSpilt");
         allBreed.removeAll(filter2);
 
         String pattern3 = "([ก-๙]+\\s*)+\\d+\\.*\\d*\\s*%*";
         List<String> filter3 = filterData(allBreed, pattern3);
-        Sheet sheet3 = workbook.createSheet("LetterAndNum");
-        createSheet(filter3, sheet3);
+        makeSheet(filter3, "LetterAndNum");
+        makeSheetMultiCol(spiltPattern(filter3), "LetterAndNumSpilt");
         allBreed.removeAll(filter3);
 
         String pattern4 = ".+\\,.+";
         List<String> filter4 = filterData(allBreed, pattern4);
-        Sheet sheet4 = workbook.createSheet("Comma");
-        createSheet(filter4, sheet4);
+        makeSheet(filter4, "Comma");
+        makeSheetMultiCol(spiltPattern(filter4), "CommaSpilt");
         allBreed.removeAll(filter4);
 
         String pattern5 = "(\\d+\\.*\\d*\\s*%\\s*[a-zA-Zก-๙]*\\s*)+";
         List<String> filter5 = filterData(allBreed, pattern5);
-        Sheet sheet5 = workbook.createSheet("MultiBreed");
-        createSheet(filter5, sheet5);
+        makeSheet(filter5, "MultiBreed");
         allBreed.removeAll(filter5);
 
         String pattern6 = ".+\\+.+";
         List<String> filter6 = filterData(allBreed, pattern6);
-        Sheet sheet6 = workbook.createSheet("Plus");
-        createSheet(filter6, sheet6);
+        makeSheet(filter6, "Plus");
         allBreed.removeAll(filter6);
 
         String pattern7 = "([a-zA-Zก-๙]*\\s*\\d+\\.*\\d*\\s*%\\s*\\s*)+";
         List<String> filter7 = filterData(allBreed, pattern7);
-        Sheet sheet7 = workbook.createSheet("Let&NamMulti");
-        createSheet(filter7, sheet7);
+        makeSheet(filter7, "Let&NamMulti");
         allBreed.removeAll(filter7);
 
         String pattern8 = "([^0-9]+\\s*)+";
         List<String> filter8 = filterData(allBreed, pattern8);
-        Sheet sheet8 = workbook.createSheet("Letter");
-        createSheet(filter8, sheet8);
+        makeSheet(filter8, "Letter");
         allBreed.removeAll(filter8);
 
         String pattern9 = "\\d+\\.*\\d*\\s*";
         List<String> filter9 = filterData(allBreed, pattern9);
-        Sheet sheet9 = workbook.createSheet("Number");
-        createSheet(filter9, sheet9);
+        makeSheet(filter9, "Number");
         allBreed.removeAll(filter9);
 
-        Sheet sheetOther = workbook.createSheet("OtherPattern");
-        createSheet(allBreed, sheetOther);
+        makeSheet(allBreed, "OtherPattern");
 
         try {
             FileOutputStream outputStream = new FileOutputStream(excelFile);
@@ -93,13 +95,89 @@ public class DairyBreedFilter {
         }
 
     }
+    public static List<String[]> spiltPattern(List<String> data){
+        List<String[]> spiltData = new ArrayList<>();
 
-    public static  void createSheet(List<String> filter, Sheet sheet){
+        Pattern numberPattern = Pattern.compile("\\d+(\\.\\d+)?");
+        Pattern letterPattern = Pattern.compile("[ก-๙a-zA-Z]+(\\s*[ก-๙a-zA-Z]+)*");
+
+        for (String value : data) {
+            String[] dataArr = new String[2];
+            List<String> dataList = new ArrayList<>();
+            Matcher matcher = numberPattern.matcher(value);
+            while (matcher.find()) {
+                String number = matcher.group();
+                dataList.add(number);
+            }
+            dataArr[0] = String.join(",", dataList);
+            dataList = new ArrayList<>();
+            matcher = letterPattern.matcher(value);
+            while (matcher.find()) {
+                String letter = matcher.group();
+                dataList.add(letter);
+            }
+            dataArr[1] = String.join(",", dataList);
+
+            spiltData.add(dataArr);
+        }
+
+        return spiltData;
+    }
+
+    public static List<String[]> spiltPatternAll(List<String> data){
+        List<String[]> spiltData = new ArrayList<>();
+        HashSet<String> selectedData = new HashSet<>();
+
+        Pattern numberPattern = Pattern.compile("\\d+(\\.\\d+)?");
+        Pattern letterPattern = Pattern.compile("[ก-๙a-zA-Z]+(\\s*[ก-๙a-zA-Z]+)*");
+
+        for (String value : data) {
+            Matcher matcher = numberPattern.matcher(value);
+            String[] dataArr = new String[2];
+            List<String> dataList = new ArrayList<>();
+            while (matcher.find()) {
+                selectedData.add(value);
+                String number = matcher.group();
+                dataList.add(number);
+            }
+            if (selectedData.contains(value)){
+                dataArr[0] = String.join(",", dataList);
+                dataList = new ArrayList<>();
+                matcher = letterPattern.matcher(value);
+                while (matcher.find()) {
+                    String letter = matcher.group();
+                    dataList.add(letter);
+                }
+                dataArr[1] = String.join(",", dataList);
+                spiltData.add(dataArr);
+            }
+
+        }
+        data.removeAll(selectedData);
+
+        return spiltData;
+    }
+
+    public static  void makeSheet(List<String> filter, String sheetName){
+        Sheet sheet = workbook.createSheet(sheetName);
         int rowNum = 0;
         for (String row : filter) {
             Row excelRow = sheet.createRow(rowNum++);
             Cell cell = excelRow.createCell(0);
             cell.setCellValue(row);
+        }
+    }
+
+    public static  void makeSheetMultiCol(List<String[]> filter, String sheetName){
+        Sheet sheet = workbook.createSheet(sheetName);
+        int rowNum = 0;
+        for (String[] row : filter) {
+            Row excelRow = sheet.createRow(rowNum++);
+            int colNum = 0;
+            for (String cellData : row) {
+                Cell cell = excelRow.createCell(colNum++);
+                cell.setCellValue(cellData);
+            }
         }
     }
 
