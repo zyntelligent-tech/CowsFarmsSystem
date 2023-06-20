@@ -315,6 +315,77 @@ public class RunDB {
         return dataList;
     }
 
+    public static ArrayList<String[]> getAllDairyCows(){
+        ArrayList<String[]> dataList = new ArrayList<>();
+        try {
+            openDPIDatabaseConnection();
+            try(PreparedStatement statement = connection.prepareStatement(
+                    "SELECT *" +
+                            " FROM tbd_cow")){
+                ResultSet resultSet = statement.executeQuery();
+                int column = statement.getMetaData().getColumnCount();
+                while (resultSet.next()){
+                    String[] data = new String[column];
+                    for (int i=1;i <= column;i++){
+                        data[i-1] = resultSet.getString(i);
+                    }
+                    dataList.add(data);
+                }
+            }
+            closeDatabaseConnection();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return dataList;
+    }
+
+    public static ArrayList<String[]> getAllDairyBreeders(){
+        ArrayList<String[]> dataList = new ArrayList<>();
+        try {
+            openDairyDatabaseConnection();
+            try(PreparedStatement statement = connection.prepareStatement(
+                    "SELECT *" +
+                            " FROM tbd_codad")){
+                ResultSet resultSet = statement.executeQuery();
+                int column = statement.getMetaData().getColumnCount();
+                while (resultSet.next()){
+                    String[] data = new String[column];
+                    for (int i=1;i <= column;i++){
+                        data[i-1] = resultSet.getString(i);
+                    }
+                    dataList.add(data);
+                }
+            }
+            closeDatabaseConnection();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return dataList;
+    }
+
+    public static String[] getDairyCow(String zyanCode){
+        String[] data = {};
+        try {
+            openDPIDatabaseConnection();
+            try(PreparedStatement statement = connection.prepareStatement(
+                    "SELECT *" +
+                            " FROM tbd_cow"+
+                            " WHERE zyan_code ='"+zyanCode+"'")){
+                ResultSet resultSet = statement.executeQuery();
+                int column = statement.getMetaData().getColumnCount();
+                while (resultSet.next()){
+                    data = new String[column];
+                    for (int i=1;i <= column;i++){
+                        data[i-1] = resultSet.getString(i);
+                    }
+                }
+            }
+            closeDatabaseConnection();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return data;
+    }
     public static ArrayList<String[]> getAllDairyBreed(){
         ArrayList<String[]> dataList = new ArrayList<>();
         try {
@@ -361,7 +432,8 @@ public class RunDB {
         }
         return dataList;
     }
-
+    
+    
     public static ArrayList<String[]> getAllDairyBreedPattern(){
         ArrayList<String[]> dataList = new ArrayList<>();
         try {
@@ -447,9 +519,9 @@ public class RunDB {
     //Connect to DPI Database
     private static void openDPIDatabaseConnection() throws SQLException {
         connection = DriverManager.getConnection(
-                "jdbc:mariadb://ec2-54-251-168-197.ap-southeast-1.compute.amazonaws.com:6667/farmdb",
-                "summer2023",
-                "Summ3r!@MISL$$23"
+                "jdbc:mariadb://localhost:3306/farmdb",
+                "root",
+                ""
         );
     }
 
@@ -462,7 +534,7 @@ public class RunDB {
         );
     }
 
-//        private static void openDPIDatabaseConnection() throws SQLException {
+//    private static void openDPIDatabaseConnection() throws SQLException {
 //        connection = DriverManager.getConnection(
 //                "jdbc:mariadb://localhost:3306/farmdb",
 //                "root",
