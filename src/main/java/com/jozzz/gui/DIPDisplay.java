@@ -29,11 +29,8 @@ public class DIPDisplay extends JPanel {
     private final String[] columnAlLCows = {"เลขเกษตรกร", "หมายเลขโค", "สถานะโค","วันที่", "ชื่อโค", "c_oth", "วันเกิด"
             , "หมายเลขแม่", "หมายเลขพ่อ", "เพศ", "outfg", "milk", "eurbrd", "eurper"};
     private final String[] columnAlLBreed = {"หมายเลขโค", "สายพันธุ์", "เปอร์เซ็นต์รวม"};
+    private boolean isPageLoading = true;
     public DIPDisplay(){
-        this.setPreferredSize(new Dimension(1366, 768));
-        this.setBorder(new EmptyBorder(10,10,10,10));
-        this.setLayout(new BorderLayout());
-
         Dialog dialog = new Dialog();
         new Thread(() -> {
             try {
@@ -42,11 +39,25 @@ public class DIPDisplay extends JPanel {
                 allErrorBreeds = RunDB.getAllErrorBreed();
                 allCorrectParent = RunDB.getAllCorrectParent();
                 allErrorParent = RunDB.getAllErrorParent();
-                createTable();
-            }catch (Exception ignored){}
+                setPageLoading(false);
+                dialog.getDialog().setVisible(false);
+                SwingUtilities.invokeLater(this::init);
+            }catch (Exception e){
+                setPageLoading(true);
+                dialog.getDialog().setVisible(false);
+                SwingUtilities.invokeLater(() -> Element.getCardLayout().show(Main.display, DisplayState.MAIN_MENU));
+            }
             SwingUtilities.invokeLater(() -> dialog.getDialog().setVisible(false));
         }).start();
         dialog.getDialog().setVisible(true);
+    }
+
+    private void init(){
+        this.setPreferredSize(new Dimension(1366, 768));
+        this.setBorder(new EmptyBorder(10,10,10,10));
+        this.setLayout(new BorderLayout());
+
+        createTable();
 
         JPanel menuBarPanel = new JPanel();
         menuBarPanel.setPreferredSize(new Dimension(0,50));
@@ -83,13 +94,18 @@ public class DIPDisplay extends JPanel {
                 new CowsTable(allErrorParent, columnAlLCows, true));
 
         this.add(tabbedPane);
-//        this.validate();
     }
-
-
 
     public String decimalFormat (int number) {
         DecimalFormat formatter = new DecimalFormat("###,###,###");
         return formatter.format(number);
+    }
+
+    public boolean isPageLoading() {
+        return isPageLoading;
+    }
+
+    public void setPageLoading(boolean pageLoading) {
+        isPageLoading = pageLoading;
     }
 }

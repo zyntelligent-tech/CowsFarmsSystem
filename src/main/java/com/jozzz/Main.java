@@ -1,13 +1,13 @@
 package com.jozzz;
 
+import com.jozzz.constant.CompName;
 import com.jozzz.constant.DisplayState;
 import com.jozzz.gui.MainMenu;
-import com.jozzz.gui.TableListSelect;
 import com.jozzz.util.Element;
+import com.jozzz.util.RunDB;
 
 import javax.swing.*;
-import java.awt.Dimension;
-import java.awt.Frame;
+import java.awt.*;
 import java.util.Objects;
 
 public class Main {
@@ -18,7 +18,7 @@ public class Main {
             @Override
             public void run() {
                 JFrame frame = new JFrame();
-                frame.setTitle("DPO Cleanser");
+                frame.setTitle(CompName.TITLE);
                 frame.setIconImage(new ImageIcon(Objects.requireNonNull(Main.class.getClassLoader().getResource("img/MomCow60px.png"))).getImage());
 
                 display = new JPanel();

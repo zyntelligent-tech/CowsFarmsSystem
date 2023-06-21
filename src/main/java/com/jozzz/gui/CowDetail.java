@@ -51,7 +51,9 @@ public class CowDetail extends JPanel{
             try {
                 InitCowData();
                 setUpCowTreePanel(cowCode);
-            }catch (Exception ignored){}
+            }catch (Exception e){
+                Element.getCardLayout().show(Main.display, DisplayState.DIP);
+            }
             SwingUtilities.invokeLater(() -> dialog.getDialog().setVisible(false));
         }).start();
         dialog.getDialog().setVisible(true);

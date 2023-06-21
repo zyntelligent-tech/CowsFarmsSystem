@@ -60,8 +60,7 @@ public class CowsTable extends JPanel {
         JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setPreferredSize(new Dimension(1366, 768));
         scrollPane.getVerticalScrollBar().setUnitIncrement(100);
-        scrollPane.setCorner(JScrollPane.UPPER_LEFT_CORNER,
-                header);
+        scrollPane.getHorizontalScrollBar().setUnitIncrement(50);
 
         this.add(scrollPane);
     }

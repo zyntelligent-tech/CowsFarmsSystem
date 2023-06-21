@@ -10,37 +10,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="62bd48ef-414f-4f9f-8bde-acfffa3c54fc" name="Changes" comment="Add New Dairy Breed Filter Tabs">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/constant/CompName.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/constant/DisplayState.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/gui/DipDairyMergeDisplay.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/regex.properties" beforeDir="false" afterPath="$PROJECT_DIR$/regex.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/jozzz/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jozzz/constant/CompName.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/constant/CompName.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jozzz/constant/DisplayState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/constant/DisplayState.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/jozzz/gui/CowDetail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/gui/CowDetail.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/jozzz/gui/CowsTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/gui/CowsTable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/jozzz/gui/DIPDisplay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/gui/DIPDisplay.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/jozzz/gui/DairyDisplay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/gui/DairyDisplay.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/jozzz/gui/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/gui/MainMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jozzz/gui/TableListSelect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/gui/TableListSelect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jozzz/util/RunDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/util/RunDB.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/jozzz/Main$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/jozzz/Main$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/jozzz/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/jozzz/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/jozzz/algor/BFS_Parent.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/jozzz/algor/BFS_Parent.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/jozzz/algor/FindParent.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/jozzz/algor/FindParent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jozzz/constant/CompName.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/jozzz/constant/CompName.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/jozzz/gui/CowDetail.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/jozzz/gui/CowDetail.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/jozzz/gui/CowsTable$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/jozzz/gui/CowsTable$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/jozzz/gui/CowsTable$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/jozzz/gui/CowsTable$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/jozzz/gui/CowsTable.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/jozzz/gui/CowsTable.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/jozzz/gui/DIPDisplay.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/jozzz/gui/DIPDisplay.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/jozzz/gui/DairyDisplay.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/jozzz/gui/DairyDisplay.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/jozzz/gui/MainMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/jozzz/gui/MainMenu.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/jozzz/gui/TableListSelect.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/jozzz/gui/TableListSelect.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/jozzz/models/Breed.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/jozzz/models/Breed.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/jozzz/models/Cow.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/jozzz/models/Cow.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/jozzz/records/DataTab.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/jozzz/records/DataTab.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/jozzz/util/CompareCow.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/jozzz/util/CompareCow.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/jozzz/util/CustomTree.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/jozzz/util/CustomTree.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/jozzz/util/Dialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/jozzz/util/Dialog.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/jozzz/util/Element.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/jozzz/util/Element.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/jozzz/util/ProgressBar.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/jozzz/util/ProgressBar.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jozzz/util/DairyBreedFilter.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/jozzz/util/RunDB.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/jozzz/util/RunDB.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/jozzz/util/WriteXlsxFile.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/jozzz/util/WriteXlsxFile.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,7 +52,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/src/main/java/com/jozzz/util/RunDB.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/jozzz/util/RunDB.java" root0="SKIP_INSPECTION" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -70,6 +63,9 @@
         <option name="useMavenConfig" value="true" />
       </MavenGeneralSettings>
     </option>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2PTMqxckZjki53NcCsw1e6d4LV3" />
   <component name="ProjectViewState">
@@ -172,6 +168,7 @@
       <updated>1683476816548</updated>
       <workItem from="1686661512154" duration="21350000" />
       <workItem from="1687071753759" duration="29884000" />
+      <workItem from="1687292368866" duration="13715000" />
     </task>
     <task id="LOCAL-00001" summary="Cows Tree Hotfix">
       <created>1683499602005</created>

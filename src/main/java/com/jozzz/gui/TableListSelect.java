@@ -1,10 +1,10 @@
 package com.jozzz.gui;
 
 import com.jozzz.Main;
+import com.jozzz.constant.DisplayState;
 import com.jozzz.util.Dialog;
 import com.jozzz.util.Element;
 import com.jozzz.util.RunDB;
-import com.jozzz.util.WriteXlsxFile;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -14,25 +14,35 @@ import java.util.ArrayList;
 import java.util.Vector;
 
 public class TableListSelect extends JPanel {
-    private CowsTable table1;
-    private CowsTable table2;
+    private ArrayList<String[]> allDairyBreedPattern;
+    private boolean isPageLoading = true;
 
     public TableListSelect() {
+        Dialog dialog = new Dialog();
+        new Thread(() -> {
+            try {
+                allDairyBreedPattern = RunDB.getAllDairyBreedPatternOnly();
+                setPageLoading(false);
+                dialog.getDialog().setVisible(false);
+                SwingUtilities.invokeLater(this::init);
+            }catch (Exception e){
+                setPageLoading(true);
+                dialog.getDialog().setVisible(false);
+                SwingUtilities.invokeLater(() -> Element.getCardLayout().show(Main.display, DisplayState.MAIN_MENU));
+            }
+        }).start();
+        dialog.getDialog().setVisible(true);
+    }
+
+    private void init(){
         this.setPreferredSize(new Dimension(1366, 768));
         this.setBorder(new EmptyBorder(10,10,10,10));
         this.setLayout(new BorderLayout());
         String[] columnList = {"List"};
         String[] columnSelectedList = {"Selected List"};
-        Dialog dialog = new Dialog();
-        new Thread(() -> {
-            try {
-                ArrayList<String[]> data = RunDB.getAllDairyBreedPatternOnly();
-                table1 = new CowsTable(data,columnList, false);
-                table2 = new CowsTable(new ArrayList<String[]>(), columnSelectedList, false);
-            }catch (Exception ignored){}
-            SwingUtilities.invokeLater(() -> dialog.getDialog().setVisible(false));
-        }).start();
-        dialog.getDialog().setVisible(true);
+
+        CowsTable table1 = new CowsTable(allDairyBreedPattern, columnList, false);
+        CowsTable table2 = new CowsTable(new ArrayList<>(), columnSelectedList, false);
 
         JButton moveToTable2Button = new JButton("ย้ายไป Selected List >>");
         moveToTable2Button.setFont(Element.getFont(15));
@@ -40,7 +50,6 @@ public class TableListSelect extends JPanel {
         moveToTable1Button.setFont(Element.getFont(15));
 
         moveToTable2Button.addActionListener(event -> moveSelectedRows(table1.getTable(), table1.getTableModel(), table2.getTableModel()));
-
         moveToTable1Button.addActionListener(event -> moveSelectedRows(table2.getTable(), table2.getTableModel(), table1.getTableModel()));
 
         JPanel tablePanel = new JPanel(new GridLayout(1, 2));
@@ -58,7 +67,7 @@ public class TableListSelect extends JPanel {
 
         JButton backButton = new JButton("ย้อนกลับ");
         backButton.setFont(Element.getFont(15));
-        backButton.addActionListener(event -> Element.getCardLayout().show(Main.display, "MAIN_MENU"));
+        backButton.addActionListener(event -> Element.getCardLayout().show(Main.display, DisplayState.MAIN_MENU));
 
         menuBarPanel.add(backButton);
 
@@ -86,5 +95,13 @@ public class TableListSelect extends JPanel {
         for (int i = selectedRows.length - 1; i >= 0; i--) {
             sourceModel.removeRow(selectedRows[i]);
         }
+    }
+
+    public boolean isPageLoading() {
+        return isPageLoading;
+    }
+
+    public void setPageLoading(boolean pageLoading) {
+        isPageLoading = pageLoading;
     }
 }
