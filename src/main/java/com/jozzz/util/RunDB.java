@@ -663,9 +663,9 @@ public class RunDB {
         );
     }
 
-//    private static void openDPIDatabaseConnection() throws SQLException {
+//    private static void openDIPDatabaseConnection() throws SQLException {
 //        connection = DriverManager.getConnection(
-//                "jdbc:mariadb://localhost:3306/zyandemo",
+//                "jdbc:mariadb://localhost:3306/farmdb",
 //                "root",
 //                ""
 //        );

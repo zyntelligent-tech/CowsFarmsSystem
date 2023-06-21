@@ -30,8 +30,10 @@ public class DairyDisplay extends JPanel {
             try {
                 listAllPattern = RunDB.getAllDairyBreedPattern();
                 setPageLoading(false);
-                dialog.getDialog().setVisible(false);
-                SwingUtilities.invokeLater(this::init);
+                SwingUtilities.invokeLater(() -> {
+                    init();
+                    dialog.getDialog().setVisible(false);
+                });
             }catch (Exception e){
                 setPageLoading(true);
                 dialog.getDialog().setVisible(false);

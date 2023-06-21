@@ -37,8 +37,10 @@ public class DipDairyMergeDisplay extends JPanel{
 //                allDairyCow = RunDB.getAllDairyCows();
 //                allDIPCow = RunDB.getAllCows();
                 setPageLoading(false);
-                SwingUtilities.invokeLater(this::init);
-                dialog.getDialog().setVisible(false);
+                SwingUtilities.invokeLater(() -> {
+                    init();
+                    dialog.getDialog().setVisible(false);
+                });
             }catch (Exception e){
                 setPageLoading(true);
                 dialog.getDialog().setVisible(false);

@@ -52,9 +52,14 @@ public class CowDetail extends JPanel{
                 InitCowData();
                 setUpCowTreePanel(cowCode);
             }catch (Exception e){
-                Element.getCardLayout().show(Main.display, DisplayState.DIP);
+                e.printStackTrace();
+                SwingUtilities.invokeLater(() -> {
+                    Element.getCardLayout().show(Main.display, DisplayState.DIP);
+                });
             }
-            SwingUtilities.invokeLater(() -> dialog.getDialog().setVisible(false));
+            SwingUtilities.invokeLater(() -> {
+                dialog.getDialog().setVisible(false);
+            });
         }).start();
         dialog.getDialog().setVisible(true);
     }
@@ -177,8 +182,11 @@ public class CowDetail extends JPanel{
             }
 
             if (centerDetailCB.isSelected()){
-                filterStr += " [ (ศูนย์/สหกรณ์) รหัสศูนย์/สหกรณ์ : "+centerDetail[1]+" , ชื่อศูนย์/สหกรณ์ : "+centerDetail[2]
-                        +" , ชื่อย่อของศูนย์ : "+centerDetail[3]+" , ภาค : "+sectorDetail[1]+" ] ";
+                System.out.println(sectorDetail.length);
+                if (centerDetail.length > 0){
+                    filterStr += " [ (ศูนย์/สหกรณ์) รหัสศูนย์/สหกรณ์ : "+centerDetail[1]+" , ชื่อศูนย์/สหกรณ์ : "+centerDetail[2]
+                            +" , ชื่อย่อของศูนย์ : "+centerDetail[3]+" , ภาค : "+ sectorDetail[1]+" ] ";
+                }
             }
         }
         else if (cowType.equals("dad")){

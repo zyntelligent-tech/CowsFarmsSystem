@@ -40,8 +40,10 @@ public class DIPDisplay extends JPanel {
                 allCorrectParent = RunDB.getAllCorrectParent();
                 allErrorParent = RunDB.getAllErrorParent();
                 setPageLoading(false);
-                dialog.getDialog().setVisible(false);
-                SwingUtilities.invokeLater(this::init);
+                SwingUtilities.invokeLater(() -> {
+                    init();
+                    dialog.getDialog().setVisible(false);
+                });
             }catch (Exception e){
                 setPageLoading(true);
                 dialog.getDialog().setVisible(false);

@@ -23,8 +23,10 @@ public class TableListSelect extends JPanel {
             try {
                 allDairyBreedPattern = RunDB.getAllDairyBreedPatternOnly();
                 setPageLoading(false);
-                dialog.getDialog().setVisible(false);
-                SwingUtilities.invokeLater(this::init);
+                SwingUtilities.invokeLater(() -> {
+                    init();
+                    dialog.getDialog().setVisible(false);
+                });
             }catch (Exception e){
                 setPageLoading(true);
                 dialog.getDialog().setVisible(false);
