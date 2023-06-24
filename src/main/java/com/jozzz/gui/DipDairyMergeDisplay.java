@@ -1,17 +1,14 @@
 package com.jozzz.gui;
 
-import com.jozzz.Main;
 import com.jozzz.constant.DisplayState;
-import com.jozzz.util.*;
 import com.jozzz.util.Dialog;
+import com.jozzz.util.*;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
 
 public class DipDairyMergeDisplay extends JPanel{
     private boolean isPageLoading = true;

@@ -1,17 +1,12 @@
 package com.jozzz.gui;
 
-import com.jozzz.Main;
 import com.jozzz.constant.DisplayState;
+import com.jozzz.util.Dialog;
 import com.jozzz.util.*;
 
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
+import java.awt.*;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 

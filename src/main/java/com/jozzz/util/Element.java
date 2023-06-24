@@ -1,15 +1,8 @@
 package com.jozzz.util;
 
-import java.awt.CardLayout;
-import java.awt.Font;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.awt.*;
 import java.io.InputStream;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
 
 public class Element {
 

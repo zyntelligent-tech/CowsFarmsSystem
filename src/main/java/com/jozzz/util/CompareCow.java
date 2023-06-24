@@ -7,8 +7,7 @@ import com.jozzz.models.Cow;
 public class CompareCow {
     
     public static Cow toCow(String[] cowData){
-        Cow cow = new Cow(cowData[3] , cowData[15] , cowData[10]);
-        return cow;
+        return new Cow(cowData[3] , cowData[15] , cowData[10]);
     }
 
     public static Cow toBreeder(String[] cowData){

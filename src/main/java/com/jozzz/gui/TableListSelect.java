@@ -1,6 +1,5 @@
 package com.jozzz.gui;
 
-import com.jozzz.Main;
 import com.jozzz.constant.DisplayState;
 import com.jozzz.util.CardPage;
 import com.jozzz.util.Dialog;

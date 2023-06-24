@@ -4,12 +4,9 @@ import com.jozzz.constant.CompName;
 import com.jozzz.constant.DisplayState;
 import com.jozzz.gui.MainMenu;
 import com.jozzz.util.CardPage;
-import com.jozzz.util.Element;
-import com.jozzz.util.RunDB;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Locale;
 import java.util.Objects;
 
 public class Main {

@@ -1,11 +1,10 @@
 package com.jozzz.gui;
 
-import com.jozzz.Main;
 import com.jozzz.constant.DisplayState;
 import com.jozzz.cow_format.RegexPattern;
 import com.jozzz.records.DataTab;
-import com.jozzz.util.*;
 import com.jozzz.util.Dialog;
+import com.jozzz.util.*;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
