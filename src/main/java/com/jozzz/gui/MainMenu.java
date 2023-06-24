@@ -3,6 +3,7 @@ package com.jozzz.gui;
 import com.jozzz.Main;
 import com.jozzz.constant.CompName;
 import com.jozzz.constant.DisplayState;
+import com.jozzz.util.CardPage;
 import com.jozzz.util.Element;
 
 import javax.swing.ImageIcon;
@@ -59,8 +60,8 @@ public class MainMenu extends JPanel {
                     dipDisplay = new DIPDisplay();
                 }
             }
-            Main.display.add(dipDisplay, DisplayState.DIP);
-            Element.getCardLayout().show(Main.display, DisplayState.DIP);
+            CardPage.addPage(dipDisplay, DisplayState.DIP);
+            CardPage.showPage(DisplayState.DIP);
         });
 
         JButton dairyPatternButton = new JButton(CompName.DAIRY_PATTERN_BUTTON);
@@ -74,8 +75,8 @@ public class MainMenu extends JPanel {
                     dairyDisplay = new DairyDisplay();
                 }
             }
-            Main.display.add(dairyDisplay, DisplayState.DAIRY);
-            Element.getCardLayout().show(Main.display, DisplayState.DAIRY);
+            CardPage.addPage(dairyDisplay, DisplayState.DAIRY);
+            CardPage.showPage(DisplayState.DAIRY);
         });
 
         JButton tableListButton = new JButton(CompName.TABLE_LIST_BUTTON);
@@ -89,8 +90,8 @@ public class MainMenu extends JPanel {
                     tableListSelect = new TableListSelect();
                 }
             }
-            Main.display.add(tableListSelect, DisplayState.TABLE_LIST);
-            Element.getCardLayout().show(Main.display, DisplayState.TABLE_LIST);
+            CardPage.addPage(tableListSelect, DisplayState.TABLE_LIST);
+            CardPage.showPage(DisplayState.TABLE_LIST);
         });
 
         JButton dairyMergeButton = new JButton(CompName.DAIRY_MERGE_BUTTON);
@@ -104,8 +105,8 @@ public class MainMenu extends JPanel {
                     dipDairyMergeDisplay = new DipDairyMergeDisplay();
                 }
             }
-            Main.display.add(dipDairyMergeDisplay, DisplayState.DIP_DAIRY_MERGE);
-            Element.getCardLayout().show(Main.display, DisplayState.DIP_DAIRY_MERGE);
+            CardPage.addPage(dipDairyMergeDisplay, DisplayState.DIP_DAIRY_MERGE);
+            CardPage.showPage(DisplayState.DIP_DAIRY_MERGE);
         });
 
         dipButtonPanel.add(dipDataButton);

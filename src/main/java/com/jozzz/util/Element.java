@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Properties;
 
 public class Element {
-    private static final CardLayout cardLayout = new CardLayout();
 
     public static Font getFont(int size){
         Font font = null;
@@ -31,9 +30,4 @@ public class Element {
         DecimalFormat formatter = new DecimalFormat("###,###,###");
         return formatter.format(number);
     }
-
-    public static CardLayout getCardLayout() {
-        return cardLayout;
-    }
-
 }

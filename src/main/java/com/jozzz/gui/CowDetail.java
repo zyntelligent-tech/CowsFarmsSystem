@@ -2,10 +2,7 @@ package com.jozzz.gui;
 
 import com.jozzz.Main;
 import com.jozzz.constant.DisplayState;
-import com.jozzz.util.CustomTree;
-import com.jozzz.util.Dialog;
-import com.jozzz.util.Element;
-import com.jozzz.util.RunDB;
+import com.jozzz.util.*;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -54,7 +51,7 @@ public class CowDetail extends JPanel{
             }catch (Exception e){
                 e.printStackTrace();
                 SwingUtilities.invokeLater(() -> {
-                    Element.getCardLayout().show(Main.display, DisplayState.DIP);
+                    CardPage.showPage(DisplayState.DIP);
                 });
             }
             SwingUtilities.invokeLater(() -> {
@@ -123,7 +120,7 @@ public class CowDetail extends JPanel{
 
         JButton backButton = new JButton("ย้อนกลับ");
         backButton.setFont(Element.getFont(20));
-        backButton.addActionListener(event -> Element.getCardLayout().show(Main.display, DisplayState.DIP));
+        backButton.addActionListener(event -> CardPage.showPage(DisplayState.DIP));
 
         menuBarPanel.add(backButton);
 
@@ -182,7 +179,6 @@ public class CowDetail extends JPanel{
             }
 
             if (centerDetailCB.isSelected()){
-                System.out.println(sectorDetail.length);
                 if (centerDetail.length > 0){
                     filterStr += " [ (ศูนย์/สหกรณ์) รหัสศูนย์/สหกรณ์ : "+centerDetail[1]+" , ชื่อศูนย์/สหกรณ์ : "+centerDetail[2]
                             +" , ชื่อย่อของศูนย์ : "+centerDetail[3]+" , ภาค : "+ sectorDetail[1]+" ] ";

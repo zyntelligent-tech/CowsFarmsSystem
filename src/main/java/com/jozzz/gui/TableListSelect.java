@@ -2,6 +2,7 @@ package com.jozzz.gui;
 
 import com.jozzz.Main;
 import com.jozzz.constant.DisplayState;
+import com.jozzz.util.CardPage;
 import com.jozzz.util.Dialog;
 import com.jozzz.util.Element;
 import com.jozzz.util.RunDB;
@@ -30,7 +31,7 @@ public class TableListSelect extends JPanel {
             }catch (Exception e){
                 setPageLoading(true);
                 dialog.getDialog().setVisible(false);
-                SwingUtilities.invokeLater(() -> Element.getCardLayout().show(Main.display, DisplayState.MAIN_MENU));
+                SwingUtilities.invokeLater(() -> CardPage.showPage(DisplayState.MAIN_MENU));
             }
         }).start();
         dialog.getDialog().setVisible(true);
@@ -69,7 +70,7 @@ public class TableListSelect extends JPanel {
 
         JButton backButton = new JButton("ย้อนกลับ");
         backButton.setFont(Element.getFont(15));
-        backButton.addActionListener(event -> Element.getCardLayout().show(Main.display, DisplayState.MAIN_MENU));
+        backButton.addActionListener(event -> CardPage.showPage(DisplayState.MAIN_MENU));
 
         menuBarPanel.add(backButton);
 
