@@ -432,14 +432,36 @@ public class RunDB {
         }
         return dataList;
     }
-    
+
+    public static ArrayList<String[]> getAllDairyBreedMain(){
+        ArrayList<String[]> dataList = new ArrayList<>();
+        try {
+            openDairyDatabaseConnection();
+            try(PreparedStatement statement = connection.prepareStatement(
+                    "SELECT id, breed_code, breed_code_eng, breed_code_initials FROM tbd_breed_main")){
+                ResultSet resultSet = statement.executeQuery();
+                int column = statement.getMetaData().getColumnCount();
+                while (resultSet.next()){
+                    String[] data = new String[column];
+                    for (int i=1;i <= column;i++){
+                        data[i-1] = resultSet.getString(i);
+                    }
+                    dataList.add(data);
+                }
+            }
+            closeDatabaseConnection();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return dataList;
+    }
     
     public static ArrayList<String[]> getAllDairyBreedPattern(){
         ArrayList<String[]> dataList = new ArrayList<>();
         try {
             openDairyDatabaseConnection();
             try(PreparedStatement statement = connection.prepareStatement(
-                    "SELECT breed_code, breed_name FROM tbd_breed")){
+                    "SELECT breed_code, breed_name, breed_id_string FROM tbd_breed")){
                 ResultSet resultSet = statement.executeQuery();
                 int column = statement.getMetaData().getColumnCount();
                 while (resultSet.next()){
