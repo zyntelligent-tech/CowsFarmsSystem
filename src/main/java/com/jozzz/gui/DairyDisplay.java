@@ -9,6 +9,7 @@ import com.jozzz.util.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -23,7 +24,7 @@ public class DairyDisplay extends JPanel {
     private JTabbedPane tabbedPane;
     private ArrayList<DataTab> allDataTabs;
     private final String[] columnAlLBreed = {"breed_uuid", "breed_code", "breed_name"};
-    private final String[] columnAlLPattern = {"breed_code","breed_name", "breed_id_string"};
+    private final String[] columnAlLPattern = {"breed_code","breed_name", "breed_id_string", "sumBreed"};
     private boolean isPageLoading = true;
     public DairyDisplay(){
         Dialog dialog = new Dialog();
@@ -122,6 +123,7 @@ public class DairyDisplay extends JPanel {
         for (String[] value : data) {
             String[] dataArr = new String[2];
             List<String> dataList = new ArrayList<>();
+            boolean hasNA = false;
             Matcher matcher = letterPattern.matcher(value[1]);
 
             while (matcher.find()) {
@@ -136,24 +138,50 @@ public class DairyDisplay extends JPanel {
                     String letter = matcher.group();
                     if (!findBreedId(letter).equals("")){
                         dataList.add(findBreedId(letter));
+                        if (findBreedId(letter).equalsIgnoreCase("NA")){
+                            hasNA = true;
+                        }
                     }
                 }
             }
             dataArr[0] = String.join(",", dataList);
+            double divisorBreed = Math.pow(2,dataList.size());
             dataList = new ArrayList<>();
+            BigDecimal sumBreed = BigDecimal.ZERO;
             matcher = numberPattern.matcher(value[1]).find()
                     ? numberPattern.matcher(value[1])
                     : numberPattern.matcher(value[0]);
             while (matcher.find()) {
                 String number = matcher.group();
                 if (Double.parseDouble(number) <= 100){
+                    sumBreed = sumBreed.add(new BigDecimal(number));
                     dataList.add(number);
                 }
             }
             dataArr[1] = String.join(",", dataList);
 
+            int comparisonResult = sumBreed.compareTo(new BigDecimal("100"));
+
+            if (dataList.size() > 1 && comparisonResult > 0){
+                dataList = new ArrayList<>();
+                sumBreed = BigDecimal.ZERO;
+                for (String percentBreed : dataArr[1].split(",")){
+                    double result = Double.parseDouble(percentBreed);
+                    if (percentBreed.contains(".")){
+                        result = Double.parseDouble(percentBreed.split("\\.")[0])
+                                + Math.round(Double.parseDouble("0."+percentBreed.split("\\.")[1])
+                                * divisorBreed)
+                                / divisorBreed;
+                    }
+                    sumBreed = sumBreed.add(new BigDecimal(result));
+                    dataList.add(String.valueOf(result));
+                }
+                dataArr[1] = String.join(",", dataList);
+            }
             value[2] = isCorrectBreed(dataArr[0], dataArr[1])
                     ? dataArr[0] + ":" + dataArr[1] : "";
+
+            value[3] = String.valueOf(sumBreed);
 
             if (!value[2].equals("")){
                 selectedBreed.add(value);

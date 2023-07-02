@@ -465,7 +465,7 @@ public class RunDB {
                 ResultSet resultSet = statement.executeQuery();
                 int column = statement.getMetaData().getColumnCount();
                 while (resultSet.next()){
-                    String[] data = new String[column];
+                    String[] data = new String[column+1];
                     for (int i=1;i <= column;i++){
                         data[i-1] = resultSet.getString(i);
                     }

@@ -9,12 +9,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="62bd48ef-414f-4f9f-8bde-acfffa3c54fc" name="Changes" comment="Add Colors in Dip Dairy Merger Table">
+    <list default="true" id="62bd48ef-414f-4f9f-8bde-acfffa3c54fc" name="Changes" comment="Add breed_id_string column and spilt breed string algorithm">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/regex.properties" beforeDir="false" afterPath="$PROJECT_DIR$/regex.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jozzz/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/jozzz/gui/DairyDisplay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/gui/DairyDisplay.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/jozzz/util/RunDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/util/RunDB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jozzz/Main$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/jozzz/Main$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jozzz/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/jozzz/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/jozzz/gui/DairyDisplay.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/jozzz/gui/DairyDisplay.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/jozzz/util/RunDB.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/jozzz/util/RunDB.class" afterDir="false" />
     </list>
@@ -161,7 +162,9 @@
       <workItem from="1687953277821" duration="10516000" />
       <workItem from="1688011910162" duration="2790000" />
       <workItem from="1688031420904" duration="3308000" />
-      <workItem from="1688125842926" duration="16688000" />
+      <workItem from="1688125842926" duration="17041000" />
+      <workItem from="1688194581372" duration="11804000" />
+      <workItem from="1688278951259" duration="1993000" />
     </task>
     <task id="LOCAL-00001" summary="Cows Tree Hotfix">
       <created>1683499602005</created>
@@ -275,7 +278,14 @@
       <option name="project" value="LOCAL" />
       <updated>1687755541477</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Add breed_id_string column and spilt breed string algorithm">
+      <created>1688146569388</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1688146569388</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -307,7 +317,8 @@
     <MESSAGE value="Add Thai language in file chooser , add CardPage and fix Dialog" />
     <MESSAGE value="Add Thai language in file chooser, add CardPage and fix Dialog and Optimize import" />
     <MESSAGE value="Add Colors in Dip Dairy Merger Table" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add Colors in Dip Dairy Merger Table" />
+    <MESSAGE value="Add breed_id_string column and spilt breed string algorithm" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add breed_id_string column and spilt breed string algorithm" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
