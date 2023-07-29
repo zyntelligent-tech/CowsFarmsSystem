@@ -24,7 +24,7 @@ public class DairyDisplay extends JPanel {
     private JTabbedPane tabbedPane;
     private ArrayList<DataTab> allDataTabs;
     private final String[] columnAlLBreed = {"breed_uuid", "breed_code", "breed_name"};
-    private final String[] columnAlLPattern = {"breed_code","breed_name", "breed_id_string", "sumBreed"};
+    private final String[] columnAlLPattern = {"breed_code","breed_name", "breed_id_string", "sumBreed", "new_format"};
     private boolean isPageLoading = true;
     public DairyDisplay(){
         Dialog dialog = new Dialog();
@@ -121,8 +121,9 @@ public class DairyDisplay extends JPanel {
         Pattern letterPattern = Pattern.compile("[ก-๙a-zA-Z]+(\\s*[ก-๙a-zA-Z]+)*");
 
         for (String[] value : data) {
-            String[] dataArr = new String[2];
+            String[] dataArr = new String[3];
             List<String> dataList = new ArrayList<>();
+            List<String> newFormatList = new ArrayList<>();
             boolean hasNA = false;
             Matcher matcher = letterPattern.matcher(value[1]);
 
@@ -156,9 +157,11 @@ public class DairyDisplay extends JPanel {
                 if (Double.parseDouble(number) <= 100){
                     sumBreed = sumBreed.add(new BigDecimal(number));
                     dataList.add(number);
+                    newFormatList.add(newBreedFormat(Double.valueOf(number)));
                 }
             }
             dataArr[1] = String.join(",", dataList);
+            dataArr[2] = String.join(",", newFormatList);
 
             int comparisonResult = sumBreed.compareTo(new BigDecimal("100"));
 
@@ -183,11 +186,38 @@ public class DairyDisplay extends JPanel {
 
             value[3] = String.valueOf(sumBreed);
 
+            value[4] = isCorrectBreed(dataArr[0], dataArr[2])
+                    ? dataArr[0] + ":" + dataArr[2] : "";
+
             if (!value[2].equals("")){
                 selectedBreed.add(value);
             }
         }
         return data;
+    }
+
+    private static String newBreedFormat(Double percent){
+        if (String.valueOf(percent).contains(".")){
+            if (String.valueOf(percent).split("\\.")[1].trim().equals("0")){
+                return String.valueOf(percent).split("\\.")[0] +"+0/1";
+            }
+            double r = Math.round(percent * 512f) / 512f;
+            int d = (int) Math.pow(10, String.valueOf(r).split("\\.")[1].length());
+            int x = Integer.parseInt(String.valueOf(r).split("\\.")[1]);
+            int gcd = gcd(x, d);
+
+            int re = x / gcd;
+            int di = d / gcd;
+
+            return String.valueOf(r).split("\\.")[0] +"+"+ re + "/" + di;
+        }
+        return percent +"+0/1";
+    }
+
+    private static int gcd(int a, int b){
+        if (b == 0)
+            return a;
+        return gcd(b, a % b);
     }
 
     private String findBreedId(String breedStr){

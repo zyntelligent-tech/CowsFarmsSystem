@@ -9,15 +9,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="62bd48ef-414f-4f9f-8bde-acfffa3c54fc" name="Changes" comment="Add breed_id_string column and spilt breed string algorithm">
+    <list default="true" id="62bd48ef-414f-4f9f-8bde-acfffa3c54fc" name="Changes" comment="Add calculate breed algorithm">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/regex.properties" beforeDir="false" afterPath="$PROJECT_DIR$/regex.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/jozzz/gui/DairyDisplay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/gui/DairyDisplay.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/jozzz/util/RunDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/util/RunDB.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/jozzz/Main$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/jozzz/Main$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/jozzz/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/jozzz/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/jozzz/gui/DairyDisplay.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/jozzz/gui/DairyDisplay.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/jozzz/util/RunDB.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/jozzz/util/RunDB.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +59,7 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;jozzz&quot;,
-    &quot;last_opened_file_path&quot;: &quot;F:/GitHub/Projects/CowsFarmsSystem&quot;,
+    &quot;last_opened_file_path&quot;: &quot;F:/GitHub/Projects/zyntelligent-tech/dairy-api&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -164,7 +160,14 @@
       <workItem from="1688031420904" duration="3308000" />
       <workItem from="1688125842926" duration="17041000" />
       <workItem from="1688194581372" duration="11804000" />
-      <workItem from="1688278951259" duration="1993000" />
+      <workItem from="1688278951259" duration="2680000" />
+      <workItem from="1688294360211" duration="255000" />
+      <workItem from="1688541221534" duration="2367000" />
+      <workItem from="1688632141427" duration="1990000" />
+      <workItem from="1689406988755" duration="2244000" />
+      <workItem from="1690450669160" duration="787000" />
+      <workItem from="1690530412181" duration="2326000" />
+      <workItem from="1690632584764" duration="8917000" />
     </task>
     <task id="LOCAL-00001" summary="Cows Tree Hotfix">
       <created>1683499602005</created>
@@ -285,7 +288,14 @@
       <option name="project" value="LOCAL" />
       <updated>1688146569388</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Add calculate breed algorithm">
+      <created>1688281425463</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1688281425463</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -318,7 +328,8 @@
     <MESSAGE value="Add Thai language in file chooser, add CardPage and fix Dialog and Optimize import" />
     <MESSAGE value="Add Colors in Dip Dairy Merger Table" />
     <MESSAGE value="Add breed_id_string column and spilt breed string algorithm" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add breed_id_string column and spilt breed string algorithm" />
+    <MESSAGE value="Add calculate breed algorithm" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add calculate breed algorithm" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
