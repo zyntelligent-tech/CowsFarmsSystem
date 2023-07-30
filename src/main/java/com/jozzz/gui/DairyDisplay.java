@@ -122,7 +122,8 @@ public class DairyDisplay extends JPanel {
 
         for (String[] value : data) {
             String[] dataArr = new String[3];
-            List<String> dataList = new ArrayList<>();
+            List<String> breedIdList = new ArrayList<>();
+            List<String> breedPercentList = new ArrayList<>();
             List<String> newFormatList = new ArrayList<>();
             boolean hasNA = false;
             Matcher matcher = letterPattern.matcher(value[1]);
@@ -130,25 +131,24 @@ public class DairyDisplay extends JPanel {
             while (matcher.find()) {
                 String letter = matcher.group();
                 if (!findBreedId(letter).equals("")){
-                    dataList.add(findBreedId(letter));
+                    breedIdList.add(findBreedId(letter));
                 }
             }
-            if (dataList.isEmpty()){
+            if (breedIdList.isEmpty()){
                 matcher = letterPattern.matcher(value[0]);
                 while (matcher.find()) {
                     String letter = matcher.group();
                     if (!findBreedId(letter).equals("")){
-                        dataList.add(findBreedId(letter));
+                        breedIdList.add(findBreedId(letter));
                         if (findBreedId(letter).equalsIgnoreCase("NA")){
                             hasNA = true;
                         }
                     }
                 }
             }
-            dataArr[0] = String.join(",", dataList);
-            double divisorBreed = Math.pow(2,dataList.size());
-            dataList = new ArrayList<>();
+            double divisorBreed = Math.pow(2,breedIdList.size());
             BigDecimal sumBreed = BigDecimal.ZERO;
+            double perLeftover = 0;
             matcher = numberPattern.matcher(value[1]).find()
                     ? numberPattern.matcher(value[1])
                     : numberPattern.matcher(value[0]);
@@ -156,35 +156,70 @@ public class DairyDisplay extends JPanel {
                 String number = matcher.group();
                 if (Double.parseDouble(number) <= 100){
                     sumBreed = sumBreed.add(new BigDecimal(number));
-                    dataList.add(number);
-                    newFormatList.add(newBreedFormat(Double.valueOf(number)));
+                    breedPercentList.add(number);
                 }
             }
-            dataArr[1] = String.join(",", dataList);
-            dataArr[2] = String.join(",", newFormatList);
 
-            int comparisonResult = sumBreed.compareTo(new BigDecimal("100"));
+            dataArr[0] = String.join(",", breedIdList);
+            dataArr[1] = String.join(",", breedPercentList);
 
-            if (dataList.size() > 1 && comparisonResult > 0){
-                dataList = new ArrayList<>();
-                sumBreed = BigDecimal.ZERO;
-                for (String percentBreed : dataArr[1].split(",")){
-                    double result = Double.parseDouble(percentBreed);
-                    if (percentBreed.contains(".")){
-                        result = Double.parseDouble(percentBreed.split("\\.")[0])
-                                + Math.round(Double.parseDouble("0."+percentBreed.split("\\.")[1])
-                                * divisorBreed)
-                                / divisorBreed;
-                    }
-                    sumBreed = sumBreed.add(new BigDecimal(result));
-                    dataList.add(String.valueOf(result));
-                }
-                dataArr[1] = String.join(",", dataList);
-            }
             value[2] = isCorrectBreed(dataArr[0], dataArr[1])
                     ? dataArr[0] + ":" + dataArr[1] : "";
 
-            value[3] = String.valueOf(sumBreed);
+            int comparisonResult = sumBreed.compareTo(new BigDecimal("100"));
+
+            if (breedPercentList.size() > 1){
+                for (String percent : breedPercentList){
+                    newFormatList.add(newBreedFormat(Double.valueOf(percent)));
+                }
+                if (comparisonResult < 0){ // less than 100
+
+                }
+                else if (comparisonResult > 0){ // greater than 100
+
+                }
+            }
+            else if (breedPercentList.size() == 1){
+                double perBreed = decimalBreed(breedPercentList.get(0));
+                if (comparisonResult < 0){ // less than 100
+                    breedIdList.add(findBreedId("NA"));
+                    perLeftover = 100.0 - perBreed;
+                    sumBreed = BigDecimal.valueOf(perBreed);
+                    newFormatList.add(newBreedFormat(perBreed));
+                    newFormatList.add(newBreedFormat(perLeftover));
+                    breedPercentList.add(String.valueOf(perLeftover));
+                }
+                else if (comparisonResult > 0){ // greater than 100
+
+                }
+                else {
+                    newFormatList.add(newBreedFormat(perBreed));
+                }
+            }
+
+            dataArr[0] = String.join(",", breedIdList);
+            dataArr[2] = String.join(",", newFormatList);
+
+//            if (breedIdList.size() > 1 && comparisonResult > 0){
+//                breedIdList = new ArrayList<>();
+//                sumBreed = BigDecimal.ZERO;
+//                for (String percentBreed : dataArr[1].split(",")){
+//                    double result = Double.parseDouble(percentBreed);
+//                    if (percentBreed.contains(".")){
+//                        result = Double.parseDouble(percentBreed.split("\\.")[0])
+//                                + Math.round(Double.parseDouble("0."+percentBreed.split("\\.")[1])
+//                                * divisorBreed)
+//                                / divisorBreed;
+//                    }
+//                    sumBreed = sumBreed.add(new BigDecimal(result));
+//                    breedIdList.add(String.valueOf(result));
+//                }
+//                dataArr[1] = String.join(",", breedIdList);
+//            }
+
+            value[3] = perLeftover == 0
+                    ? String.valueOf(sumBreed)
+                    : sumBreed + "+" + perLeftover;
 
             value[4] = isCorrectBreed(dataArr[0], dataArr[2])
                     ? dataArr[0] + ":" + dataArr[2] : "";
@@ -196,25 +231,44 @@ public class DairyDisplay extends JPanel {
         return data;
     }
 
-    private static String newBreedFormat(Double percent){
+    private String newBreedFormat(Double percent){
         if (String.valueOf(percent).contains(".")){
             if (String.valueOf(percent).split("\\.")[1].trim().equals("0")){
                 return String.valueOf(percent).split("\\.")[0] +"+0/1";
             }
             double r = Math.round(percent * 512f) / 512f;
-            int d = (int) Math.pow(10, String.valueOf(r).split("\\.")[1].length());
-            int x = Integer.parseInt(String.valueOf(r).split("\\.")[1]);
-            int gcd = gcd(x, d);
+            long d = (long) Math.pow(10, String.valueOf(r).split("\\.")[1].length());
+            long x = Integer.parseInt(String.valueOf(r).split("\\.")[1]);
+            long gcd = gcd(x, d);
 
-            int re = x / gcd;
-            int di = d / gcd;
+            long re = x / gcd;
+            long di = d / gcd;
 
             return String.valueOf(r).split("\\.")[0] +"+"+ re + "/" + di;
         }
         return percent +"+0/1";
     }
 
-    private static int gcd(int a, int b){
+    private double decimalBreed(String percent){
+        if (percent.contains(".")){
+            if (percent.split("\\.")[1].trim().equals("0")){
+                return Double.parseDouble(percent);
+            }
+            double r = Math.round(Double.parseDouble(percent) * 512f) / 512f;
+            long d = (long) Math.pow(10, String.valueOf(r).split("\\.")[1].length());
+            long num = Integer.parseInt(String.valueOf(r).split("\\.")[0]);
+            long x = Integer.parseInt(String.valueOf(r).split("\\.")[1]);
+            long gcd = gcd(x, d);
+
+            double re = (double) x / gcd;
+            double di = (double) d / gcd;
+
+            return num + re / di;
+        }
+        return Double.parseDouble(percent);
+    }
+
+    private long gcd(long a, long b){
         if (b == 0)
             return a;
         return gcd(b, a % b);
