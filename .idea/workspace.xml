@@ -9,10 +9,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="62bd48ef-414f-4f9f-8bde-acfffa3c54fc" name="Changes" comment="Add calculate breed algorithm">
+    <list default="true" id="62bd48ef-414f-4f9f-8bde-acfffa3c54fc" name="Changes" comment="Add NA breed and new format for once percent breed">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/regex.properties" beforeDir="false" afterPath="$PROJECT_DIR$/regex.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jozzz/constant/CompName.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/constant/CompName.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/jozzz/gui/DairyDisplay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/gui/DairyDisplay.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jozzz/constant/CompName.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/jozzz/constant/CompName.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/jozzz/gui/DairyDisplay.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/jozzz/gui/DairyDisplay.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -64,6 +66,7 @@
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
@@ -170,6 +173,11 @@
       <workItem from="1690632584764" duration="8995000" />
       <workItem from="1690695857276" duration="8321000" />
       <workItem from="1690710051985" duration="4278000" />
+      <workItem from="1690873665163" duration="1534000" />
+      <workItem from="1690876089978" duration="1948000" />
+      <workItem from="1690908152234" duration="10014000" />
+      <workItem from="1690963148804" duration="9587000" />
+      <workItem from="1691061179422" duration="103000" />
     </task>
     <task id="LOCAL-00001" summary="Cows Tree Hotfix">
       <created>1683499602005</created>

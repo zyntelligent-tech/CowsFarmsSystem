@@ -6,6 +6,9 @@ import com.jozzz.records.DataTab;
 import com.jozzz.util.Dialog;
 import com.jozzz.util.*;
 
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -115,7 +118,7 @@ public class DairyDisplay extends JPanel {
         return filteredData;
     }
 
-    public ArrayList<String[]> spiltPattern(ArrayList<String[]> data){
+    public ArrayList<String[]> spiltPattern(ArrayList<String[]> data) {
 
         Pattern numberPattern = Pattern.compile("\\d+(\\.\\d+)?");
         Pattern letterPattern = Pattern.compile("[ก-๙a-zA-Z]+(\\s*[ก-๙a-zA-Z]+)*");
@@ -168,6 +171,7 @@ public class DairyDisplay extends JPanel {
 
             int comparisonResult = sumBreed.compareTo(new BigDecimal("100"));
             int count = 0;
+            boolean is96 = false;
             if (breedPercentList.size() > 1){
                 double perBreed = 0; 
                 for(int i = 0 ; i < breedPercentList.size() ; i++){
@@ -192,7 +196,8 @@ public class DairyDisplay extends JPanel {
                             breedIdList.add("20");
                             breedPercentList.add(Double.toString(perLeftover));
                         }else{
-                            breedPercentList.set(i, Double.toString(perLeftover));
+                            breedPercentList.set(i, Double.toString(perLeftover + Double.parseDouble(breedPercentList.get(i))));
+//                            System.out.println(breedPercentList);
                         }
                     }else{
                         perLeftover = 100.0 - perBreed;
@@ -230,6 +235,7 @@ public class DairyDisplay extends JPanel {
                                     }else{
                                         breedPercentList.set(i,Integer.toString(Integer.parseInt(breedPercentList.get(i)) + 1));
                                         resultDiv = (perLeftover - 1) / (count - 1);
+
                                     }
                                     i = 0;
                                     for(String percent : breedPercentList){
@@ -237,7 +243,8 @@ public class DairyDisplay extends JPanel {
                                             breedPercentList.set(i, Double.toString(resultDiv));
                                         }
                                         i++;
-                                    }                
+                                    }
+                                    is96 = true;
                                 }else{
                                     for(String percent : breedPercentList){
                                         if(i == 0){
@@ -259,12 +266,27 @@ public class DairyDisplay extends JPanel {
                             }
                         }
                     }
+                    sumBreed = BigDecimal.ZERO;
+                    for(String percent : breedPercentList){
+
+                        newFormatList.add(newBreedFormat(Double.parseDouble(percent)));
+                        sumBreed = sumBreed.add(new BigDecimal(percent));
+                    }
+//                    if(is96){
+////                        System.out.println(breedIdList);
+////                        System.out.println(breedPercentList);
+//                        System.out.println(newFormatList);
+//                    }
+                }
+                else if (comparisonResult > 0){ // greater than 100
                     for(String percent : breedPercentList){
                         newFormatList.add(newBreedFormat(Double.parseDouble(percent)));
                     }
                 }
-                else if (comparisonResult > 0){ // greater than 100
-                   
+                else{
+                    for(String percent : breedPercentList){
+                        newFormatList.add(newBreedFormat(Double.parseDouble(percent)));
+                    }
                 }
             }
             else if (breedPercentList.size() == 1){
@@ -276,11 +298,11 @@ public class DairyDisplay extends JPanel {
                     newFormatList.add(newBreedFormat(perBreed));
                     newFormatList.add(newBreedFormat(perLeftover));
                     breedPercentList.add(String.valueOf(perLeftover));
+                    sumBreed = sumBreed.add(new BigDecimal(perLeftover));
                 }
                 else if (comparisonResult > 0){ // greater than 100
-                    System.out.println(breedIdList);
-                    System.out.println(breedPercentList);
-                    
+                    newFormatList.add(newBreedFormat(perBreed - (perBreed - 100)));
+                    sumBreed = new BigDecimal("100");
                 }
                 else {
                     newFormatList.add(newBreedFormat(perBreed));
@@ -307,9 +329,58 @@ public class DairyDisplay extends JPanel {
 //                dataArr[1] = String.join(",", breedIdList);
 //            }
 
-            value[3] = perLeftover == 0
-                    ? String.valueOf(sumBreed)
-                    : sumBreed + "+" + perLeftover;
+            double sum = 0;
+            for (String per : newFormatList){
+                sum += calNewBreedFormat(per);
+            }
+            if (sum < 100 && !newFormatList.isEmpty()){
+                int index = 0;
+                for (String breed : breedIdList){
+                    if (breed.equals("20")){
+                        break;
+                    }
+                    index++;
+                }
+                if (index == breedIdList.size()){
+                    newFormatList.add(newBreedFormat(100 - sum));
+                    breedIdList.add("20");
+                    dataArr[0] = String.join(",", breedIdList);
+                }
+                else{
+                    double breedNA = calNewBreedFormat(newFormatList.get(index));
+                    newFormatList.set(index, newBreedFormat(100 - sum + breedNA));
+                }
+                dataArr[2] = String.join(",", newFormatList);
+                sum = 0;
+                for (String per : newFormatList){
+                    sum += calNewBreedFormat(per);
+                }
+            }
+            else if (sum > 100 && sum <= 101.0 && !newFormatList.isEmpty()){
+//                System.out.println(sum);
+                int index = 0;
+                for (String breed : breedIdList){
+                    if (breed.equals("20")){
+                        break;
+                    }
+                    index++;
+                }
+                if (index == breedIdList.size()){//not found NA
+                    double breedLast = calNewBreedFormat(newFormatList.get(index-1));
+                    newFormatList.set(index-1, newBreedFormat(breedLast - (sum - 100)));
+                }
+                else {
+                    System.out.println(newFormatList);
+                    double breedNA = calNewBreedFormat(newFormatList.get(index));
+                    newFormatList.set(index, newBreedFormat(breedNA - (sum - 100)));
+                }
+                dataArr[2] = String.join(",", newFormatList);
+                sum = 0;
+                for (String per : newFormatList){
+                    sum += calNewBreedFormat(per);
+                }
+            }
+            value[3] = String.valueOf(sum);
 
             value[4] = isCorrectBreed(dataArr[0], dataArr[2])
                     ? dataArr[0] + ":" + dataArr[2] : "";
@@ -356,6 +427,14 @@ public class DairyDisplay extends JPanel {
             return num + re / di;
         }
         return Double.parseDouble(percent);
+    }
+
+    private double calNewBreedFormat(String newFormat)  {
+        String [] split1 = newFormat.split("\\+");
+        String [] split2 = split1[1].split("/");
+        return  Double.parseDouble(split1[0])
+                + Double.parseDouble(split2[0])
+                / Double.parseDouble(split2[1]);
     }
 
     private long gcd(long a, long b){
