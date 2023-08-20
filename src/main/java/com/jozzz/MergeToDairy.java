@@ -212,9 +212,9 @@ public class MergeToDairy {
     }
 
     private static void closeDatabaseConnection() throws SQLException{
-        System.out.println("Closing database connection...");
+//        System.out.println("Closing database connection...");
         connection.close();
-        System.out.println("Connection valid : "+connection.isValid(5));
+//        System.out.println("Connection valid : "+connection.isValid(5));
     }
 
 }
