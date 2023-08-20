@@ -10,12 +10,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="62bd48ef-414f-4f9f-8bde-acfffa3c54fc" name="Changes" comment="Add NA breed and new format for once percent breed">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/MergeToDairy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/regex.properties" beforeDir="false" afterPath="$PROJECT_DIR$/regex.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jozzz/constant/CompName.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/constant/CompName.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jozzz/gui/DairyDisplay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/gui/DairyDisplay.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/jozzz/constant/CompName.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/jozzz/constant/CompName.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/jozzz/gui/DairyDisplay.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/jozzz/gui/DairyDisplay.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CowSimulator.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jozzz/util/RunDB.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/jozzz/util/RunDB.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,6 +32,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
@@ -39,16 +45,13 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="MavenImportPreferences">
-    <option name="generalSettings">
-      <MavenGeneralSettings>
-        <option name="useMavenConfig" value="true" />
-      </MavenGeneralSettings>
-    </option>
-  </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": -1
+}]]></component>
   <component name="ProjectId" id="2PTMqxckZjki53NcCsw1e6d4LV3" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -61,7 +64,7 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;jozzz&quot;,
-    &quot;last_opened_file_path&quot;: &quot;F:/GitHub/Projects/zyntelligent-tech/dairy-api&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Coding/Github/FarmDatabaseRepository&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -94,7 +97,7 @@
       <recent name="com.jozzz.gui" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="Application.MergeToDairy">
     <configuration name="DairyBreedFilter" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.jozzz.cow_format.DairyBreedFilter" />
       <module name="CowSimulator" />
@@ -121,6 +124,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="MergeToDairy" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.jozzz.MergeToDairy" />
+      <module name="CowSimulator" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.jozzz.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="com.jozzz.Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.jozzz.Main" />
       <module name="CowSimulator" />
@@ -136,6 +152,8 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.MergeToDairy" />
+        <item itemvalue="Application.com.jozzz.Main" />
         <item itemvalue="Application.Main" />
         <item itemvalue="Application.DairyBreedFilter" />
       </list>
@@ -178,6 +196,10 @@
       <workItem from="1690908152234" duration="10014000" />
       <workItem from="1690963148804" duration="9587000" />
       <workItem from="1691061179422" duration="103000" />
+      <workItem from="1692001183865" duration="1302000" />
+      <workItem from="1692437327831" duration="3479000" />
+      <workItem from="1692465479674" duration="657000" />
+      <workItem from="1692496918644" duration="20441000" />
     </task>
     <task id="LOCAL-00001" summary="Cows Tree Hotfix">
       <created>1683499602005</created>
