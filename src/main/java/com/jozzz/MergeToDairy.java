@@ -11,25 +11,28 @@ public class MergeToDairy {
 
     private static Connection connection;
     String dairyApiRegisterUrl = "http://192.168.182.244:8083/register/add";
-    String [] dipAndDairyDataBase = {"jdbc:mariadb://localhost:3306/dip_dairy", "root",""};
-    String [] dairyDataBase = {"jdbc:mariadb://localhost:3306/zyanwoadev_test","root",""};
+    String [] dipDataBase = {"jdbc:mariadb://54.251.168.197:6667/farmdb", "summer2023","Summ3r!@MISL$$23"};
+    String [] dairyDataBase = {"jdbc:mariadb://54.251.168.197:6667/zyanwoadev_test","summer2023","Summ3r!@MISL$$23"};
     public static void main(String[]args) throws SQLException {
         new MergeToDairy();
     }
 
-    public MergeToDairy() throws SQLException {
+    public MergeToDairy() {
         ArrayList<String[]> allDIPMember = getAllDIPMember();
-        ArrayList<String[]> allDIPSameEmail = getAllDIPDairySameEmail();
+        ArrayList<String[]> allDairyMember = getAllDairyMember();
         ArrayList<String[]> allDIPSameDairy  = new ArrayList<>();
 
-        for(String [] sameFarmer : allDIPSameEmail){
-            for (String[] farmer : allDIPMember){
-                if (Arrays.equals(sameFarmer, farmer)){
-                    allDIPSameDairy.add(farmer);
-                    break;
+        for(String [] dipMember : allDIPMember ){
+            for (String[] dairyMember : allDairyMember){
+                if (dairyMember[4] == null){
+                    continue;
+                }
+                if (dairyMember[4].trim().equalsIgnoreCase("dpo"+dipMember[1]+"@zyanwoa.com")){
+                    allDIPSameDairy.add(dipMember);
                 }
             }
         }
+
         //Remove same data Dip and dairy from allDipMember
         allDIPMember.removeAll(allDIPSameDairy);
         int count = 1;
@@ -96,9 +99,9 @@ public class MergeToDairy {
     public ArrayList<String[]> getAllDIPMember(){
         ArrayList<String[]> dataList = new ArrayList<>();
         try {
-            openDIPDairyConnection();
+            openDIPConnection();
             try(PreparedStatement statement = connection.prepareStatement(
-                    "SELECT farmer.* FROM farmer")){
+                    "SELECT * FROM farmer")){
                 ResultSet resultSet = statement.executeQuery();
                 int column = statement.getMetaData().getColumnCount();
                 while (resultSet.next()){
@@ -116,10 +119,11 @@ public class MergeToDairy {
         return dataList;
     }
 
+
     public ArrayList<String[]> getAllDIPDairySameEmail(){
         ArrayList<String[]> dataList = new ArrayList<>();
         try {
-            openDIPDairyConnection();
+            openDIPConnection();
             try(PreparedStatement statement = connection.prepareStatement(
                     "SELECT farmer.*" +
                             "FROM tb_member, farmer\n" +
@@ -144,9 +148,9 @@ public class MergeToDairy {
     public ArrayList<String[]> getAllDairyMember(){
         ArrayList<String[]> dataList = new ArrayList<>();
         try {
-            openDIPDairyConnection();
+            openDairyConnection();
             try(PreparedStatement statement = connection.prepareStatement(
-                    "SELECT tb_member.* FROM tb_member")){
+                    "SELECT * FROM tb_member")){
                 ResultSet resultSet = statement.executeQuery();
                 int column = statement.getMetaData().getColumnCount();
                 while (resultSet.next()){
@@ -167,7 +171,7 @@ public class MergeToDairy {
     public ArrayList<String[]> getAllDairySameEmail(){
         ArrayList<String[]> dataList = new ArrayList<>();
         try {
-            openDIPDairyConnection();
+            openDIPConnection();
             try(PreparedStatement statement = connection.prepareStatement(
                     "SELECT tb_member.*\n" +
                             "FROM tb_member, farmer\n" +
@@ -191,11 +195,11 @@ public class MergeToDairy {
 
 
 
-    private void openDIPDairyConnection() throws SQLException {
+    private void openDIPConnection() throws SQLException {
         connection = DriverManager.getConnection(
-                dipAndDairyDataBase[0],
-                dipAndDairyDataBase[1],
-                dipAndDairyDataBase[2]
+                dipDataBase[0],
+                dipDataBase[1],
+                dipDataBase[2]
         );
     }
 

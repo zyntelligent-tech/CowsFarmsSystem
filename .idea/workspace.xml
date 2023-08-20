@@ -9,14 +9,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="62bd48ef-414f-4f9f-8bde-acfffa3c54fc" name="Changes" comment="Add NA breed and new format for once percent breed">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/MergeToDairy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+    <list default="true" id="62bd48ef-414f-4f9f-8bde-acfffa3c54fc" name="Changes" comment="Add merge dip to dairy">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CowSimulator.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/jozzz/util/RunDB.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/jozzz/util/RunDB.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jozzz/MergeToDairy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jozzz/MergeToDairy.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,6 +33,20 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "JOZZZEP"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="4ae61c2b-eef5-418d-9ae0-caa9803d9e2c" />
+        <option name="url" value="https://github.com/JOZZZEP/CowsFarmsSystem.git" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/main/java/com/jozzz/util/RunDB.java" root0="SKIP_INSPECTION" />
@@ -199,7 +208,7 @@
       <workItem from="1692001183865" duration="1302000" />
       <workItem from="1692437327831" duration="3479000" />
       <workItem from="1692465479674" duration="657000" />
-      <workItem from="1692496918644" duration="20441000" />
+      <workItem from="1692496918644" duration="33434000" />
     </task>
     <task id="LOCAL-00001" summary="Cows Tree Hotfix">
       <created>1683499602005</created>
@@ -327,7 +336,15 @@
       <option name="project" value="LOCAL" />
       <updated>1688281425463</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Add merge dip to dairy">
+      <option name="closed" value="true" />
+      <created>1692527636498</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1692527636498</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -361,7 +378,8 @@
     <MESSAGE value="Add Colors in Dip Dairy Merger Table" />
     <MESSAGE value="Add breed_id_string column and spilt breed string algorithm" />
     <MESSAGE value="Add calculate breed algorithm" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add calculate breed algorithm" />
+    <MESSAGE value="Add merge dip to dairy" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add merge dip to dairy" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
