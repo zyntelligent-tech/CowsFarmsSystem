@@ -10,17 +10,26 @@ import java.util.Arrays;
 public class MergeToDairy {
 
     private static Connection connection;
-    String dairyApiRegisterUrl = "http://192.168.182.244:8083/register/add";
-    String [] dipDataBase = {"jdbc:mariadb://54.251.168.197:6667/farmdb", "summer2023","Summ3r!@MISL$$23"};
-    String [] dairyDataBase = {"jdbc:mariadb://54.251.168.197:6667/zyanwoadev_test","summer2023","Summ3r!@MISL$$23"};
+    String dairyApiRegisterUrl = "http://192.168.130.170:8083/register/add";
+//    String [] dipDataBase = {"jdbc:mariadb://54.251.168.197:6667/farmdb", "summer2023","Summ3r!@MISL$$23"};
+//    String [] dairyDataBase = {"jdbc:mariadb://54.251.168.197:6667/zyanwoadev_test","summer2023","Summ3r!@MISL$$23"};
+
+    String [] dipDataBase = {"jdbc:mariadb://localhost:3306/dip_dairy", "root",""};
+    String [] dairyDataBase = {"jdbc:mariadb://localhost:3306/dip_dairy", "root",""};
     public static void main(String[]args) throws SQLException {
         new MergeToDairy();
     }
 
     public MergeToDairy() {
         ArrayList<String[]> allDIPMember = getAllDIPMember();
+        ArrayList<String[]> allDIPCow = getAllDIPCow();
         ArrayList<String[]> allDairyMember = getAllDairyMember();
         ArrayList<String[]> allDIPSameDairy  = new ArrayList<>();
+        ArrayList<String[]> allDairySameDIP  = new ArrayList<>();
+        ArrayList<String[]> allDIPCowNotIn  = new ArrayList<>();
+        ArrayList<String[]> allDIPCowIn  = new ArrayList<>();
+
+        System.out.println(allDIPCow.size());
 
         for(String [] dipMember : allDIPMember ){
             for (String[] dairyMember : allDairyMember){
@@ -29,14 +38,40 @@ public class MergeToDairy {
                 }
                 if (dairyMember[4].trim().equalsIgnoreCase("dpo"+dipMember[1]+"@zyanwoa.com")){
                     allDIPSameDairy.add(dipMember);
+                    allDairySameDIP.add(dairyMember);
                 }
             }
         }
 
         //Remove same data Dip and dairy from allDipMember
+        System.out.println(allDairySameDIP.size());
         allDIPMember.removeAll(allDIPSameDairy);
-        int count = 1;
-        //insert dip member to dairy
+        System.out.println(allDIPMember.size());
+
+//        for (String [] cow : allDIPCow){
+//            for (String[] farmer : allDIPMember){
+//                if (cow[0].equals(farmer[1])){
+//                    allDIPCowNotIn.add(cow);
+//                }
+//            }
+//        }
+//        System.out.println(allDIPCowNotIn.size());
+//
+//        for (String [] cow : allDIPCow){
+//            for (String[] farmer : allDIPSameDairy){
+//                if (cow[0].equals(farmer[1])){
+//                    allDIPCowIn.add(cow);
+//                }
+//            }
+//        }
+//        System.out.println(allDIPCowIn.size());
+//        System.out.println(allDIPCow.size());
+//        allDIPCow.removeAll(allDIPCowNotIn);
+//        allDIPCow.removeAll(allDIPCowIn);
+//        System.out.println(Arrays.toString(allDIPCow.get(0)));
+
+        int count = 0;
+//        insert dip member to dairy
         for (String[] farmer : allDIPMember){
             System.out.print(count+" ");
             regMember(farmer);
@@ -77,7 +112,7 @@ public class MergeToDairy {
         regPayload.setMemberName(payload[3]);
         regPayload.setMemberSurname(payload[4]);
         regPayload.setMemberTel("");
-        regPayload.setEmail("dpoTest"+ payload[1] +"@zyanwoa.com");
+        regPayload.setEmail("dpo"+ payload[1] +"@zyanwoa.com");
         regPayload.setPassword("123456");
 
         String addr = !payload[6].isEmpty() ? payload[6]+" " : "";
@@ -119,6 +154,28 @@ public class MergeToDairy {
         return dataList;
     }
 
+    public ArrayList<String[]> getAllDIPCow(){
+        ArrayList<String[]> dataList = new ArrayList<>();
+        try {
+            openDIPConnection();
+            try(PreparedStatement statement = connection.prepareStatement(
+                    "SELECT * FROM cow")){
+                ResultSet resultSet = statement.executeQuery();
+                int column = statement.getMetaData().getColumnCount();
+                while (resultSet.next()){
+                    String[] data = new String[column];
+                    for (int i=1;i <= column;i++){
+                        data[i-1] = resultSet.getString(i);
+                    }
+                    dataList.add(data);
+                }
+            }
+            closeDatabaseConnection();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return dataList;
+    }
 
     public ArrayList<String[]> getAllDIPDairySameEmail(){
         ArrayList<String[]> dataList = new ArrayList<>();
@@ -151,6 +208,29 @@ public class MergeToDairy {
             openDairyConnection();
             try(PreparedStatement statement = connection.prepareStatement(
                     "SELECT * FROM tb_member")){
+                ResultSet resultSet = statement.executeQuery();
+                int column = statement.getMetaData().getColumnCount();
+                while (resultSet.next()){
+                    String[] data = new String[column];
+                    for (int i=1;i <= column;i++){
+                        data[i-1] = resultSet.getString(i);
+                    }
+                    dataList.add(data);
+                }
+            }
+            closeDatabaseConnection();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return dataList;
+    }
+
+    public ArrayList<String[]> getAllDairyCow(){
+        ArrayList<String[]> dataList = new ArrayList<>();
+        try {
+            openDairyConnection();
+            try(PreparedStatement statement = connection.prepareStatement(
+                    "SELECT * FROM tbd_cow")){
                 ResultSet resultSet = statement.executeQuery();
                 int column = statement.getMetaData().getColumnCount();
                 while (resultSet.next()){
