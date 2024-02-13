@@ -3,6 +3,10 @@ package com.jozzz.gui;
 import com.jozzz.Main;
 import com.jozzz.constant.CompName;
 import com.jozzz.constant.DisplayState;
+import com.jozzz.gui.dip.DIPDisplay;
+import com.jozzz.gui.dip.TableListSelect;
+import com.jozzz.gui.dip_dairy.DipDairyMergeDisplay;
+import com.jozzz.gui.dip_dairy.DairyNewFormat.DairyNewFormatDisplay;
 import com.jozzz.util.CardPage;
 import com.jozzz.util.Element;
 
@@ -14,13 +18,13 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.util.Objects;
 
-public class MainMenu extends JPanel {
+public class MainDisplay extends JPanel {
 
     private DIPDisplay dipDisplay;
-    private DairyDisplay dairyDisplay;
+    private DairyNewFormatDisplay dairyDisplay;
     private DipDairyMergeDisplay dipDairyMergeDisplay;
     private TableListSelect tableListSelect;
-    public MainMenu(){
+    public MainDisplay(){
         this.setPreferredSize(new Dimension(1366, 768));
         this.setBorder(new EmptyBorder(10,10,10,10));
         this.setLayout(new GridLayout(1, 2));
@@ -68,11 +72,11 @@ public class MainMenu extends JPanel {
         dairyPatternButton.setFont(Element.getFont(20));
         dairyPatternButton.addActionListener(event -> {
             if(dairyDisplay == null){
-                dairyDisplay = new DairyDisplay();
+                dairyDisplay = new DairyNewFormatDisplay();
             }
             else{
                 if(dairyDisplay.isPageLoading()){
-                    dairyDisplay = new DairyDisplay();
+                    dairyDisplay = new DairyNewFormatDisplay();
                 }
             }
             CardPage.addPage(dairyDisplay, DisplayState.DAIRY);

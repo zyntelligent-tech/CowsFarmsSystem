@@ -6,9 +6,25 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class RegexPattern {
 
+    public static  ArrayList<String[]> filterData(ArrayList<String[]> inputData, String pattern) {
+        ArrayList<String[]> filteredData = new ArrayList<>();
+        
+        Pattern regexPattern = Pattern.compile(pattern);
+
+        for (String[] value : inputData) {
+            Matcher matcher = regexPattern.matcher(value[1].trim());
+            if (matcher.matches()) {
+                filteredData.add(value);
+            }
+        }
+        return filteredData;
+    }
+    
     public static void setRegexProperties(){
         Properties properties = new Properties();
 
@@ -78,25 +94,48 @@ public class RegexPattern {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        
+        int countRegex = countRegexKeys(properties, "regex");
+        System.out.println(countRegex);
+        for (int i = 0; i < countRegex; i++) {
+            String key = "regex" + i; // Assuming your keys are like regex0, regex1, ...
+            String data = properties.getProperty(key);
+            
+            String[] splitValue = data.split(",");
+            String regexName = splitValue[0];
+            String regex = splitValue[1];
+            regexList.add(new String[]{regexName,regex});
+        }
 
-        regexList.add(new String[]{"Percent", properties.getProperty("Percent")});
-        regexList.add(new String[]{"Number", properties.getProperty("Number")});
-        regexList.add(new String[]{"Percent & Eng", properties.getProperty("Percent & Eng")});
-        regexList.add(new String[]{"Percent & Thai", properties.getProperty("Percent & Thai")});
-        regexList.add(new String[]{"Eng & Percent", properties.getProperty("Eng & Percent")});
-        regexList.add(new String[]{"Thai & Percent", properties.getProperty("Thai & Percent")});
-        regexList.add(new String[]{"Num & Eng", properties.getProperty("Num & Eng")});
-        regexList.add(new String[]{"Num & Thai", properties.getProperty("Num & Thai")});
-        regexList.add(new String[]{"Eng & Num", properties.getProperty("Eng & Num")});
-        regexList.add(new String[]{"Thai & Num", properties.getProperty("Thai & Num")});
-        regexList.add(new String[]{"Eng Multi", properties.getProperty("Eng Multi")});
-        regexList.add(new String[]{"Thai Multi", properties.getProperty("Thai Multi")});
-        regexList.add(new String[]{"Comma", properties.getProperty("Comma")});
-        regexList.add(new String[]{"Plus", properties.getProperty("Plus")});
-        regexList.add(new String[]{"Letter & Num Multi", properties.getProperty("Letter & Num Multi")});
-        regexList.add(new String[]{"Letter", properties.getProperty("Letter")});
-        regexList.add(new String[]{"Thai Per Eng", properties.getProperty("Thai Per Eng")});
+        
+        // regexList.add(new String[]{"Number", properties.getProperty("Number")});
+        // regexList.add(new String[]{"Percent & Eng", properties.getProperty("Percent & Eng")});
+        // regexList.add(new String[]{"Percent & Thai", properties.getProperty("Percent & Thai")});
+        // regexList.add(new String[]{"Eng & Percent", properties.getProperty("Eng & Percent")});
+        // regexList.add(new String[]{"Thai & Percent", properties.getProperty("Thai & Percent")});
+        // regexList.add(new String[]{"Num & Eng", properties.getProperty("Num & Eng")});
+        // regexList.add(new String[]{"Num & Thai", properties.getProperty("Num & Thai")});
+        // regexList.add(new String[]{"Eng & Num", properties.getProperty("Eng & Num")});
+        // regexList.add(new String[]{"Thai & Num", properties.getProperty("Thai & Num")});
+        // regexList.add(new String[]{"Eng Multi", properties.getProperty("Eng Multi")});
+        // regexList.add(new String[]{"Thai Multi", properties.getProperty("Thai Multi")});
+        // regexList.add(new String[]{"Comma", properties.getProperty("Comma")});
+        // regexList.add(new String[]{"Plus", properties.getProperty("Plus")});
+        // regexList.add(new String[]{"Letter & Num Multi", properties.getProperty("Letter & Num Multi")});
+        // regexList.add(new String[]{"Letter", properties.getProperty("Letter")});
+        // regexList.add(new String[]{"Thai Per Eng", properties.getProperty("Thai Per Eng")});
 
         return regexList;
+    }
+
+    private static int countRegexKeys(Properties properties , String prefix){
+        int count = 0;
+        for (String key : properties.stringPropertyNames()) {
+            if (key.startsWith(prefix)) {
+                count++;
+            }
+        }
+
+        return count;
     }
 }

@@ -1,4 +1,4 @@
-package com.jozzz.gui;
+package com.jozzz.gui.dip.component;
 
 import com.jozzz.constant.DisplayState;
 import com.jozzz.util.Dialog;
@@ -24,6 +24,7 @@ public class CowDetail extends JPanel{
     private ArrayList<String[]> cowParent;
 
     public CowDetail(String cowCode){
+        
         this.cowCode = cowCode;
         this.setLayout(new BorderLayout());
 

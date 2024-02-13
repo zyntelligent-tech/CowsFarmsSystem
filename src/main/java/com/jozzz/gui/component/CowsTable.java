@@ -1,6 +1,7 @@
-package com.jozzz.gui;
+package com.jozzz.gui.component;
 
 import com.jozzz.constant.DisplayState;
+import com.jozzz.gui.dip.component.CowDetail;
 import com.jozzz.util.CardPage;
 import com.jozzz.util.CustomTable;
 import com.jozzz.util.Element;
@@ -24,6 +25,8 @@ public class CowsTable extends JPanel {
     private final String[] dipColumn = { "dpo_mem_id"};
     private final String[] dairyColumn = { "zyan_code", "zyan_mem_id", "zyan_center", "zyan_farm_id", "zyan_farm_name"};
 
+    private final String[] dairyDisplayBISColumn = { "breed_id_string"  };
+    private final String[] dairyDisplayNewBISColumn = { "new_breed_id_string"};
 
     public CowsTable(ArrayList<String[]> allData, String[] columnNames, boolean isViewDetail){
         this.allData = allData;
@@ -49,6 +52,10 @@ public class CowsTable extends JPanel {
                 table.getColumnModel().getColumn(i).setCellRenderer(new CustomTable(Color.BLUE));
             } else if (contains(dairyColumn, columnName)) {
                 table.getColumnModel().getColumn(i).setCellRenderer(new CustomTable(Color.MAGENTA));
+            } else if (contains(dairyDisplayBISColumn , columnName)){
+                table.getColumnModel().getColumn(i).setCellRenderer(new CustomTable(new Color(255,179,0)));
+            } else if (contains(dairyDisplayNewBISColumn , columnName)){
+                table.getColumnModel().getColumn(i).setCellRenderer(new CustomTable(new Color(255,65,65)));
             }
         }
         table.setFont(Element.getFont(15));

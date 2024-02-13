@@ -1,6 +1,7 @@
-package com.jozzz.gui;
+package com.jozzz.gui.dip_dairy;
 
 import com.jozzz.constant.DisplayState;
+import com.jozzz.gui.component.CowsTable;
 import com.jozzz.util.Dialog;
 import com.jozzz.util.*;
 

@@ -2,7 +2,7 @@ package com.jozzz;
 
 import com.jozzz.constant.CompName;
 import com.jozzz.constant.DisplayState;
-import com.jozzz.gui.MainMenu;
+import com.jozzz.gui.MainDisplay;
 import com.jozzz.util.CardPage;
 
 import javax.swing.*;
@@ -25,7 +25,7 @@ public class Main {
 
                 display = new JPanel();
                 display.setLayout(CardPage.getCardLayout());
-                display.add(new MainMenu(), DisplayState.MAIN_MENU);
+                display.add(new MainDisplay(), DisplayState.MAIN_MENU);
 
                 frame.add(display);
 
