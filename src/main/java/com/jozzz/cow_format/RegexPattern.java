@@ -13,11 +13,13 @@ public class RegexPattern {
 
     public static  ArrayList<String[]> filterData(ArrayList<String[]> inputData, String pattern) {
         ArrayList<String[]> filteredData = new ArrayList<>();
-        
+        System.out.println(inputData.size());
+        System.out.println(pattern);
         Pattern regexPattern = Pattern.compile(pattern);
 
         for (String[] value : inputData) {
-            Matcher matcher = regexPattern.matcher(value[1].trim());
+            
+            Matcher matcher = regexPattern.matcher(value[6].trim());
             if (matcher.matches()) {
                 filteredData.add(value);
             }
@@ -101,7 +103,7 @@ public class RegexPattern {
             String key = "regex" + i; // Assuming your keys are like regex0, regex1, ...
             String data = properties.getProperty(key);
             
-            String[] splitValue = data.split(",");
+            String[] splitValue = data.split("=");
             String regexName = splitValue[0];
             String regex = splitValue[1];
             regexList.add(new String[]{regexName,regex});

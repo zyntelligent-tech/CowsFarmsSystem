@@ -478,9 +478,9 @@ public class RunDB {
                         data[i-2] = resultSet.getString(i-1);
                     }
                     dataList.add(data);
-                    if(count == 1000){
-                        break;
-                    }
+                    // if(count == 50000){
+                    //     break;
+                    // }
                     count++;
                 }
             }

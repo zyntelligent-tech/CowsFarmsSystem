@@ -68,218 +68,218 @@ public class OldBreedIdString {
             int comparisonResult = sumBreed.compareTo(new BigDecimal("100"));
             int count = 0;
             boolean is96 = false;
-//             if (breedPercentList.size() > 1){
-//                 double perBreed = 0; 
-//                 for(int i = 0 ; i < breedPercentList.size() ; i++){
-//                     perBreed = perBreed + decimalBreed(breedPercentList.get(i));
-//                 }
-//                 if (comparisonResult < 0){ // less than 100
-//                     for(String percent : breedPercentList){{
-//                         if(percent.equals("0")){
-//                             count ++;
-//                         }
-//                     }}
-//                     if(count == 0){
-//                         int i = 0;
-//                         perLeftover = 100.0 - perBreed;
-//                         for(String id : breedIdList){
-//                             if(id.equals("20")){
-//                                 break;
-//                             }   
-//                             i++;
-//                         } 
-//                         if(i == breedIdList.size()){
-//                             breedIdList.add("20");
-//                             breedPercentList.add(Double.toString(perLeftover));
-//                         }else{
-//                             breedPercentList.set(i, Double.toString(perLeftover + Double.parseDouble(breedPercentList.get(i))));
-// //                            System.out.println(breedPercentList);
-//                         }
-//                     }else{
-//                         perLeftover = 100.0 - perBreed;
-//                         double resultDiv = perLeftover / count;
-//                         int i = 0;
-//                         if(Double.toString(resultDiv).contains(".")){
-//                             if(Double.toString(resultDiv).split("\\.")[1].length() > 3){
-//                                 resultDiv = perLeftover / (count + 1);
-//                                 if(Double.toString(resultDiv).split("\\.")[1].length() > 3){   
-//                                     for(String id : breedIdList){
-//                                         if(id.equals("20")){
-//                                             break;
-//                                         }   
-//                                         i++;
-//                                     }     
-//                                     if(i == breedIdList.size()){
-//                                         double mod = perLeftover % 6;
-//                                         if(perLeftover > 3){
-//                                             mod = perLeftover % 3;
-//                                             perLeftover = perLeftover - mod;
-//                                             breedIdList.add("20");
-//                                             breedPercentList.add(Double.toString(mod));
-//                                         }else{
-//                                             mod = 3 - perLeftover;
-//                                             perLeftover = perLeftover + mod;
-//                                             breedPercentList.set(0, Double.toString(Double.parseDouble(breedPercentList.get(0)) - mod));
-//                                         }
-//                                         resultDiv = perLeftover / count ;
-//                                         for(String percent : breedPercentList){
-//                                             if(percent.equals("0")){
-//                                                 breedPercentList.set(i, Double.toString(resultDiv));
-//                                             }
-//                                             i++;
-//                                         }     
-//                                     }else{
-//                                         breedPercentList.set(i,Integer.toString(Integer.parseInt(breedPercentList.get(i)) + 1));
-//                                         resultDiv = (perLeftover - 1) / (count - 1);
+            if (breedPercentList.size() > 1){
+                double perBreed = 0; 
+                for(int i = 0 ; i < breedPercentList.size() ; i++){
+                    perBreed = perBreed + decimalBreed(breedPercentList.get(i));
+                }
+                if (comparisonResult < 0){ // less than 100
+                    for(String percent : breedPercentList){{
+                        if(percent.equals("0")){
+                            count ++;
+                        }
+                    }}
+                    if(count == 0){
+                        int i = 0;
+                        perLeftover = 100.0 - perBreed;
+                        for(String id : breedIdList){
+                            if(id.equals("20")){
+                                break;
+                            }   
+                            i++;
+                        } 
+                        if(i == breedIdList.size()){
+                            breedIdList.add("20");
+                            breedPercentList.add(Double.toString(perLeftover));
+                        }else{
+                            breedPercentList.set(i, Double.toString(perLeftover + Double.parseDouble(breedPercentList.get(i))));
+//                            System.out.println(breedPercentList);
+                        }
+                    }else{
+                        perLeftover = 100.0 - perBreed;
+                        double resultDiv = perLeftover / count;
+                        int i = 0;
+                        if(Double.toString(resultDiv).contains(".")){
+                            if(Double.toString(resultDiv).split("\\.")[1].length() > 3){
+                                resultDiv = perLeftover / (count + 1);
+                                if(Double.toString(resultDiv).split("\\.")[1].length() > 3){   
+                                    for(String id : breedIdList){
+                                        if(id.equals("20")){
+                                            break;
+                                        }   
+                                        i++;
+                                    }     
+                                    if(i == breedIdList.size()){
+                                        double mod = perLeftover % 6;
+                                        if(perLeftover > 3){
+                                            mod = perLeftover % 3;
+                                            perLeftover = perLeftover - mod;
+                                            breedIdList.add("20");
+                                            breedPercentList.add(Double.toString(mod));
+                                        }else{
+                                            mod = 3 - perLeftover;
+                                            perLeftover = perLeftover + mod;
+                                            breedPercentList.set(0, Double.toString(Double.parseDouble(breedPercentList.get(0)) - mod));
+                                        }
+                                        resultDiv = perLeftover / count ;
+                                        for(String percent : breedPercentList){
+                                            if(percent.equals("0")){
+                                                breedPercentList.set(i, Double.toString(resultDiv));
+                                            }
+                                            i++;
+                                        }     
+                                    }else{
+                                        breedPercentList.set(i,Integer.toString(Integer.parseInt(breedPercentList.get(i)) + 1));
+                                        resultDiv = (perLeftover - 1) / (count - 1);
 
-//                                     }
-//                                     i = 0;
-//                                     for(String percent : breedPercentList){
-//                                         if(percent.equals("0")){
-//                                             breedPercentList.set(i, Double.toString(resultDiv));
-//                                         }
-//                                         i++;
-//                                     }
-//                                     is96 = true;
-//                                 }else{
-//                                     for(String percent : breedPercentList){
-//                                         if(i == 0){
-//                                             breedPercentList.set(i ,Double.toString(Double.parseDouble(breedPercentList.get(i)) + resultDiv));
-//                                         }
-//                                         if(percent.equals("0")){
-//                                             breedPercentList.set(i, Double.toString(resultDiv));
-//                                         }
-//                                         i++;
-//                                     }  
-//                                 }
-//                             }else{
-//                                 for(String percent : breedPercentList){
-//                                     if(percent.equals("0")){
-//                                         breedPercentList.set(i, Double.toString(resultDiv));
-//                                     }
-//                                     i++;
-//                                 }
-//                             }
-//                         }
-//                     }
-//                     sumBreed = BigDecimal.ZERO;
-//                     for(String percent : breedPercentList){
+                                    }
+                                    i = 0;
+                                    for(String percent : breedPercentList){
+                                        if(percent.equals("0")){
+                                            breedPercentList.set(i, Double.toString(resultDiv));
+                                        }
+                                        i++;
+                                    }
+                                    is96 = true;
+                                }else{
+                                    for(String percent : breedPercentList){
+                                        if(i == 0){
+                                            breedPercentList.set(i ,Double.toString(Double.parseDouble(breedPercentList.get(i)) + resultDiv));
+                                        }
+                                        if(percent.equals("0")){
+                                            breedPercentList.set(i, Double.toString(resultDiv));
+                                        }
+                                        i++;
+                                    }  
+                                }
+                            }else{
+                                for(String percent : breedPercentList){
+                                    if(percent.equals("0")){
+                                        breedPercentList.set(i, Double.toString(resultDiv));
+                                    }
+                                    i++;
+                                }
+                            }
+                        }
+                    }
+                    sumBreed = BigDecimal.ZERO;
+                    for(String percent : breedPercentList){
 
-//                         newFormatList.add(newBreedFormat(Double.parseDouble(percent)));
-//                         sumBreed = sumBreed.add(new BigDecimal(percent));
-//                     }
-// //                    if(is96){
-// ////                        System.out.println(breedIdList);
-// ////                        System.out.println(breedPercentList);
-// //                        System.out.println(newFormatList);
-// //                    }
-//                 }
-//                 else if (comparisonResult > 0){ // greater than 100
-//                     for(String percent : breedPercentList){
-//                         newFormatList.add(newBreedFormat(Double.parseDouble(percent)));
-//                     }
-//                 }
-//                 else{
-//                     for(String percent : breedPercentList){
-//                         newFormatList.add(newBreedFormat(Double.parseDouble(percent)));
-//                     }
-//                 }
-//             }
-//             else if (breedPercentList.size() == 1){
-//                 double perBreed = decimalBreed(breedPercentList.get(0));
-//                 if (comparisonResult < 0){ // less than 100
-//                     breedIdList.add(findBreedId("NA"));
-//                     perLeftover = 100.0 - perBreed;
-//                     sumBreed = BigDecimal.valueOf(perBreed);
-//                     newFormatList.add(newBreedFormat(perBreed));
-//                     newFormatList.add(newBreedFormat(perLeftover));
-//                     breedPercentList.add(String.valueOf(perLeftover));
-//                     sumBreed = sumBreed.add(new BigDecimal(perLeftover));
-//                 }
-//                 else if (comparisonResult > 0){ // greater than 100
-//                     newFormatList.add(newBreedFormat(perBreed - (perBreed - 100)));
-//                     sumBreed = new BigDecimal("100");
-//                 }
-//                 else {
-//                     newFormatList.add(newBreedFormat(perBreed));
-//                 }
-//             }
+                        newFormatList.add(newBreedFormat(Double.parseDouble(percent)));
+                        sumBreed = sumBreed.add(new BigDecimal(percent));
+                    }
+//                    if(is96){
+////                        System.out.println(breedIdList);
+////                        System.out.println(breedPercentList);
+//                        System.out.println(newFormatList);
+//                    }
+                }
+                else if (comparisonResult > 0){ // greater than 100
+                    for(String percent : breedPercentList){
+                        newFormatList.add(newBreedFormat(Double.parseDouble(percent)));
+                    }
+                }
+                else{
+                    for(String percent : breedPercentList){
+                        newFormatList.add(newBreedFormat(Double.parseDouble(percent)));
+                    }
+                }
+            }
+            else if (breedPercentList.size() == 1){
+                double perBreed = decimalBreed(breedPercentList.get(0));
+                if (comparisonResult < 0){ // less than 100
+                    breedIdList.add(findBreedId("NA"));
+                    perLeftover = 100.0 - perBreed;
+                    sumBreed = BigDecimal.valueOf(perBreed);
+                    newFormatList.add(newBreedFormat(perBreed));
+                    newFormatList.add(newBreedFormat(perLeftover));
+                    breedPercentList.add(String.valueOf(perLeftover));
+                    sumBreed = sumBreed.add(new BigDecimal(perLeftover));
+                }
+                else if (comparisonResult > 0){ // greater than 100
+                    newFormatList.add(newBreedFormat(perBreed - (perBreed - 100)));
+                    sumBreed = new BigDecimal("100");
+                }
+                else {
+                    newFormatList.add(newBreedFormat(perBreed));
+                }
+            }
 
             dataArr[0] = String.join(",", breedIdList);
             dataArr[2] = String.join(",", newFormatList);
 
-//            if (breedIdList.size() > 1 && comparisonResult > 0){
-//                breedIdList = new ArrayList<>();
-//                sumBreed = BigDecimal.ZERO;
-//                for (String percentBreed : dataArr[1].split(",")){
-//                    double result = Double.parseDouble(percentBreed);
-//                    if (percentBreed.contains(".")){
-//                        result = Double.parseDouble(percentBreed.split("\\.")[0])
-//                                + Math.round(Double.parseDouble("0."+percentBreed.split("\\.")[1])
-//                                * divisorBreed)
-//                                / divisorBreed;
-//                    }
-//                    sumBreed = sumBreed.add(new BigDecimal(result));
-//                    breedIdList.add(String.valueOf(result));
-//                }
-//                dataArr[1] = String.join(",", breedIdList);
-//            }
+           if (breedIdList.size() > 1 && comparisonResult > 0){
+               breedIdList = new ArrayList<>();
+               sumBreed = BigDecimal.ZERO;
+               for (String percentBreed : dataArr[1].split(",")){
+                   double result = Double.parseDouble(percentBreed);
+                   if (percentBreed.contains(".")){
+                       result = Double.parseDouble(percentBreed.split("\\.")[0])
+                               + Math.round(Double.parseDouble("0."+percentBreed.split("\\.")[1])
+                               * divisorBreed)
+                               / divisorBreed;
+                   }
+                   sumBreed = sumBreed.add(new BigDecimal(result));
+                   breedIdList.add(String.valueOf(result));
+               }
+               dataArr[1] = String.join(",", breedIdList);
+           }
 
-//             double sum = 0;
-//             for (String per : newFormatList){
-//                 sum += calNewBreedFormat(per);
-//             }
-//             if (sum < 100 && !newFormatList.isEmpty()){
-//                 int index = 0;
-//                 for (String breed : breedIdList){
-//                     if (breed.equals("20")){
-//                         break;
-//                     }
-//                     index++;
-//                 }
-//                 if (index == breedIdList.size()){
-//                     newFormatList.add(newBreedFormat(100 - sum));
-//                     breedIdList.add("20");
-//                     dataArr[0] = String.join(",", breedIdList);
-//                 }
-//                 else{
-//                     double breedNA = calNewBreedFormat(newFormatList.get(index));
-//                     newFormatList.set(index, newBreedFormat(100 - sum + breedNA));
-//                 }
-//                 dataArr[2] = String.join(",", newFormatList);
-//                 sum = 0;
-//                 for (String per : newFormatList){
-//                     sum += calNewBreedFormat(per);
-//                 }
-//             }
-//             else if (sum > 100 && sum <= 101.0 && !newFormatList.isEmpty()){
-// //                System.out.println(sum);
-//                 int index = 0;
-//                 for (String breed : breedIdList){
-//                     if (breed.equals("20")){
-//                         break;
-//                     }
-//                     index++;
-//                 }
-//                 if (index == breedIdList.size()){//not found NA
-//                     double breedLast = calNewBreedFormat(newFormatList.get(index-1));
-//                     newFormatList.set(index-1, newBreedFormat(breedLast - (sum - 100)));
-//                 }
-//                 else {
-//                     System.out.println(newFormatList);
-//                     double breedNA = calNewBreedFormat(newFormatList.get(index));
-//                     newFormatList.set(index, newBreedFormat(breedNA - (sum - 100)));
-//                 }
-//                 dataArr[2] = String.join(",", newFormatList);
-//                 sum = 0;
-//                 for (String per : newFormatList){
-//                     sum += calNewBreedFormat(per);
-//                 }
-//             }
-//             value[9] = String.valueOf(sum);
+            double sum = 0;
+            for (String per : newFormatList){
+                sum += calNewBreedFormat(per);
+            }
+            if (sum < 100 && !newFormatList.isEmpty()){
+                int index = 0;
+                for (String breed : breedIdList){
+                    if (breed.equals("20")){
+                        break;
+                    }
+                    index++;
+                }
+                if (index == breedIdList.size()){
+                    newFormatList.add(newBreedFormat(100 - sum));
+                    breedIdList.add("20");
+                    dataArr[0] = String.join(",", breedIdList);
+                }
+                else{
+                    double breedNA = calNewBreedFormat(newFormatList.get(index));
+                    newFormatList.set(index, newBreedFormat(100 - sum + breedNA));
+                }
+                dataArr[2] = String.join(",", newFormatList);
+                sum = 0;
+                for (String per : newFormatList){
+                    sum += calNewBreedFormat(per);
+                }
+            }
+            else if (sum > 100 && sum <= 101.0 && !newFormatList.isEmpty()){
+//                System.out.println(sum);
+                int index = 0;
+                for (String breed : breedIdList){
+                    if (breed.equals("20")){
+                        break;
+                    }
+                    index++;
+                }
+                if (index == breedIdList.size()){//not found NA
+                    double breedLast = calNewBreedFormat(newFormatList.get(index-1));
+                    newFormatList.set(index-1, newBreedFormat(breedLast - (sum - 100)));
+                }
+                else {
+                    System.out.println(newFormatList);
+                    double breedNA = calNewBreedFormat(newFormatList.get(index));
+                    newFormatList.set(index, newBreedFormat(breedNA - (sum - 100)));
+                }
+                dataArr[2] = String.join(",", newFormatList);
+                sum = 0;
+                for (String per : newFormatList){
+                    sum += calNewBreedFormat(per);
+                }
+            }
+            value[9] = String.valueOf(sum);
 
-//             value[8] = isCorrectBreed(dataArr[0], dataArr[2])
-//                     ? dataArr[0] + ":" + dataArr[2] : "";
+            value[8] = isCorrectBreed(dataArr[0], dataArr[2])
+                    ? dataArr[0] + ":" + dataArr[2] : "";
 
             if (!value[7].equals("")){
                 selectedBreed.add(value);
