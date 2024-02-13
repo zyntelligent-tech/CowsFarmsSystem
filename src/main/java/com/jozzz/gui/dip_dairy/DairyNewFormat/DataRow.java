@@ -26,7 +26,7 @@ public class DataRow {
             List<String> breedPercentList = new ArrayList<>();
             List<String> newFormatList = new ArrayList<>();
             boolean hasNA = false;
-            Matcher matcher = letterPattern.matcher(value[6]);
+            Matcher matcher = letterPattern.matcher(value[5]);
 
             while (matcher.find()) {
                 String letter = matcher.group();
@@ -195,6 +195,11 @@ public class DataRow {
                 }
             }
  
+            ////////////
+            dataArr[0] = String.join(",", breedIdList);
+            dataArr[2] = String.join(",", newFormatList);
+            ////////////
+            
             if (!value[7].equals("")) {
                 selectedBreed.add(value);
             }
