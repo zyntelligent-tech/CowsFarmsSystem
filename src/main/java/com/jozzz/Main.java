@@ -21,8 +21,7 @@ public class Main {
             public void run() {
                 frame = new JFrame();
                 frame.setTitle(CompName.TITLE);
-                frame.setIconImage(new ImageIcon(Objects.requireNonNull(Main.class.getClassLoader().getResource("img/MomCow60px.png"))).getImage());
-
+                
                 display = new JPanel();
                 display.setLayout(CardPage.getCardLayout());
                 display.add(new MainDisplay(), DisplayState.MAIN_MENU);

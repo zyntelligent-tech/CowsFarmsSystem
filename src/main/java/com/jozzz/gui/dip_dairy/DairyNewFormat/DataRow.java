@@ -11,14 +11,14 @@ import com.jozzz.util.RunDB;
 public class DataRow {
 
     String[] data;
-
+    static ArrayList<String[]> listAllBreedMain;
     public static ArrayList<String[]> formatDairyNewFormatDisplay(ArrayList<String[]> data,
             ArrayList<String[]> selectedBreed) {
         Pattern numberPattern = Pattern.compile("\\d+(\\.\\d+)?");
         Pattern letterPattern = Pattern.compile("[ก-๙a-zA-Z]+(\\s*[ก-๙a-zA-Z]+)*");
 
         // BreeedMain
-        ArrayList<String[]> listAllBreedMain = RunDB.getAllDairyBreedMain();
+        listAllBreedMain = RunDB.getAllDairyBreedMain();
 
         for (String[] value : data) {
             String[] dataArr = new String[3];
@@ -26,16 +26,27 @@ public class DataRow {
             List<String> breedPercentList = new ArrayList<>();
             List<String> newFormatList = new ArrayList<>();
             boolean hasNA = false;
-            Matcher matcher = letterPattern.matcher(value[5]);
+            Matcher matcher = letterPattern.matcher(value[6]);
 
             while (matcher.find()) {
                 String letter = matcher.group();
-                if (!findBreedId(letter, listAllBreedMain).equals("")) {
-                    breedIdList.add(findBreedId(letter, listAllBreedMain));
+                if (!findBreedId(letter).equals("")){
+                    breedIdList.add(findBreedId(letter));
                 }
             }
-            
-            double divisorBreed = Math.pow(2, breedIdList.size());
+            if (breedIdList.isEmpty()){
+                matcher = letterPattern.matcher(value[5]);
+                while (matcher.find()) {
+                    String letter = matcher.group();
+                    if (!findBreedId(letter).equals("")){
+                        breedIdList.add(findBreedId(letter));
+                        if (findBreedId(letter).equalsIgnoreCase("NA")){
+                            hasNA = true;
+                        }
+                    }
+                }
+            }
+            double divisorBreed = Math.pow(2,breedIdList.size());
             BigDecimal sumBreed = BigDecimal.ZERO;
             double perLeftover = 0;
             matcher = numberPattern.matcher(value[6]).find()
@@ -44,8 +55,8 @@ public class DataRow {
             while (matcher.find()) {
                 String number = matcher.group();
                 // if (Double.parseDouble(number) <= 100){
-                sumBreed = sumBreed.add(new BigDecimal(number));
-                breedPercentList.add(number);
+                    sumBreed = sumBreed.add(new BigDecimal(number));
+                    breedPercentList.add(number);
                 // }
             }
 
@@ -53,8 +64,8 @@ public class DataRow {
             dataArr[1] = String.join(",", breedPercentList);
 
             value[7] = isCorrectBreed(dataArr[0], dataArr[1])
-                    ? dataArr[0] + ":" + dataArr[1]
-                    : "";
+                    ? dataArr[0] + ":" + dataArr[1] : "";
+
             int comparisonResult = sumBreed.compareTo(new BigDecimal("100"));
             int count = 0;
             boolean is96 = false;
@@ -178,7 +189,7 @@ public class DataRow {
             else if (breedPercentList.size() == 1){
                 double perBreed = decimalBreed(breedPercentList.get(0));
                 if (comparisonResult < 0){ // less than 100
-                    breedIdList.add(findBreedId("NA" , listAllBreedMain));
+                    breedIdList.add(findBreedId("NA"));
                     perLeftover = 100.0 - perBreed;
                     sumBreed = BigDecimal.valueOf(perBreed);
                     newFormatList.add(newBreedFormat(perBreed));
@@ -194,16 +205,78 @@ public class DataRow {
                     newFormatList.add(newBreedFormat(perBreed));
                 }
             }
- 
-            ////////////
+
             dataArr[0] = String.join(",", breedIdList);
             dataArr[2] = String.join(",", newFormatList);
-            ////////////
-            
-            if (!value[7].equals("")) {
-                selectedBreed.add(value);
+
+           if (breedIdList.size() > 1 && comparisonResult > 0){
+               breedIdList = new ArrayList<>();
+               sumBreed = BigDecimal.ZERO;
+               for (String percentBreed : dataArr[1].split(",")){
+                   double result = Double.parseDouble(percentBreed);
+                   if (percentBreed.contains(".")){
+                       result = Double.parseDouble(percentBreed.split("\\.")[0])
+                               + Math.round(Double.parseDouble("0."+percentBreed.split("\\.")[1])
+                               * divisorBreed)
+                               / divisorBreed;
+                   }
+                   sumBreed = sumBreed.add(new BigDecimal(result));
+                   breedIdList.add(String.valueOf(result));
+               }
+               dataArr[1] = String.join(",", breedIdList);
+           }
+
+            double sum = 0;
+            for (String per : newFormatList){
+                sum += calNewBreedFormat(per);
             }
-            
+            if (sum < 100 && !newFormatList.isEmpty()){
+                int index = 0;
+                for (String breed : breedIdList){
+                    if (breed.equals("20")){
+                        break;
+                    }
+                    index++;
+                }
+                if (index == breedIdList.size()){
+                    newFormatList.add(newBreedFormat(100 - sum));
+                    breedIdList.add("20");
+                    dataArr[0] = String.join(",", breedIdList);
+                }
+                else{
+                    double breedNA = calNewBreedFormat(newFormatList.get(index));
+                    newFormatList.set(index, newBreedFormat(100 - sum + breedNA));
+                }
+                dataArr[2] = String.join(",", newFormatList);
+                sum = 0;
+                for (String per : newFormatList){
+                    sum += calNewBreedFormat(per);
+                }
+            }
+            else if (sum > 100 && sum <= 101.0 && !newFormatList.isEmpty()){
+//                System.out.println(sum);
+                int index = 0;
+                for (String breed : breedIdList){
+                    if (breed.equals("20")){
+                        break;
+                    }
+                    index++;
+                }
+                if (index == breedIdList.size()){//not found NA
+                    double breedLast = calNewBreedFormat(newFormatList.get(index-1));
+                    newFormatList.set(index-1, newBreedFormat(breedLast - (sum - 100)));
+                }
+                else {
+                    System.out.println(newFormatList);
+                    double breedNA = calNewBreedFormat(newFormatList.get(index));
+                    newFormatList.set(index, newBreedFormat(breedNA - (sum - 100)));
+                }
+                dataArr[2] = String.join(",", newFormatList);
+                sum = 0;
+                for (String per : newFormatList){
+                    sum += calNewBreedFormat(per);
+                }
+            }
             //mock corrector for waiting
             value[8] = Corrector.corrector();
             if(value[8] != "ERROR"){
@@ -211,9 +284,19 @@ public class DataRow {
             }else{
                 value[9] = "ERROR"; 
             }
+            if (!value[7].equals("")) {
+                selectedBreed.add(value);
+            }
 
         }
         return data;
+    }
+    private static double calNewBreedFormat(String newFormat)  {
+        String [] split1 = newFormat.split("\\+");
+        String [] split2 = split1[1].split("/");
+        return  Double.parseDouble(split1[0])
+                + Double.parseDouble(split2[0])
+                / Double.parseDouble(split2[1]);
     }
 
     private static boolean isCorrectBreed(String str1, String str2) {
@@ -221,7 +304,7 @@ public class DataRow {
                 && str1.split(",").length == str2.split(",").length;
     }
 
-    private static String findBreedId(String breedStr, ArrayList<String[]> listAllBreedMain) {
+    private static String findBreedId(String breedStr) {
         for (String[] breed : listAllBreedMain) {
             if (similarStr(breed[1], (breedStr))
                     || similarStr(breed[2], (breedStr))

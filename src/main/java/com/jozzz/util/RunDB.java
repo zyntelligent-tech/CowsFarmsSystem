@@ -1,5 +1,9 @@
 package com.jozzz.util;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -478,9 +482,9 @@ public class RunDB {
                         data[i-2] = resultSet.getString(i-1);
                     }
                     dataList.add(data);
-                    // if(count == 50000){
-                    //     break;
-                    // }
+                    if(count == 50000){
+                        break;
+                    }
                     count++;
                 }
             }
@@ -492,6 +496,41 @@ public class RunDB {
         return dataList;
     }
 
+    public static ArrayList<String[]> getAllDairyBreedByFarmId(int id){
+        ArrayList<String[]> dataList = new ArrayList<>();
+        int count = 0;
+        try {
+            openDairyDatabaseConnection();
+            try(PreparedStatement statement = connection.prepareStatement(
+                    "SELECT cow_id , cow_name , cow_fa_zyan_code,cow_ma_zyan_code,tbd_cow.farm_id,breed_code, breed_name, breed_id_string \r\n" + //
+                            "FROM tbd_breed , tbd_cow\r\n" + //
+                            "WHERE tbd_breed.breed_id = tbd_cow.breed_id\r\n" + //
+                            "")){
+                ResultSet resultSet = statement.executeQuery();
+                int column = statement.getMetaData().getColumnCount();
+                
+                
+                while (resultSet.next()){
+                    //plus 2 for column new_breed_id_string and sum_breed 
+                    //because we need to use string[] for one row it's mean if we want to add column in row we need to plus column here
+                    String[] data = new String[column+2];
+                    for (int i=2;i <= column;i++){
+                        data[i-2] = resultSet.getString(i-1);
+                    }
+                    dataList.add(data);
+                    if(count == 50000){
+                        break;
+                    }
+                    count++;
+                }
+            }
+            
+            closeDatabaseConnection();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return dataList;
+    }
     public static ArrayList<String[]> getAllDipDairyCompare(){
         ArrayList<String[]> dataList = new ArrayList<>();
         try {
@@ -664,6 +703,7 @@ public class RunDB {
         return resultData;
     }
 
+   
     //Connect to DPI Database
     private static void openDIPDatabaseConnection() throws SQLException {
         connection = DriverManager.getConnection(

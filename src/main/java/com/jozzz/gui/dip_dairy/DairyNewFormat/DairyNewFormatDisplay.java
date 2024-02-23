@@ -28,6 +28,7 @@ public class DairyNewFormatDisplay extends JPanel {
     private ArrayList<String[]> cowData;
     private ArrayList<String[]> listAllBreedMain;
     private ArrayList<String[]> selectedBreed;
+    private ArrayList<String[]> selectedBreedFarmId;
     private JTabbedPane tabbedPane;
     private ArrayList<DataTab> allDataTabs;
     private final String[] columnAlLBreed = {"breed_uuid", "breed_code", "breed_name"};
@@ -42,8 +43,9 @@ public class DairyNewFormatDisplay extends JPanel {
         new Thread(() -> {
             try {
 
-                listAllBreedMain = RunDB.getAllDairyBreedMain();
                 cowData = RunDB.getAllDairyBreedPattern();
+                //cowData = DataDB.getAllDairyCowBreedForPattern();
+                listAllBreedMain = RunDB.getAllDairyBreedMain();
                 
                 setPageLoading(false);
                 SwingUtilities.invokeLater(() -> {
@@ -66,8 +68,11 @@ public class DairyNewFormatDisplay extends JPanel {
         this.setLayout(new BorderLayout());
  
         List<String[]> regexList = RegexPattern.loadRegexProperties();
+        List<String[]> farmIdList = RegexPattern.loadFarmIdProperties();
+
         allDataTabs = new ArrayList<>();
         selectedBreed = new ArrayList<>();
+        selectedBreedFarmId = new ArrayList<>();
         ArrayList<String[]> notHaveStringBreed = new ArrayList<>(cowData);
         
         //temp for all cow data
@@ -81,6 +86,16 @@ public class DairyNewFormatDisplay extends JPanel {
             allDataTabs.add(new DataTab(regex[0],DataRow.formatDairyNewFormatDisplay(filteredData,selectedBreed)));
             
             tempRegex.removeAll(filteredData);
+        }
+
+
+        for (String[] id : farmIdList) {
+            
+            ArrayList<String[]> filteredData = RegexPattern.filterDataWithId(tempFarmId,id[1]);
+
+            allDataTabs.add(new DataTab(id[0],DataRow.formatDairyNewFormatDisplay(filteredData,selectedBreedFarmId)));
+            
+            tempFarmId.removeAll(filteredData);
         }
         allDataTabs.add(new DataTab("Other",
         tempRegex));

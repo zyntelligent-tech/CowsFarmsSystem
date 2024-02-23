@@ -9,6 +9,8 @@ import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.jozzz.util.RunDB;
+
 public class RegexPattern {
 
     public static  ArrayList<String[]> filterData(ArrayList<String[]> inputData, String pattern) {
@@ -21,6 +23,18 @@ public class RegexPattern {
             
             Matcher matcher = regexPattern.matcher(value[6].trim());
             if (matcher.matches()) {
+                filteredData.add(value);
+            }
+        }
+        return filteredData;
+    }
+
+    public static  ArrayList<String[]> filterDataWithId(ArrayList<String[]> inputData, String id) {
+        ArrayList<String[]> filteredData = new ArrayList<>();
+        System.out.println(inputData.size());
+        System.out.println(id);
+        for (String[] value : inputData) {
+            if (value[4].equals(id)) {
                 filteredData.add(value);
             }
         }
@@ -108,7 +122,6 @@ public class RegexPattern {
             String regex = splitValue[1];
             regexList.add(new String[]{regexName,regex});
         }
-
         
         // regexList.add(new String[]{"Number", properties.getProperty("Number")});
         // regexList.add(new String[]{"Percent & Eng", properties.getProperty("Percent & Eng")});
@@ -128,6 +141,31 @@ public class RegexPattern {
         // regexList.add(new String[]{"Thai Per Eng", properties.getProperty("Thai Per Eng")});
 
         return regexList;
+    }
+
+    public static List<String[]> loadFarmIdProperties(){
+        List<String[]> farmIdList = new ArrayList<>();
+
+        Properties properties = new Properties();
+
+        try {
+            FileInputStream fis = new FileInputStream("regex.properties");
+            properties.load(fis);
+            fis.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+        int countFarmId = countRegexKeys(properties, "farm_id");
+        System.out.println(countFarmId);
+        for (int i = 1; i <= countFarmId; i++) {
+            String key = "farm_id" + i; // Assuming your keys are like regex0, regex1, ...
+            String data = properties.getProperty(key);
+            
+            farmIdList.add(new String[]{"farm_id_"+data,data});
+            System.out.println(data);
+        }
+        return farmIdList;
     }
 
     private static int countRegexKeys(Properties properties , String prefix){
