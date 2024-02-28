@@ -63,7 +63,7 @@ public class DataRow {
             dataArr[0] = String.join(",", breedIdList);
             dataArr[1] = String.join(",", breedPercentList);
 
-            value[7] = isCorrectBreed(dataArr[0], dataArr[1])
+            value[8] = isCorrectBreed(dataArr[0], dataArr[1])
                     ? dataArr[0] + ":" + dataArr[1] : "";
 
             int comparisonResult = sumBreed.compareTo(new BigDecimal("100"));
@@ -278,13 +278,13 @@ public class DataRow {
                 }
             }
             //mock corrector for waiting
-            value[8] = Corrector.corrector();
-            if(value[8] != "ERROR"){
-                value[9] = "100";
+            value[9] = Corrector.corrector();
+            if(value[9] != "ERROR"){
+                value[10] = "100";
             }else{
-                value[9] = "ERROR"; 
+                value[10] = "ERROR"; 
             }
-            if (!value[7].equals("")) {
+            if (!value[8].equals("")) {
                 selectedBreed.add(value);
             }
 

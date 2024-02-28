@@ -32,7 +32,7 @@ public class DairyNewFormatDisplay extends JPanel {
     private JTabbedPane tabbedPane;
     private ArrayList<DataTab> allDataTabs;
     private final String[] columnAlLBreed = {"breed_uuid", "breed_code", "breed_name"};
-    private final String[] columnAlLPattern = {"Cow_id","Cow_name","Bull" ,"Cow","Farm","breed_code","breed_name","breed_id_string","new_breed_id_string","sum_breed"};
+    private final String[] columnAlLPattern = {"Cow_id","Cow_name","Bull" ,"Cow","Farm","breed_id","breed_code","breed_name","breed_id_string","new_breed_id_string","sum_breed"};
     private boolean isPageLoading = true;
 
     private ArrayList<String[]> tempRegex;
@@ -43,8 +43,8 @@ public class DairyNewFormatDisplay extends JPanel {
         new Thread(() -> {
             try {
 
-                cowData = RunDB.getAllDairyBreedPattern();
-                //cowData = DataDB.getAllDairyCowBreedForPattern();
+                //cowData = RunDB.getAllDairyBreedPattern();
+                cowData = DataDB.getAllDairyCowBreedForPattern();
                 listAllBreedMain = RunDB.getAllDairyBreedMain();
                 
                 setPageLoading(false);

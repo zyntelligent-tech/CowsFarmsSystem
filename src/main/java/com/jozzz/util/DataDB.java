@@ -3,110 +3,97 @@ package com.jozzz.util;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
-import java.net.URL;
+import java.net.http.HttpResponse.BodyHandlers;
 import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpRequest;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.bouncycastle.asn1.dvcs.Data;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.jozzz.models.Cow;
+import com.jozzz.models.CowBreedDairy;
 
 public class DataDB {
+
     // Connect to spring framwork or backend dpo-api
     static String url = "http://localhost:8083";
-
-    public static ArrayList<String[]> getAllDairyCowBreedForPattern() throws IOException {
+    static ArrayList<String[]> cowList = new ArrayList<>();
+    public static ArrayList<String[]> getAllDairyCowBreedForPattern() throws Exception {
         System.out.println("connection to dpo_api");
         String endpoint = url + "/cow/all_list";
-        URL obj = new URL(endpoint);
+        HttpGet request = new HttpGet(endpoint);
 
-        // Open a connection using HttpURLConnection
-        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+        try (CloseableHttpClient httpClient = HttpClients.createDefault();
+                CloseableHttpResponse response = httpClient.execute(request);) {
+            HttpEntity entity = response.getEntity();
 
-        // Set the request method (GET, POST, PUT, DELETE, etc.)
-        con.setRequestMethod("GET");
+            if (entity != null) {
+                String result = EntityUtils.toString(entity);
+                System.out.println(result);
 
-        // Read the response
-        BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-        String inputLine;
-        StringBuffer response = new StringBuffer();
+                Gson gson = new Gson();
+                Type listType = new TypeToken<List<CowBreedDairy>>() {
+                }.getType();
+                List<CowBreedDairy> cows = gson.fromJson(result, listType);
 
-        while ((inputLine = in.readLine()) != null) {
-            response.append(inputLine);
+                for (CowBreedDairy cow : cows) {
+                    String[] cowArray = {
+                            String.valueOf(cow.getCow_id()),
+                            cow.getCow_name(),
+                            cow.getCow_fa_zyan_code(),
+                            cow.getCow_ma_zyan_code(),
+                            String.valueOf(cow.getFarm_id()),
+                            String.valueOf(cow.getBreed_id()),
+                            cow.getBreed_code(),
+                            cow.getBreed_name(),
+                            cow.getBreed_id_string(),
+                            "",
+                            ""
+                    };
+                    cowList.add(cowArray);
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error at http Entity!!!");
+            System.out.println(e);
         }
-        in.close();
-        System.out.println("closing to dpo_api");
-        // Parse the response and return as ArrayList<String[]>
-        return parseResponse(response.toString());
+        return cowList;
     }
 
     public static ArrayList<String[]> getCowById() throws IOException {
         System.out.println("connection to dpo_api");
         String endpoint = url + "/cow/135678";
-        URL obj = new URL(endpoint);
 
-        // Open a connection using HttpURLConnection
-        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-
-        // Set the request method (GET, POST, PUT, DELETE, etc.)
-        con.setRequestMethod("GET");
-
-        // Read the response
-        BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-        String inputLine;
-        StringBuffer response = new StringBuffer();
-
-        while ((inputLine = in.readLine()) != null) {
-            response.append(inputLine);
-        }
-        in.close();
-        System.out.println("closing to dpo_api");
-        // Parse the response and return as ArrayList<String[]>
-        return parseResponse(response.toString());
+        return new ArrayList<>();
     }
 
-    private static ArrayList<String[]> parseResponse(String response) throws JsonMappingException, JsonProcessingException {
-        ArrayList<String[]> dataList = new ArrayList<>();
-        // You need to implement your own parsing logic here
-        // Example: Split response by newline and then split each line by comma
-        // Initialize ObjectMapper from Jackson library
-        ObjectMapper objectMapper = new ObjectMapper();
-        
-        // Parse JSON response
-        JsonNode rootNode = objectMapper.readTree(response);
-        
-        // Iterate through JSON array
-        for (JsonNode node : rootNode) {
-            // Extract values from JSON object
-            String cow_id = node.get("cow_id").asText();
-            String cow_name = node.get("cow_name").asText();
-            String cow_fa_zyan_code = node.get("cow_fa_zyan_code").asText();
-            String cow_ma_zyan_code = node.get("cow_ma_zyan_code").asText();
-            String farm_id = node.get("farm_id").asText();
-            String breed_code = node.get("breed_code").asText();
-            String breed_name = node.get("breed_name").asText();
-            String breed_id_string = node.get("breed_id_string").asText();
-            
-            // Create a String array to hold the values
-            String[] values = { cow_id, cow_name, cow_fa_zyan_code, cow_ma_zyan_code ,farm_id,breed_code,breed_name,breed_id_string,"",""};
-            
-            // Add the String array to the dataList
-            dataList.add(values);
-        }
-        return dataList;
-    }
-    private static void printParsedResponse(ArrayList<String[]> parsedResponse) {
-        for (String[] row : parsedResponse) {
-            for (String value : row) {
-                System.out.print(value + " ");
+    public static void printArrayList(ArrayList<String[]> arrayList) {
+        for (String[] array : arrayList) {
+            for (String element : array) {
+                System.out.print(element + " ");
             }
-            System.out.println();
+            System.out.println(); // Move to the next line after printing each array
         }
     }
-    public static void main(String[] args) throws IOException {
-        ArrayList data = DataDB.getAllDairyCowBreedForPattern();
-        printParsedResponse(data);
+
+    public static void main(String[] args) throws Exception {
+        ArrayList<String[]>cowList =  DataDB.getAllDairyCowBreedForPattern();
+        printArrayList(cowList);
     }
 }
