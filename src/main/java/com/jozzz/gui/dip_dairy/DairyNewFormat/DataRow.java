@@ -26,7 +26,7 @@ public class DataRow {
             List<String> breedPercentList = new ArrayList<>();
             List<String> newFormatList = new ArrayList<>();
             boolean hasNA = false;
-            Matcher matcher = letterPattern.matcher(value[6]);
+            Matcher matcher = letterPattern.matcher(value[7]);
 
             while (matcher.find()) {
                 String letter = matcher.group();
@@ -35,7 +35,7 @@ public class DataRow {
                 }
             }
             if (breedIdList.isEmpty()){
-                matcher = letterPattern.matcher(value[5]);
+                matcher = letterPattern.matcher(value[6]);
                 while (matcher.find()) {
                     String letter = matcher.group();
                     if (!findBreedId(letter).equals("")){
@@ -49,9 +49,9 @@ public class DataRow {
             double divisorBreed = Math.pow(2,breedIdList.size());
             BigDecimal sumBreed = BigDecimal.ZERO;
             double perLeftover = 0;
-            matcher = numberPattern.matcher(value[6]).find()
-                    ? numberPattern.matcher(value[6])
-                    : numberPattern.matcher(value[5]);
+            matcher = numberPattern.matcher(value[7]).find()
+                    ? numberPattern.matcher(value[7])
+                    : numberPattern.matcher(value[6]);
             while (matcher.find()) {
                 String number = matcher.group();
                 // if (Double.parseDouble(number) <= 100){

@@ -43,8 +43,8 @@ public class DairyNewFormatDisplay extends JPanel {
         new Thread(() -> {
             try {
 
-                //cowData = RunDB.getAllDairyBreedPattern();
-                cowData = DataDB.getAllDairyCowBreedForPattern();
+                cowData = RunDB.getAllDairyBreedPattern();
+                //cowData = DataDB.getAllDairyCowBreedForPattern();
                 listAllBreedMain = RunDB.getAllDairyBreedMain();
                 
                 setPageLoading(false);

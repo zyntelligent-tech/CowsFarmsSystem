@@ -466,7 +466,7 @@ public class RunDB {
         try {
             openDairyDatabaseConnection();
             try(PreparedStatement statement = connection.prepareStatement(
-                    "SELECT cow_id , cow_name , cow_fa_zyan_code,cow_ma_zyan_code,tbd_cow.farm_id,breed_code, breed_name, breed_id_string \r\n" + //
+                    "SELECT cow_id , cow_name , cow_fa_zyan_code,cow_ma_zyan_code,tbd_cow.farm_id,tbd_breed.breed_id,breed_code, breed_name, breed_id_string \r\n" + //
                             "FROM tbd_breed , tbd_cow\r\n" + //
                             "WHERE tbd_breed.breed_id = tbd_cow.breed_id\r\n" + //
                             "")){
