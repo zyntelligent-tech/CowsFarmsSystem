@@ -64,6 +64,7 @@ public class DataDB {
                             cow.getBreed_name(),
                             cow.getBreed_id_string(),
                             "",
+                            "",
                             ""
                     };
                     cowList.add(cowArray);

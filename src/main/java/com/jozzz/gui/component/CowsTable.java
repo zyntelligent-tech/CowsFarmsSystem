@@ -26,6 +26,7 @@ public class CowsTable extends JPanel {
     private final String[] dairyColumn = { "zyan_code", "zyan_mem_id", "zyan_center", "zyan_farm_id", "zyan_farm_name"};
 
     private final String[] dairyDisplayBISColumn = { "breed_id_string"  };
+    private final String[] dairyDisplayNewBNSColumn= { "new_breed_name_string"};
     private final String[] dairyDisplayNewBISColumn = { "new_breed_id_string"};
 
     public CowsTable(ArrayList<String[]> allData, String[] columnNames, boolean isViewDetail){
@@ -56,6 +57,8 @@ public class CowsTable extends JPanel {
                 table.getColumnModel().getColumn(i).setCellRenderer(new CustomTable(new Color(255,179,0)));
             } else if (contains(dairyDisplayNewBISColumn , columnName)){
                 table.getColumnModel().getColumn(i).setCellRenderer(new CustomTable(new Color(255,65,65)));
+            } else if (contains(dairyDisplayNewBNSColumn , columnName)){
+                table.getColumnModel().getColumn(i).setCellRenderer(new CustomTable(new Color(127,255,0)));
             }
         }
         table.setFont(Element.getFont(15));

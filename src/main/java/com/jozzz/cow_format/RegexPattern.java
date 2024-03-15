@@ -21,7 +21,7 @@ public class RegexPattern {
 
         for (String[] value : inputData) {
             
-            Matcher matcher = regexPattern.matcher(value[6].trim());
+            Matcher matcher = regexPattern.matcher(value[7].trim());
             if (matcher.matches()) {
                 filteredData.add(value);
             }

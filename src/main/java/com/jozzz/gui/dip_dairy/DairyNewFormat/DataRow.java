@@ -23,6 +23,7 @@ public class DataRow {
         for (String[] value : data) {
             String[] dataArr = new String[3];
             List<String> breedIdList = new ArrayList<>();
+            List<String> breedNameList = new ArrayList<>();
             List<String> breedPercentList = new ArrayList<>();
             List<String> newFormatList = new ArrayList<>();
             boolean hasNA = false;
@@ -33,7 +34,11 @@ public class DataRow {
                 if (!findBreedId(letter).equals("")){
                     breedIdList.add(findBreedId(letter));
                 }
+                if (!findBreedName(letter).equals("")){
+                    breedNameList.add(findBreedName(letter));
+                }
             }
+
             if (breedIdList.isEmpty()){
                 matcher = letterPattern.matcher(value[6]);
                 while (matcher.find()) {
@@ -46,6 +51,20 @@ public class DataRow {
                     }
                 }
             }
+            if (breedNameList.isEmpty()){
+                matcher = letterPattern.matcher((value[6]));
+                while (matcher.find()) {
+                    String letter = matcher.group();
+                    if (!findBreedName(letter).equals("")){
+                        breedNameList.add(findBreedName(letter));
+                        if (findBreedName(letter).equalsIgnoreCase("NA")){
+                            hasNA = true;
+                        }
+                    }
+                }
+            }
+
+            
             double divisorBreed = Math.pow(2,breedIdList.size());
             BigDecimal sumBreed = BigDecimal.ZERO;
             double perLeftover = 0;
@@ -66,6 +85,11 @@ public class DataRow {
             value[8] = isCorrectBreed(dataArr[0], dataArr[1])
                     ? dataArr[0] + ":" + dataArr[1] : "";
 
+            dataArr[0] = String.join(",", breedNameList);
+            dataArr[1] = String.join(",", breedPercentList);
+
+            value[9] = isCorrectBreed(dataArr[0], dataArr[1]) 
+                    ? dataArr[0] + ":" + dataArr[1] : "";
             int comparisonResult = sumBreed.compareTo(new BigDecimal("100"));
             int count = 0;
             boolean is96 = false;
@@ -278,11 +302,11 @@ public class DataRow {
                 }
             }
             //mock corrector for waiting
-            value[9] = Corrector.corrector();
-            if(value[9] != "ERROR"){
-                value[10] = "100";
+            value[10] = Corrector.corrector();
+            if(value[10] != "ERROR"){
+                value[11] = "100";
             }else{
-                value[10] = "ERROR"; 
+                value[11] = "ERROR"; 
             }
             if (!value[8].equals("")) {
                 selectedBreed.add(value);
@@ -314,7 +338,16 @@ public class DataRow {
         }
         return "";
     }
-
+    private static String findBreedName(String breedStr) {
+        for (String[] breed : listAllBreedMain) {
+            if (similarStr(breed[1], (breedStr))
+                    || similarStr(breed[2], (breedStr))
+                    || similarStr(breed[3], (breedStr))) {
+                return breed[3];
+            }
+        }
+        return "";
+    }
     private static boolean similarStr(String str1, String str2) {
         Set<Character> set1 = new HashSet<>();
         Set<Character> set2 = new HashSet<>();
