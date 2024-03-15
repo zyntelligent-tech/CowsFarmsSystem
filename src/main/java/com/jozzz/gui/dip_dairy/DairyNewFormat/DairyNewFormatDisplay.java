@@ -81,7 +81,7 @@ public class DairyNewFormatDisplay extends JPanel {
         
         for (String[] regex : regexList) {
             
-            ArrayList<String[]> filteredData = RegexPattern.filterData(tempRegex, regex[1]);
+            ArrayList<String[]> filteredData = RegexPattern.filterData(tempRegex, regex[1],7);
 
             allDataTabs.add(new DataTab(regex[0],DataRow.formatDairyNewFormatDisplay(filteredData,selectedBreed)));
             

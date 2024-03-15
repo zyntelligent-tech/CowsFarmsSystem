@@ -149,6 +149,43 @@ public class WriteXlsxFile {
         }
     }
 
+   
+    public static void exportToExcel(String[] excelHeader ,ArrayList<String[]> mapedRows) {
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Save as");
+        int userSelection = fileChooser.showSaveDialog(null);
 
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            String excelFilePath = fileChooser.getSelectedFile().getPath() + ".xlsx";
+            try (Workbook workbook = new XSSFWorkbook()) {
+                Sheet sheet = workbook.createSheet("Data");
+
+                // เขียนหัวตาราง Excel
+                Row headerRow = sheet.createRow(0);
+                for (int i = 0; i < excelHeader.length; i++) {
+                    Cell cell = headerRow.createCell(i);
+                    cell.setCellValue(excelHeader[i]);
+                }
+
+                // เขียนข้อมูลจาก deletedRows ลงใน Excel
+                int rowCount = 1;
+                for (String[] rowData : mapedRows) {
+                    Row row = sheet.createRow(rowCount++);
+                    for (int j = 0; j < rowData.length; j++) {
+                        Cell cell = row.createCell(j);
+                        cell.setCellValue(rowData[j]);
+                    }
+                }
+
+                // บันทึกไฟล์ Excel
+                try (FileOutputStream outputStream = new FileOutputStream(excelFilePath)) {
+                    workbook.write(outputStream);
+                }
+                System.out.println("Excel written successfully.");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }
 

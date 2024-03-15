@@ -13,7 +13,7 @@ import com.jozzz.util.RunDB;
 
 public class RegexPattern {
 
-    public static  ArrayList<String[]> filterData(ArrayList<String[]> inputData, String pattern) {
+    public static  ArrayList<String[]> filterData(ArrayList<String[]> inputData, String pattern,int position) {
         ArrayList<String[]> filteredData = new ArrayList<>();
         System.out.println(inputData.size());
         System.out.println(pattern);
@@ -21,7 +21,7 @@ public class RegexPattern {
 
         for (String[] value : inputData) {
             
-            Matcher matcher = regexPattern.matcher(value[7].trim());
+            Matcher matcher = regexPattern.matcher(value[position].trim());
             if (matcher.matches()) {
                 filteredData.add(value);
             }

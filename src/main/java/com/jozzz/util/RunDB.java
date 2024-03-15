@@ -417,9 +417,9 @@ public class RunDB {
         try {
             openDairyDatabaseConnection();
             try(PreparedStatement statement = connection.prepareStatement(
-                    "SELECT breed_name" +
+                    "SELECT breed_code" +
                             " FROM tbd_breed" +
-                            " GROUP BY breed_name")){
+                            " GROUP BY breed_code")){
                 ResultSet resultSet = statement.executeQuery();
                 int column = statement.getMetaData().getColumnCount();
                 while (resultSet.next()){
@@ -434,6 +434,7 @@ public class RunDB {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        System.out.println(dataList.size());
         return dataList;
     }
 
@@ -717,9 +718,9 @@ public class RunDB {
     //Connect to Dairy Database
     private static void openDairyDatabaseConnection() throws SQLException {
         connection = DriverManager.getConnection(
-                "jdbc:mariadb://54.251.168.197:6667/zyanwoadev_test",
-                "summer2023",
-                "Summ3r!@MISL$$23"
+                "jdbc:mariadb://10.148.0.5:3306/zyanwoadev",
+                "dpobreedcorrector",
+                "W@gyu$=J3rSeyNA"
         );
     }
 
