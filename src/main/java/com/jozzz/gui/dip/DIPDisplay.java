@@ -1,19 +1,13 @@
-package com.jozzz.gui;
+package com.jozzz.gui.dip;
 
-import com.jozzz.Main;
+import com.jozzz.constant.DisplayState;
+import com.jozzz.gui.component.CowsTable;
 import com.jozzz.util.Dialog;
-import com.jozzz.util.Element;
-import com.jozzz.util.RunDB;
-import com.jozzz.util.WriteXlsxFile;
+import com.jozzz.util.*;
 
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
+import java.awt.*;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
@@ -28,11 +22,8 @@ public class DIPDisplay extends JPanel {
     private final String[] columnAlLCows = {"เลขเกษตรกร", "หมายเลขโค", "สถานะโค","วันที่", "ชื่อโค", "c_oth", "วันเกิด"
             , "หมายเลขแม่", "หมายเลขพ่อ", "เพศ", "outfg", "milk", "eurbrd", "eurper"};
     private final String[] columnAlLBreed = {"หมายเลขโค", "สายพันธุ์", "เปอร์เซ็นต์รวม"};
+    private boolean isPageLoading = true;
     public DIPDisplay(){
-        this.setPreferredSize(new Dimension(1366, 768));
-        this.setBorder(new EmptyBorder(10,10,10,10));
-        this.setLayout(new BorderLayout());
-
         Dialog dialog = new Dialog();
         new Thread(() -> {
             try {
@@ -41,11 +32,27 @@ public class DIPDisplay extends JPanel {
                 allErrorBreeds = RunDB.getAllErrorBreed();
                 allCorrectParent = RunDB.getAllCorrectParent();
                 allErrorParent = RunDB.getAllErrorParent();
-                createTable();
-            }catch (Exception ignored){}
+                setPageLoading(false);
+                SwingUtilities.invokeLater(() -> {
+                    init();
+                    dialog.getDialog().setVisible(false);
+                });
+            }catch (Exception e){
+                setPageLoading(true);
+                dialog.getDialog().setVisible(false);
+                SwingUtilities.invokeLater(() -> CardPage.showPage(DisplayState.MAIN_MENU));
+            }
             SwingUtilities.invokeLater(() -> dialog.getDialog().setVisible(false));
         }).start();
         dialog.getDialog().setVisible(true);
+    }
+
+    private void init(){
+        this.setPreferredSize(new Dimension(1366, 768));
+        this.setBorder(new EmptyBorder(10,10,10,10));
+        this.setLayout(new BorderLayout());
+
+        createTable();
 
         JPanel menuBarPanel = new JPanel();
         menuBarPanel.setPreferredSize(new Dimension(0,50));
@@ -53,7 +60,7 @@ public class DIPDisplay extends JPanel {
 
         JButton backButton = new JButton("ย้อนกลับ");
         backButton.setFont(Element.getFont(15));
-        backButton.addActionListener(event -> Element.getCardLayout().show(Main.display, "MAIN_MENU"));
+        backButton.addActionListener(event -> CardPage.showPage(DisplayState.MAIN_MENU));
 
         JButton exportButton = new JButton("ส่งออกเป็นไฟล์ Excel (.xlsx)");
         exportButton.setFont(Element.getFont(15));
@@ -82,13 +89,18 @@ public class DIPDisplay extends JPanel {
                 new CowsTable(allErrorParent, columnAlLCows, true));
 
         this.add(tabbedPane);
-//        this.validate();
     }
-
-
 
     public String decimalFormat (int number) {
         DecimalFormat formatter = new DecimalFormat("###,###,###");
         return formatter.format(number);
+    }
+
+    public boolean isPageLoading() {
+        return isPageLoading;
+    }
+
+    public void setPageLoading(boolean pageLoading) {
+        isPageLoading = pageLoading;
     }
 }

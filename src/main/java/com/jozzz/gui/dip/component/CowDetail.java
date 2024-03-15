@@ -1,23 +1,13 @@
-package com.jozzz.gui;
+package com.jozzz.gui.dip.component;
 
-import com.jozzz.Main;
-import com.jozzz.util.CustomTree;
+import com.jozzz.constant.DisplayState;
 import com.jozzz.util.Dialog;
-import com.jozzz.util.Element;
-import com.jozzz.util.RunDB;
+import com.jozzz.util.*;
 
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTree;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.tree.DefaultMutableTreeNode;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -34,6 +24,7 @@ public class CowDetail extends JPanel{
     private ArrayList<String[]> cowParent;
 
     public CowDetail(String cowCode){
+        
         this.cowCode = cowCode;
         this.setLayout(new BorderLayout());
 
@@ -50,8 +41,15 @@ public class CowDetail extends JPanel{
             try {
                 InitCowData();
                 setUpCowTreePanel(cowCode);
-            }catch (Exception ignored){}
-            SwingUtilities.invokeLater(() -> dialog.getDialog().setVisible(false));
+            }catch (Exception e){
+                e.printStackTrace();
+                SwingUtilities.invokeLater(() -> {
+                    CardPage.showPage(DisplayState.DIP);
+                });
+            }
+            SwingUtilities.invokeLater(() -> {
+                dialog.getDialog().setVisible(false);
+            });
         }).start();
         dialog.getDialog().setVisible(true);
     }
@@ -115,8 +113,7 @@ public class CowDetail extends JPanel{
 
         JButton backButton = new JButton("ย้อนกลับ");
         backButton.setFont(Element.getFont(20));
-
-        backButton.addActionListener(event -> Element.getCardLayout().show(Main.display, "DPO_DISPLAY"));
+        backButton.addActionListener(event -> CardPage.showPage(DisplayState.DIP));
 
         menuBarPanel.add(backButton);
 
@@ -175,8 +172,10 @@ public class CowDetail extends JPanel{
             }
 
             if (centerDetailCB.isSelected()){
-                filterStr += " [ (ศูนย์/สหกรณ์) รหัสศูนย์/สหกรณ์ : "+centerDetail[1]+" , ชื่อศูนย์/สหกรณ์ : "+centerDetail[2]
-                        +" , ชื่อย่อของศูนย์ : "+centerDetail[3]+" , ภาค : "+sectorDetail[1]+" ] ";
+                if (centerDetail.length > 0){
+                    filterStr += " [ (ศูนย์/สหกรณ์) รหัสศูนย์/สหกรณ์ : "+centerDetail[1]+" , ชื่อศูนย์/สหกรณ์ : "+centerDetail[2]
+                            +" , ชื่อย่อของศูนย์ : "+centerDetail[3]+" , ภาค : "+ sectorDetail[1]+" ] ";
+                }
             }
         }
         else if (cowType.equals("dad")){
