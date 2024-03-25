@@ -18,19 +18,19 @@ import java.util.ArrayList;
 
 public class WriteXlsxFile {
 
-    public static void selectFileDialog(JTabbedPane tabbedPane){
+    public static void selectFileDialog(JTabbedPane tabbedPane) {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
         ArrayList<JCheckBox> checkBoxesList = new ArrayList<>();
         ArrayList<CowsTable> cowsTables = new ArrayList<>();
 
-        for (int i=0;i < tabbedPane.getTabCount();i++){
+        for (int i = 0; i < tabbedPane.getTabCount(); i++) {
             checkBoxesList.add(new JCheckBox(tabbedPane.getTitleAt(i)));
             cowsTables.add((CowsTable) tabbedPane.getComponentAt(i));
         }
 
-        for (JCheckBox checkBox : checkBoxesList){
+        for (JCheckBox checkBox : checkBoxesList) {
             checkBox.setSelected(true);
             checkBox.setFont(Element.getFont(20));
             panel.add(checkBox);
@@ -40,31 +40,32 @@ public class WriteXlsxFile {
         exportButton.setFont(Element.getFont(20));
         exportButton.addActionListener(event -> {
             boolean isSelected = false;
-            for (JCheckBox checkBox : checkBoxesList){
-                if (checkBox.isSelected()){
+            for (JCheckBox checkBox : checkBoxesList) {
+                if (checkBox.isSelected()) {
                     isSelected = true;
                     break;
                 }
             }
-            if (isSelected){
+            if (isSelected) {
                 JOptionPane.getRootFrame().dispose();
                 showExportFileChooser(checkBoxesList, cowsTables, tabbedPane);
-            }
-            else{
+            } else {
                 JLabel label = new JLabel("กรุณาเลือกตารางที่จะส่งออก");
                 label.setFont(Element.getFont(20));
-                JOptionPane.showMessageDialog(null,label,"กรุณาเลือกตารางที่จะส่งออก",JOptionPane.WARNING_MESSAGE,null);
+                JOptionPane.showMessageDialog(null, label, "กรุณาเลือกตารางที่จะส่งออก", JOptionPane.WARNING_MESSAGE,
+                        null);
             }
         });
 
         JOptionPane.showOptionDialog(null, panel, "กรุณาเลือกตารางที่จะส่งออก",
-                JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, new Object[] {exportButton}, null);
+                JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, new Object[] { exportButton }, null);
     }
 
-    public static void showExportFileChooser(ArrayList<JCheckBox> checkBoxesList , ArrayList<CowsTable> cowsTables, JTabbedPane tabbedPane) {
+    public static void showExportFileChooser(ArrayList<JCheckBox> checkBoxesList, ArrayList<CowsTable> cowsTables,
+            JTabbedPane tabbedPane) {
         setFileChooserUI();
         JFileChooser fileChooser = new JFileChooser();
-        setFileChooserFont(fileChooser ,Element.getFont(15));
+        setFileChooserFont(fileChooser, Element.getFont(15));
 
         FileNameExtensionFilter filter = new FileNameExtensionFilter("EXCEL FILES", "xlsx");
         fileChooser.setFileFilter(filter);
@@ -77,19 +78,20 @@ public class WriteXlsxFile {
         }
     }
 
-    private static void exportFile(String filePath, ArrayList<JCheckBox> checkBoxesList, ArrayList<CowsTable> cowsTables, JTabbedPane tabbedPane){
+    private static void exportFile(String filePath, ArrayList<JCheckBox> checkBoxesList,
+            ArrayList<CowsTable> cowsTables, JTabbedPane tabbedPane) {
         String excelFile = filePath + ".xlsx";
         new Thread(() -> {
             Workbook workbook = new XSSFWorkbook();
             int totalProgress = 0;
             int currentProgress = 0;
-            for (int i=0;i < checkBoxesList.size();i++) {
-                if (checkBoxesList.get(i).isSelected()){
+            for (int i = 0; i < checkBoxesList.size(); i++) {
+                if (checkBoxesList.get(i).isSelected()) {
                     totalProgress += cowsTables.get(i).getAllData().size();
                 }
             }
             ProgressBar progressBar = new ProgressBar(totalProgress);
-            for (int i=0;i < checkBoxesList.size();i++){
+            for (int i = 0; i < checkBoxesList.size(); i++) {
                 if (checkBoxesList.get(i).isSelected()) {
                     Sheet sheet = workbook.createSheet(tabbedPane.getTitleAt(i));
                     Row headerRow = sheet.createRow(0);
@@ -120,14 +122,14 @@ public class WriteXlsxFile {
                 progressBar.getProgressBarFrame().dispose();
                 JLabel label = new JLabel("ส่งออกไฟล์สำเร็จ");
                 label.setFont(Element.getFont(20));
-                JOptionPane.showMessageDialog(null,label,"ส่งออกไฟล์สำเร็จ",JOptionPane.INFORMATION_MESSAGE,null);
+                JOptionPane.showMessageDialog(null, label, "ส่งออกไฟล์สำเร็จ", JOptionPane.INFORMATION_MESSAGE, null);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }).start();
     }
 
-    private static void setFileChooserUI(){
+    private static void setFileChooserUI() {
         UIManager.put("FileChooser.openDialogTitleText", "เปิดไฟล์");
         UIManager.put("FileChooser.saveDialogTitleText", "บันทึกไฟล์");
         UIManager.put("FileChooser.lookInLabelText", "ค้นหาใน");
@@ -149,14 +151,19 @@ public class WriteXlsxFile {
         }
     }
 
-   
-    public static void exportToExcel(String[] excelHeader ,ArrayList<String[]> mapedRows) {
+    public static void exportToExcel(ArrayList<String[]> mapedRows,
+            ArrayList<String[]> mapedProjects) {
+        
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Save as");
         int userSelection = fileChooser.showSaveDialog(null);
-
+        String[] excelHeader = new String[2];
+        excelHeader[0] = "Key";
+        excelHeader[1] = "String";
         if (userSelection == JFileChooser.APPROVE_OPTION) {
             String excelFilePath = fileChooser.getSelectedFile().getPath() + ".xlsx";
+            String excelProjectPath = "BreedMap.xlsx";
+            deleteExcelFile();
             try (Workbook workbook = new XSSFWorkbook()) {
                 Sheet sheet = workbook.createSheet("Data");
 
@@ -169,7 +176,7 @@ public class WriteXlsxFile {
 
                 // เขียนข้อมูลจาก deletedRows ลงใน Excel
                 int rowCount = 1;
-                for (String[] rowData : mapedRows) {
+                for (String[] rowData : mapedProjects) {
                     Row row = sheet.createRow(rowCount++);
                     for (int j = 0; j < rowData.length; j++) {
                         Cell cell = row.createCell(j);
@@ -181,11 +188,45 @@ public class WriteXlsxFile {
                 try (FileOutputStream outputStream = new FileOutputStream(excelFilePath)) {
                     workbook.write(outputStream);
                 }
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try (Workbook workbook = new XSSFWorkbook()) {
+                Sheet sheetProject = workbook.createSheet("Data");
+                
+                // เขียนข้อมูลจาก deletedRows ลงใน Excel
+                int rowCountProject = 1;
+                for (String[] rowData : mapedProjects) {
+                    Row row = sheetProject.createRow(rowCountProject++);
+                    for (int j = 0; j < rowData.length; j++) {
+                        Cell cell = row.createCell(j);
+                        cell.setCellValue(rowData[j]);
+                    }
+                }
                 System.out.println("Excel written successfully.");
+                try (FileOutputStream outputStream = new FileOutputStream(excelProjectPath)) {
+                    workbook.write(outputStream);
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
-}
 
+    public static void deleteExcelFile() {
+        // Provide the path to your Excel file
+        String excelFilePath = "BreedMap.xlsx";
+
+        File excelFile = new File(excelFilePath);
+        if (excelFile.exists()) {
+            if (excelFile.delete()) {
+                System.out.println("Excel file deleted successfully.");
+            } else {
+                System.out.println("Failed to delete Excel file.");
+            }
+        } else {
+            System.out.println("Excel file not found.");
+        }
+    }
+}

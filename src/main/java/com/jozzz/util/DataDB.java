@@ -34,10 +34,13 @@ public class DataDB {
     // Connect to spring framwork or backend dpo-api
     static String url = "http://localhost:8083";
     static ArrayList<String[]> cowList = new ArrayList<>();
+    static ArrayList<String[]> breedList = new ArrayList<>();
+
     public static ArrayList<String[]> getAllDairyCowBreedForPattern() throws Exception {
         System.out.println("connection to dpo_api");
         String endpoint = url + "/cow/all_list";
         HttpGet request = new HttpGet(endpoint);
+        System.out.println("Get URL: "+endpoint);
 
         try (CloseableHttpClient httpClient = HttpClients.createDefault();
                 CloseableHttpResponse response = httpClient.execute(request);) {
@@ -76,7 +79,38 @@ public class DataDB {
         }
         return cowList;
     }
+    public static ArrayList<String[]> getAllDairBreedCode() throws Exception {
+        System.out.println("connection to dpo_api");
+        String endpoint = url + "/breed/breed_code";
+        System.out.println("Get URL: "+endpoint);
+        HttpGet request = new HttpGet(endpoint);
 
+        try (CloseableHttpClient httpClient = HttpClients.createDefault();
+                CloseableHttpResponse response = httpClient.execute(request);) {
+            HttpEntity entity = response.getEntity();
+
+            if (entity != null) {
+                String result = EntityUtils.toString(entity);
+                System.out.println(result);
+
+                Gson gson = new Gson();
+                Type listType = new TypeToken<List<String>>() {
+                }.getType();
+                List<String> breedCodes = gson.fromJson(result, listType);
+
+                for (String breedCode : breedCodes) {
+                    String[] breed = {
+                            breedCode
+                    };
+                    breedList.add(breed);
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error at http Entity!!!");
+            System.out.println(e);
+        }
+        return breedList;
+    }
     public static ArrayList<String[]> getCowById() throws IOException {
         System.out.println("connection to dpo_api");
         String endpoint = url + "/cow/135678";

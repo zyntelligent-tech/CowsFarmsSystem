@@ -5,8 +5,8 @@ import com.jozzz.constant.DisplayState;
 import com.jozzz.cow_format.RegexPattern;
 import com.jozzz.gui.component.CowsTable;
 import com.jozzz.records.DataTab;
-import com.jozzz.util.Dialog;
 import com.jozzz.util.*;
+import com.jozzz.util.Dialog;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
@@ -84,7 +84,8 @@ public class DairyNewFormatDisplay extends JPanel {
             ArrayList<String[]> filteredData = RegexPattern.filterData(tempRegex, regex[1],7);
 
             allDataTabs.add(new DataTab(regex[0],DataRow.formatDairyNewFormatDisplay(filteredData,selectedBreed)));
-            
+            printArrayList(filteredData);
+            printArrayList(tempRegex);
             tempRegex.removeAll(filteredData);
         }
 
@@ -142,5 +143,19 @@ public class DairyNewFormatDisplay extends JPanel {
 
     public void setPageLoading(boolean pageLoading) {
         isPageLoading = pageLoading;
+    }
+      public static void printArrayList(ArrayList<String[]> arrayList) {
+        int count = 0;
+        for (String[] array : arrayList) {
+            System.out.print("[ ");
+            for (String element : array) {
+                System.out.print(element + ", ");
+            }
+            System.out.println("]");
+            if(count == 20){
+                break;
+            }
+            count++;
+        }
     }
 }

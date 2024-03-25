@@ -86,14 +86,10 @@ public class MainDisplay extends JPanel {
         JButton tableListButton = new JButton(CompName.TABLE_LIST_BUTTON);
         tableListButton.setFont(Element.getFont(20));
         tableListButton.addActionListener(event -> {
-            if (tableListSelect == null){
+          
                 tableListSelect = new TableListSelect();
-            }
-            else{
-                if(tableListSelect.isPageLoading()){
-                    tableListSelect = new TableListSelect();
-                }
-            }
+            
+            
             CardPage.addPage(tableListSelect, DisplayState.TABLE_LIST);
             CardPage.showPage(DisplayState.TABLE_LIST);
         });

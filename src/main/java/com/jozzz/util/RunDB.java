@@ -465,7 +465,10 @@ public class RunDB {
         ArrayList<String[]> dataList = new ArrayList<>();
         int count = 0;
         try {
+            System.out.println("open connection");
             openDairyDatabaseConnection();
+            System.out.println("close connection");
+
             try(PreparedStatement statement = connection.prepareStatement(
                     "SELECT cow_id , cow_name , cow_fa_zyan_code,cow_ma_zyan_code,tbd_cow.farm_id,\r\n"+
                     "tbd_breed.breed_id,breed_code, breed_name, breed_id_string \r\n" + //
@@ -474,7 +477,7 @@ public class RunDB {
                             "")){
                 ResultSet resultSet = statement.executeQuery();
                 int column = statement.getMetaData().getColumnCount();
-                
+                System.out.println(column);
                 
                 while (resultSet.next()){
                     //plus 2 for column new_breed_id_string and sum_breed 

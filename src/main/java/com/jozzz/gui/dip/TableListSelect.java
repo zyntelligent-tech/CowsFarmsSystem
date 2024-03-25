@@ -4,6 +4,7 @@ import com.jozzz.constant.DisplayState;
 import com.jozzz.cow_format.RegexPattern;
 import com.jozzz.gui.component.CowsTable;
 import com.jozzz.util.CardPage;
+import com.jozzz.util.DataDB;
 import com.jozzz.util.Dialog;
 import com.jozzz.util.Element;
 import com.jozzz.util.RunDB;
@@ -12,8 +13,24 @@ import com.jozzz.util.WriteXlsxFile;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+
+import org.apache.poi.EncryptedDocumentException;
+import org.apache.poi.hpsf.Array;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 import java.awt.*;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Vector;
 import java.util.List;
 
@@ -21,12 +38,13 @@ public class TableListSelect extends JPanel {
     private ArrayList<String[]> allDairyBreedPattern;
     private boolean isPageLoading = true;
     private ArrayList<String[]> mapedRows = new ArrayList<>();
-    private String[] excelHeader;
+    ArrayList<String[]> mapedProject = new ArrayList<>();
+
     public TableListSelect() {
         Dialog dialog = new Dialog();
         new Thread(() -> {
             try {
-                allDairyBreedPattern = RunDB.getAllDairyBreedPatternOnly();
+                allDairyBreedPattern = DataDB.getAllDairBreedCode();
                 setPageLoading(false);
                 SwingUtilities.invokeLater(() -> {
                     init();
@@ -45,12 +63,42 @@ public class TableListSelect extends JPanel {
         this.setPreferredSize(new Dimension(1366, 768));
         this.setBorder(new EmptyBorder(10, 10, 10, 10));
         this.setLayout(new BorderLayout());
+
+        JPanel appBarPanel = new JPanel();
+        JPanel bodyPanel = new JPanel();
+        bodyPanel.setLayout(new BorderLayout());
+
         String[] columnList = { "List" };
         String[] columnSelectedList = { "Selected List" };
         List<String[]> regex = RegexPattern.loadRegexProperties();
         ArrayList<String[]> tempDairyBreed = new ArrayList<>(allDairyBreedPattern);
 
         ArrayList<String[]> filter = RegexPattern.filterData(tempDairyBreed, regex.get(15)[1], 0);
+        ArrayList<String[]> dataExcel = findNameInExcel();
+
+        HashSet<String> keyMaped = new HashSet<>();
+
+        if (!dataExcel.isEmpty()) {
+            for (int i = 0; i < filter.size(); i++) {
+                String[] filterData = filter.get(i);
+                for (String[] dataExcelRow : dataExcel) {
+                    if (filterData[0].equals(dataExcelRow[1])) {
+                        filter.remove(i);
+                        i--; // ลดค่าตัวแปร i เพื่อปรับปรุงตำแหน่งใหม่หลังจากการลบ
+                        break; // ออกจากลูปภายในเมื่อพบสมาชิกที่ต้องการลบแล้ว
+                    }
+
+                }
+            }
+            for (String[] dataExcelRow : dataExcel) {
+                if (dataExcelRow[0].equals("Key")) {
+                    continue;
+                }
+                keyMaped.add(dataExcelRow[0]);
+            }
+            mapedProject = dataExcel;
+        }
+
         CowsTable table1 = new CowsTable(filter, columnList, false);
         CowsTable table2 = new CowsTable(new ArrayList<>(), columnSelectedList, false);
 
@@ -72,17 +120,46 @@ public class TableListSelect extends JPanel {
                 event -> moveSelectedRows(table2.getTable(), table2.getTableModel(), table1.getTableModel()));
 
         JPanel tablePanel = new JPanel(new GridLayout(1, 2));
-        tablePanel.add(table1);
-        tablePanel.add(table2);
 
         JPanel buttonPanel = new JPanel(new GridLayout(1, 2));
         buttonPanel.setPreferredSize(new Dimension(0, 50));
         buttonPanel.add(moveToTable2Button);
         buttonPanel.add(moveToTable1Button);
 
+        JPanel movePanel = new JPanel(null);
+        tablePanel.add(table1);
+        tablePanel.add(movePanel);
+
+        moveToTable1Button.setBounds(100, 250, 315, 50);
+        moveToTable2Button.setBounds(100, 100, 315, 50);
+
+        JTextArea mapTextArea = new JTextArea();
+        JLabel mapLabel = new JLabel("ประวัติ Key");
+        mapTextArea.setBounds(100, 340, 315, 200);
+        mapTextArea.setFont(Element.getFont(15));
+        JScrollPane scrollPane = new JScrollPane(mapTextArea);
+        scrollPane.setBounds(100, 340, 315, 200);
+        scrollPane.setFont(Element.getFont(15));
+        mapLabel.setBounds(100, 320, 315, 20);
+        mapLabel.setFont(Element.getFont(20));
+
+        for (String key : keyMaped) {
+            System.out.println(key);
+            mapTextArea.append(key + "\n");
+        }
+        movePanel.add(moveToTable1Button);
+        movePanel.add(moveToTable2Button);
+        movePanel.add(mapLabel);
+        movePanel.add(scrollPane);
+
+        tablePanel.add(table2);
+
         JPanel menuBarPanel = new JPanel();
         menuBarPanel.setPreferredSize(new Dimension(0, 50));
         menuBarPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 0));
+        JPanel menuCenterPanel = new JPanel();
+        menuBarPanel.setPreferredSize(new Dimension(0, 50));
+        menuBarPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 0));
 
         JButton backButton = new JButton("ย้อนกลับ");
         backButton.setFont(Element.getFont(15));
@@ -90,21 +167,37 @@ public class TableListSelect extends JPanel {
 
         JButton exportButton = new JButton("ส่งออกเป็นไฟล์ Excel (.xlsx)");
         exportButton.setFont(Element.getFont(15));
-        exportButton.addActionListener(event -> WriteXlsxFile.exportToExcel(excelHeader , mapedRows));
+        exportButton.addActionListener(event -> WriteXlsxFile.exportToExcel(mapedRows, mapedProject));
 
-        JButton mapButton = new JButton("ยืนยัน");
+        JButton mapButton = new JButton("เพิ่ม");
         mapButton.setFont(Element.getFont(15));
         mapButton.addActionListener(
-                event -> mapKey(table2.getTable(), keyTextField, (DefaultTableModel) table2.getTable().getModel()));
+                event -> mapKey(table2.getTable(), keyTextField, (DefaultTableModel) table2.getTable().getModel(),
+                        keyMaped, mapTextArea));
+
+        JButton editButton = new JButton("แก้ไข");
+        editButton.setFont(Element.getFont(15));
+        editButton.addActionListener(
+                event -> editExcelFile(keyTextField.getText(), table2, keyMaped, mapTextArea));
+
+        JButton deleteButton = new JButton("ลบ");
+        deleteButton.setFont(Element.getFont(15));
+        deleteButton.addActionListener(
+                event -> deleteKey(table1,mapTextArea,keyMaped,keyTextField.getText()));
 
         menuBarPanel.add(backButton);
         menuBarPanel.add(exportButton);
-        menuBarPanel.add(mapButton);
-        menuBarPanel.add(keyPanel);
+        menuCenterPanel.add(keyPanel);
+        menuCenterPanel.add(mapButton);
+        menuCenterPanel.add(editButton);
+        menuCenterPanel.add(deleteButton);
+
+        bodyPanel.add(menuCenterPanel, BorderLayout.NORTH);
+        bodyPanel.add(tablePanel, BorderLayout.CENTER);
+        bodyPanel.add(buttonPanel, BorderLayout.SOUTH);
 
         this.add(menuBarPanel, BorderLayout.NORTH);
-        this.add(tablePanel, BorderLayout.CENTER);
-        this.add(buttonPanel, BorderLayout.SOUTH);
+        this.add(bodyPanel, BorderLayout.CENTER);
     }
 
     private void moveSelectedRows(JTable sourceTable, DefaultTableModel sourceModel, DefaultTableModel targetModel) {
@@ -128,21 +221,159 @@ public class TableListSelect extends JPanel {
         }
     }
 
-    private void mapKey(JTable rightTable, JTextField keyTextField, DefaultTableModel rightTableModel) {
-        String key = keyTextField.getText().trim();
+    private ArrayList<String[]> findNameInExcel() {
+        ArrayList<String[]> foundNames = new ArrayList<>();
+        String excelFilePath = "BreedMap.xlsx";
 
+        File excelFile = new File(excelFilePath);
+        try (FileInputStream fis = new FileInputStream(excelFilePath);
+                Workbook workbook = WorkbookFactory.create(fis)) {
+            Sheet sheet = workbook.getSheetAt(0); // Assuming data is in the first sheet
+
+            for (Row row : sheet) {
+                Cell cell0 = row.getCell(0);
+                Cell cell1 = row.getCell(1); // Assuming name is in the second column
+                if (cell0 != null && cell0.getCellType() == CellType.STRING) {
+                    String key = cell0.getStringCellValue();
+                    String name = cell1.getStringCellValue();
+                    // Add the name to the foundNames list
+                    foundNames.add(new String[] { key, name });
+                    System.out.println(name);
+                }
+            }
+        } catch (IOException | EncryptedDocumentException ex) {
+            ex.printStackTrace();
+        }
+        return foundNames;
+    }
+
+    private void editExcelFile(String key, CowsTable table2, HashSet<String> keyMapSet, JTextArea mapTextArea) {
+        String excelFilePath = "BreedMap.xlsx";
+        ArrayList<String[]> dataExcel = findNameInExcel();
+        mapedRows.clear();
+        try (FileInputStream fis = new FileInputStream(excelFilePath);
+                Workbook workbook = WorkbookFactory.create(fis)) {
+            Sheet sheet = workbook.getSheetAt(0); // Assuming data is in the first sheet
+            for (int i = 0; i < mapedProject.size(); i++) {
+                if (key.equals(mapedProject.get(i)[0])) {
+                    DefaultTableModel table2Model = (DefaultTableModel) table2.getTable().getModel();
+                    table2Model.addRow(new String[] { mapedProject.get(i)[1] });
+                    mapedProject.remove(i);
+                    i--;
+                }
+            }
+            mapTextArea.setText("");
+            String[] keyMapString = keyMapSet.toArray(new String[keyMapSet.size()]);
+            System.out.println(keyMapString.length);
+            for (int i = 0; i < keyMapString.length; i++) {
+                if (keyMapString[i].equals(key)) {
+                    keyMapSet.remove(keyMapString[i]);
+                    continue;
+                }
+                System.out.println(keyMapString[i]);
+                mapTextArea.append(keyMapString[i] + "\n");
+            }
+
+            System.out.println("EDIT SUCCESS " + key);
+            System.out.println("====");
+            System.out.println("Map in project");
+            printArrayList(mapedProject);
+            System.out.println("====");
+            System.out.println("Map to user");
+            printArrayList(mapedRows);
+        } catch (IOException | EncryptedDocumentException ex) {
+            ex.printStackTrace();
+        }
+
+    }
+
+    private void deleteKey(
+            CowsTable table1, JTextArea keyTextField, HashSet<String> mapHashSet,String key) {
+        // Provide the path to your Excel file
+        String excelFilePath = "BreedMap.xlsx";
+        mapedRows.clear();
+        DefaultTableModel tableModel1 = (DefaultTableModel) table1.getTable().getModel();
+
+        for (int i = 0; i < mapedProject.size(); i++) {
+            if (key.equals(mapedProject.get(i)[0])) {
+                tableModel1.addRow(new String[] { mapedProject.get(i)[1] });
+                mapedProject.remove(i);
+                i--;
+            }
+        }
+
+        tableModel1.fireTableDataChanged(); // Refresh the table view
+        keyTextField.setText("");
+
+        mapHashSet.remove(key);
+        String[] keyMapString = mapHashSet.toArray(new String[mapHashSet.size()]);
+        System.out.println(keyMapString.length);
+        for (int i = 0; i < keyMapString.length; i++) {
+            System.out.println(keyMapString[i]);
+            keyTextField.append(keyMapString[i] + "\n");
+        }
+        System.out.println("DELETE SUCCESS " + key);
+        System.out.println("====");
+        System.out.println("Map in project");
+        printArrayList(mapedProject);
+        System.out.println("====");
+        System.out.println("Map to user");
+        printArrayList(mapedRows);
+
+        String excelProjectPath = "BreedMap.xlsx";
+        WriteXlsxFile.deleteExcelFile();
+        try (Workbook workbook = new XSSFWorkbook()) {
+            Sheet sheetProject = workbook.createSheet("Data");
+
+            // เขียนข้อมูลจาก deletedRows ลงใน Excel
+            int rowCountProject = 1;
+            for (String[] rowData : mapedProject) {
+                Row row = sheetProject.createRow(rowCountProject++);
+                for (int j = 0; j < rowData.length; j++) {
+                    Cell cell = row.createCell(j);
+                    cell.setCellValue(rowData[j]);
+                }
+            }
+            System.out.println("Excel written successfully.");
+            try (FileOutputStream outputStream = new FileOutputStream(excelProjectPath)) {
+                workbook.write(outputStream);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private ArrayList<String[]> readExcelData(String excelFilePath) throws IOException {
+        ArrayList<String[]> excelData = new ArrayList<>();
+
+        try (FileInputStream fis = new FileInputStream(excelFilePath);
+                Workbook workbook = WorkbookFactory.create(fis)) {
+            Sheet sheet = workbook.getSheetAt(0); // Assuming data is in the first sheet
+
+            for (Row row : sheet) {
+                ArrayList<String> rowData = new ArrayList<>();
+                for (Cell cell : row) {
+                    String cellValue = cell.getStringCellValue();
+                    rowData.add(cellValue);
+                }
+                excelData.add(rowData.toArray(new String[0]));
+            }
+        }
+
+        return excelData;
+    }
+
+    private void mapKey(JTable rightTable, JTextField keyTextField, DefaultTableModel rightTableModel,
+            HashSet<String> keyMapSet, JTextArea mapTextArea) {
+        String key = keyTextField.getText().trim();
         int rightRowCount = rightTableModel.getRowCount();
+        mapedRows.clear();
         if (key.equals("")) {
             System.out.println("Dont have key");
             return;
         }
 
         // เตรียมหัวของไฟล์ Excel
-        excelHeader = new String[rightTableModel.getColumnCount() + 1];
-        excelHeader[0] = "Key";
-        for (int i = 1; i < rightTableModel.getColumnCount() + 1; i++) {
-            excelHeader[i] = "String " + i;
-        }
 
         for (int i = rightRowCount - 1; i >= 0; i--) {
             String[] rowData = new String[rightTableModel.getColumnCount() + 1]; // เก็บข้อมูลของแถวที่ถูกลบ
@@ -150,19 +381,75 @@ public class TableListSelect extends JPanel {
             for (int j = 1; j < rightTableModel.getColumnCount() + 1; j++) {
                 rowData[j] = rightTableModel.getValueAt(i, j - 1).toString();
             }
+            mapedProject.add(rowData);
             mapedRows.add(rowData); // เพิ่มข้อมูลที่ถูกลบลงในรายการ
+            System.out.println(rowData[1]);
             rightTableModel.removeRow(i);
+        }
+
+        mapTextArea.setText("");
+
+        keyMapSet.add(key);
+        String[] keyMapString = keyMapSet.toArray(new String[keyMapSet.size()]);
+        System.out.println(keyMapString.length);
+        for (int i = 0; i < keyMapString.length; i++) {
+            System.out.println(keyMapString[i]);
+            mapTextArea.append(keyMapString[i] + "\n");
         }
         System.out.println("MAP SUCCESS " + key);
         keyTextField.setText("");
+        System.out.println("====");
+        System.out.println("Map in project");
+        printArrayList(mapedProject);
+        System.out.println("====");
+        System.out.println("Map to user");
+        printArrayList(mapedRows);
+        // for(String key : ){
+
+        // }
+        String excelProjectPath = "BreedMap.xlsx";
+        WriteXlsxFile.deleteExcelFile();
+        try (Workbook workbook = new XSSFWorkbook()) {
+            Sheet sheetProject = workbook.createSheet("Data");
+
+            // เขียนข้อมูลจาก deletedRows ลงใน Excel
+            int rowCountProject = 1;
+            for (String[] rowData : mapedProject) {
+                Row row = sheetProject.createRow(rowCountProject++);
+                for (int j = 0; j < rowData.length; j++) {
+                    Cell cell = row.createCell(j);
+                    cell.setCellValue(rowData[j]);
+                }
+            }
+            System.out.println("Excel written successfully.");
+            try (FileOutputStream outputStream = new FileOutputStream(excelProjectPath)) {
+                workbook.write(outputStream);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    
     public boolean isPageLoading() {
         return isPageLoading;
     }
 
     public void setPageLoading(boolean pageLoading) {
         isPageLoading = pageLoading;
+    }
+
+    public static void printArrayList(ArrayList<String[]> arrayList) {
+        int count = 0;
+        for (String[] array : arrayList) {
+            System.out.print("[ ");
+            for (String element : array) {
+                System.out.print(element + ", ");
+            }
+            System.out.println("]");
+            if (count == 20) {
+                break;
+            }
+            count++;
+        }
     }
 }

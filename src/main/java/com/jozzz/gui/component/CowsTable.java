@@ -15,7 +15,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 public class CowsTable extends JPanel {
-    private final ArrayList<String[]> allData;
+    private  ArrayList<String[]> allData;
     private final String[] columnNames;
     private final JTable table;
     private  final DefaultTableModel tableModel;
@@ -106,7 +106,9 @@ public class CowsTable extends JPanel {
     public ArrayList<String[]> getAllData() {
         return allData;
     }
-
+    public void setAllData(ArrayList<String[]> allData) {
+        this.allData = allData;
+    }
     public String[] getColumnNames(){
         return columnNames;
     }
